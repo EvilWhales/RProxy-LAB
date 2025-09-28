@@ -23,6 +23,17 @@ The configurations in this repository are intended for use in authorized testing
 - Refer to the documentation of Modlishka, Evilginx, EvilPuppet and others for setup instructions.
 - Avoid deploying configurations in production or unauthorized systems.
 
+## Resources
+Visit [RPoxy LAB](https://lab.evilginx.dev) for detailed documentation, tutorials, and live examples of RProxy LAB configurations.
+
+## Ethical Use
+RProxy LAB is for authorized security testing only. Unauthorized use may violate laws such as the Computer Fraud and Abuse Act (CFAA) or local cybersecurity regulations. Always obtain explicit permission from system owners before testing.
+
+## Community and Support
+Join our community for discussions and support:
+- [Discord Server](https://docs.google.com/forms/d/e/1FAIpQLScOFhh87l91h4dnE4cTnhi2S0yVZyptaN-9BkbTMmkEXi1JHA/viewform)
+- [Issues Page](https://github.com/EvilWhales/RProxy-LAB/issues) for bug reports and feature requests.
+
 ### Contributing
 Contributions are welcome! If you have ideas for improving configurations or adding new templates, please submit a pull request. Ensure all contributions align with the educational and ethical goals of this project.
 
