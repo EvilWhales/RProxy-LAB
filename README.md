@@ -31,7 +31,7 @@ RProxy LAB is for authorized security testing only. Unauthorized use may violate
 
 ## Community and Support
 Join our community for discussions and support:
-- [Discord Server](https://docs.google.com/forms/d/e/1FAIpQLScOFhh87l91h4dnE4cTnhi2S0yVZyptaN-9BkbTMmkEXi1JHA/viewform)
+- [Discord Server](https://subscord.com/store/1397884713951170610)
 - [Issues Page](https://github.com/EvilWhales/RProxy-LAB/issues) for bug reports and feature requests.
 
 ### Contributing
