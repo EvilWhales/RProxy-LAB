@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "atob": "^2.1.2",
+    "axios": "^1.12.2",
+    "btoa": "^1.2.1",
+    "chalk": "^4.1.2",
+    "cheerio": "^1.1.2",
+    "cli-table3": "^0.6.5",
+    "commander": "^14.0.1",
+    "console.table": "^0.10.0",
+    "crypto": "^1.0.1",
+    "diff-dom": "^5.2.1",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "html-differ": "^1.4.0",
+    "http": "^0.0.1-security",
+    "inquirer": "^12.9.6",
+    "mime": "^3.0.0",
+    "node-telegram-bot-api": "^0.63.0",
+    "path": "^0.12.7",
+    "prettier": "^3.6.2",
+    "puppeteer": "^23.11.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "socket.io": "^4.8.1",
+    "url": "^0.11.1"
+  }
+}

