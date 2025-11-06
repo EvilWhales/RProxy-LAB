@@ -1,5 +1,20 @@
-# RProxy LAB by EvilWhales
-RProxy LAB by EvilWhales  is a research project aimed at studying reverse proxy server configurations for authentication testing in controlled authorized environments. This repository provides custom configurations and modifications based on advanced reverse proxy platforms such as Modlishka, Evilginx, EvilPuppet and others. These tools are designed for cybersecurity professionals, penetration testers, and red team employees to explore authentication vulnerabilities and develop secure systems.
+
+<h3 align="center">RProxy LAB by EvilWhales  is a research project aimed at studying reverse proxy server configurations for authentication testing in controlled authorized environments.</h3>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/14e231d3-335e-4a58-9752-51218f6eca19" alt="jsdelivr-logo" width="512px" height="512px"/>
+  <br>
+  <i>
+    <br>This repository provides custom configurations and modifications based on advanced reverse proxy platforms such as Modlishka, Evilginx, EvilPuppet and others. These tools are designed for cybersecurity professionals, penetration testers, and red team employees to explore authentication vulnerabilities and develop secure systems.</i>
+  <br>
+</p>
+
+<p align="center">
+  <a href="https://lab.evilginx.dev"><strong>lab.evilginx.dev</strong></a>
+  <br>
+</p>
+
+Web by [Info](https://lab.evilginx.dev) | follow us on [Twitter](https://twitter.com/EvilWhales) | Discord SERVER xCommunity RProxy LAB the [EvilGinx/Modlishka/NodeJS](https://subscord.com/store/1397884713951170610) | Telegram [Contact](https://t.me/EvilWhales) Email [Contact](injectexpdev@proton.me)
 
 #### Note: This project is intended solely for educational purposes and authorized testing. Any unauthorized or malicious use is strictly prohibited. The developer is not responsible for any misuse of the provided materials.
 
