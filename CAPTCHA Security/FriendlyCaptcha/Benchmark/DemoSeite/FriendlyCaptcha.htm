@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Friendly Captcha</title>
+    <meta name="description" content="A privacy friendly proof-of-work based CAPTCHA alternative.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- <script async defer data-domain="friendlycaptcha.com" src="https://plausible.io/js/plausible.js"></script> -->
+    <link rel="shortcut icon"
+        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABsElEQVRYhe3XMY8xQRjA8bGyvRgsrVrpE4hKIohoqHwFLbYSiVJCpRF6IUSiEBU+gU59khVbSVTrf8293tu7kFy81pucSZ5iZ5+d55eZ2c2OABSgArzhXHv7qKkIoOxg4a+tIoDdEwE78cTiALwAL8BVQL1ex+v13ozZbPY4QLVaRQhxMyaTyS8CSClZLBYMh0O63S7NZpPtduscIBgM3hxov9+j6zrRaJRQKEQ4HCadTjMajR4PWK/XBAKBq0vVarXuB/h8PjabzSUMwwDAMAz8fr8tNxaLkcvlLte1Wu1+wNfQdR2Acrls608mkwCcTic8Hs+/m4FrgEgkYuvvdDqXMdrtNsVikeVyeT/A7XYjpURRlAvgfD6jqqotbzqdXi12F+DPJrQsi8PhgGmaWJaFy+Wy5f3063j3W6Bpmi2v1+s5C/i824UQ5PN52/3j8fhYwGq1+rYM2WyWUqlEJpNBSolpmo8DADQajW+IzzEej38O6Pf7JBKJSxQKhauDAMznc1KpFJqmoaoqUkri8TiDweDmc//vD8kL8KsATz+aVZ4IqAj+Hs+dnIndR03lHav1/5rE+9NOAAAAAElFTkSuQmCC" />
+    <style>
+        ::selection {
+            color: var(--color-bg);
+            background-color: var(--color-text);
+        }
+
+        :root {
+            --border-radius: 5px;
+            --box-shadow: 2px 2px 10px;
+            --color: #4270f9;
+            --color-accent: #00000007;
+            --color-bg: #fff;
+            --color-bg-secondary: #e9e9e9;
+            --color-secondary: #3778f0;
+            --color-secondary-accent: #920de90b;
+            --color-shadow: #f4f4f4;
+            --color-text: #333;
+            --color-text-secondary: #999;
+            --font-family: 'Inter var', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            --hover-brightness: 1.2;
+            --justify-normal: left;
+            --line-height: 1.5;
+            --width-content: 1080px;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            margin: 0
+        }
+
+        html {
+            box-sizing: border-box
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+        }
+
+        body,
+        p,
+        ol,
+        ul,
+        li,
+        dl,
+        dt,
+        dd,
+        blockquote,
+        figure,
+        fieldset,
+        legend,
+        textarea,
+        pre,
+        iframe,
+        hr {
+            margin: 0;
+            padding: 0
+        }
+
+        .button,
+        .input,
+        .textarea,
+        .select select {
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            align-items: center;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            box-shadow: none;
+            display: inline-flex;
+            font-size: 1rem;
+            height: 2.5em;
+            justify-content: flex-start;
+            line-height: 1.5;
+            padding-bottom: calc(0.5em - 1px);
+            padding-left: calc(0.75em - 1px);
+            padding-right: calc(0.75em - 1px);
+            padding-top: calc(0.5em - 1px);
+            position: relative;
+            vertical-align: top;
+        }
+
+        .is-unselectable,
+        .button {
+            user-select: none;
+        }
+
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .is-size-5 {
+            font-size: 1.25rem !important;
+        }
+
+        .is-size-7 {
+            font-size: .75rem !important;
+        }
+
+        .has-light-text {
+            color: #b5b5b5 !important;
+        }
+
+        .blockquote {
+            padding: 0 1em;
+            color: #6a737d;
+            border-left: .25em solid #dfe2e5;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #f7f7f7;
+            padding: 3rem 2rem 2.5rem 3.5rem;
+            color: #222;
+        }
+
+        .navbar {
+            min-height: 3.25em;
+            position: relative;
+        }
+
+        .navbar a {
+            font-weight: initial;
+        }
+
+        .navbar,
+        .navbar-menu,
+        .navbar-start,
+        .navbar-end {
+            display: flex;
+            align-items: stretch;
+        }
+
+        .navbar-menu {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+
+        .navbar-brand {
+            min-height: 3.25em;
+            display: flex;
+        }
+
+        .navbar-item {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            flex-grow: 0;
+            flex-shrink: 0;
+            color: #444;
+            position: relative;
+            line-height: 1.5;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .navbar-start {
+            justify-content: flex-start;
+            margin-right: auto;
+        }
+
+        .navbar-end {
+            justify-content: flex-end;
+            margin-left: auto;
+        }
+
+        .navbar-burger {
+            color: #4a4a4a;
+            cursor: pointer;
+            display: block;
+            height: 3.25rem;
+            position: relative;
+            width: 3.25rem;
+            margin-left: auto;
+        }
+
+        .navbar-burger span {
+            background-color: currentColor;
+            height: 1px;
+            left: calc(50% - 8px);
+            position: absolute;
+            transform-origin: center;
+            transition-duration: 86ms;
+            transition-property: background-color, opacity, transform;
+            transition-timing-function: ease-out;
+            width: 16px;
+            display: none;
+        }
+
+        .navbar-burger span:nth-child(1) {
+            top: calc(50% - 6px);
+        }
+
+        .navbar-burger span:nth-child(2) {
+            top: calc(50% - 1px);
+        }
+
+        .navbar-burger span:nth-child(3) {
+            top: calc(50% + 4px);
+        }
+
+        .navbar-brand .navbar-item,
+        .navbar-tabs .navbar-item {
+            align-items: center;
+            display: flex;
+        }
+
+        a.navbar-item:focus,
+        a.navbar-item:focus-within,
+        a.navbar-item:hover,
+        a.navbar-item.is-active,
+        .navbar-link:focus,
+        .navbar-link:focus-within,
+        .navbar-link:hover,
+        .navbar-link.is-active {
+            background-color: #fafafa;
+            color: var(--color);
+        }
+
+        @media screen and (min-width: 1024px) {
+            .navbar-burger {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 1023px) {
+            /* .navbar-brand {
+        width: 100%;
+    } */
+
+            .navbar-burger,
+            .navbar-burger span {
+                display: block;
+            }
+
+            .navbar-menu.is-active {
+                display: block;
+            }
+
+            .navbar-menu {
+                display: none;
+            }
+
+            .navbar-end {
+                margin-left: 0;
+            }
+
+            .navbar-menu {
+                background-color: #fff;
+                box-shadow: 0 8px 16px rgba(10, 10, 10, 0.1);
+                padding: 0.5rem 0;
+            }
+
+            .navbar {
+                flex-direction: column;
+            }
+        }
+
+        .button {
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .button {
+            background-color: #fff;
+            border-color: #dbdbdb;
+            border-width: 1px;
+            color: #363636;
+            cursor: pointer;
+            justify-content: center;
+            padding-bottom: calc(0.5em - 1px);
+            padding-left: 1em;
+            padding-right: 1em;
+            padding-top: calc(0.5em - 1px);
+            text-align: center;
+            white-space: nowrap;
+            text-decoration: none !important;
+            font-family: inherit;
+        }
+
+        .button.small {
+            font-size: 0.8em;
+        }
+
+        .button:hover {
+            filter: brightness(1.1);
+        }
+
+        .button.is-primary {
+            background-color: var(--color);
+            border-color: transparent;
+            color: var(--color-bg);
+        }
+
+        .buttons .button {
+            margin-bottom: 0.5rem;
+        }
+
+        .semi-bold,
+        a.semi-bold {
+            font-weight: 600;
+        }
+
+        /* Layout */
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-family);
+            line-height: var(--line-height);
+            margin: 0;
+        }
+
+        main {
+            margin: 0 auto;
+            max-width: var(--width-content);
+            padding: 3rem 1rem;
+            min-height: calc(100% - 3.25rem);
+        }
+
+        hr {
+            background-color: var(--color-bg-secondary);
+            border: none;
+            height: 1px;
+            margin: 4rem 0;
+        }
+
+        [hidden] {
+            display: none;
+        }
+
+        details {
+            margin: 1.3rem 0;
+        }
+
+        details summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            line-height: var(--line-height);
+        }
+
+        mark {
+            padding: 0.1rem;
+        }
+
+        ol li,
+        ul li {
+            padding: 0.2rem 0;
+        }
+
+        p {
+            margin: 0.75rem 0;
+            padding: 0;
+        }
+
+        small {
+            color: var(--color-text-secondary);
+        }
+
+        sup {
+            background-color: var(--color-secondary);
+            border-radius: var(--border-radius);
+            color: var(--color-bg);
+            font-size: xx-small;
+            font-weight: bold;
+            margin: 0.2rem;
+            padding: 0.2rem 0.3rem;
+            position: relative;
+            top: -2px;
+        }
+
+        /* Links */
+        a {
+            color: var(--color-secondary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+
+        button:hover {
+            filter: brightness(var(--hover-brightness));
+        }
+
+        button {
+            background-color: var(--color);
+            border: 2px solid var(--color);
+            color: var(--color-bg);
+        }
+
+        /* Forms */
+
+        button:disabled,
+        input:disabled {
+            background: var(--color-bg-secondary);
+            border-color: var(--color-bg-secondary);
+            color: var(--color-text-secondary);
+            cursor: not-allowed;
+        }
+
+        button[disabled]:hover {
+            filter: none;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            display: inline-block;
+        }
+
+        input[type="checkbox"]+label,
+        input[type="radio"]+label {
+            display: inline-block;
+            font-weight: normal;
+            position: relative;
+            top: 1px;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px solid var(--color-bg-secondary);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            padding: 0.4rem 0.8rem;
+        }
+
+        input[readonly],
+        textarea[readonly] {
+            background-color: var(--color-bg-secondary);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.2rem;
+        }
+
+        /* Tables */
+        table {
+            border: 1px solid var(--color-bg-secondary);
+            border-radius: var(--border-radius);
+            border-spacing: 0;
+            display: table;
+            max-width: 100%;
+            overflow-x: auto;
+            padding: 0;
+            white-space: nowrap;
+        }
+
+        table td,
+        table th,
+        table tr {
+            padding: 0.4rem 0.8rem;
+            text-align: center;
+        }
+
+        table thead {
+            border-collapse: collapse;
+            border-radius: var(--border-radius);
+            margin: 0;
+            padding: 0;
+        }
+
+        table thead th:first-child {
+            border-top-left-radius: var(--border-radius);
+        }
+
+        table thead th:last-child {
+            border-top-right-radius: var(--border-radius);
+        }
+
+        table thead th:first-child,
+        table tr td:first-child {
+            text-align: var(--justify-normal);
+        }
+
+        table tr:nth-child(even) {
+            background-color: var(--color-accent);
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1.125;
+            word-break: break-word;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            line-height: 1.25em;
+        }
+
+        .main-title {
+            font-size: 2.9em;
+            word-break: keep-all;
+        }
+
+        @media screen and (max-width: 940px) {
+            .main-title {
+                font-size: 2.4em;
+            }
+        }
+
+        .main-subtitle {
+            margin-top: -1.25em;
+            color: var(--color-text-secondary)
+        }
+
+        .main-header {
+            text-align: center;
+            height: 60vh;
+            margin: 2rem 0 3rem 0;
+        }
+
+        .button.big {
+            padding: 1.2rem 1.2rem;
+        }
+
+        .section {
+            margin-bottom: 1rem;
+            margin-top: 1rem;
+        }
+
+        .box {
+            margin: 1rem;
+            flex-basis: 50%;
+            padding: 1rem;
+            border: 1px solid #bbb;
+            border-radius: var(--border-radius);
+            box-shadow: var(--color-shadow) var(--box-shadow);
+            max-width: calc(min(480px, 100%));
+        }
+
+        .pricing-box {
+            width: 360px;
+            align-self: center;
+        }
+
+        .box.less-margin {
+            margin: 0.4rem;
+        }
+
+        .box h3 {
+            font-size: 1.6em;
+            margin: 0 0 0.1rem 0;
+        }
+
+        .box:hover {
+            background-color: #fcfcfc;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .button.transparent {
+            border: 0;
+            background: transparent;
+            color: var(--color);
+        }
+
+        .button.outline {
+            border: 2px solid var(--color);
+            background-color: var(--color-bg);
+            color: var(--color);
+        }
+
+        .button.small {
+            padding: 6px 8px;
+            margin: 0;
+        }
+
+        .demo-form {
+            padding: 1.6rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 1px 2px #0000000d;
+            border-radius: var(--border-radius)
+        }
+
+        .demo-form h2,
+        .demo-form p,
+        .demo-form a {
+            text-align: center;
+        }
+
+        .box-group {
+            display: flex;
+        }
+
+        .box-group-inner {
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+        }
+
+        @media screen and (max-width: 940px) {
+            .box-group {
+                flex-direction: column;
+            }
+        }
+
+        @media screen and (max-width: 620px) {
+            .box-group-inner {
+                flex-direction: column;
+            }
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            margin-top: 2rem;
+        }
+
+        .form input[type="text"] {
+            border: 1px solid var(--color);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form button {
+            min-width: 180px;
+        }
+
+        .form .button-group {
+            display: flex;
+            margin-top: 1rem;
+            align-self: flex-end;
+            align-items: center;
+        }
+
+        .form label span {
+            font-weight: normal;
+            font-size: 0.9em;
+            color: #444;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .d-align-baseline {
+            align-items: baseline;
+        }
+
+        .m-0 {
+            margin: 0 !important;
+        }
+
+        .me-1 {
+            margin-right: 0.5em;
+        }
+
+        .ms-1 {
+            margin-left: 0.5em;
+        }
+
+        .text-muted {
+            color: #666;
+        }
+
+        .text-extra-muted {
+            color: #999;
+        }
+    </style>
+
+
+    <script type="module" src="script/widget.module.min.js" async defer></script>
+    <!-- <script nomodule src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.10/widget.polyfilled.min.js" async defer></script> -->
+
+</head>
+
+<body>
+
+    <nav class="navbar" role="navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://friendlycaptcha.com" style="padding-left:1.2rem">
+                <b>Friendly Captcha</b>
+            </a>
+            <a role="button" aria-label="menu" class="navbar-burger burger" aria-expanded="false"
+                onclick="document.querySelector('.navbar-menu').classList.toggle('is-active')">
+                <span aria-hidden="true"></span> <span aria-hidden="true"></span> <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-menu">
+            <div class="navbar-start">
+                <a href="https://docs.friendlycaptcha.com" class="navbar-item">Documentation</a>
+
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a href="/login" class="button semi-bold"
+                            style="border-color: transparent; background-color: transparent;">
+                            Sign in
+                        </a>
+                        <a href="/signup" class="button is-primary semi-bold">
+                            Create Account
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <div class="flex-center" style="width: 100%; height: 100%;">
+            <form action="http://127.0.0.1:5000/puzzle" method="post" class="demo-form">
+
+                <h2>FriendlyCaptcha Demo</h2>
+
+                <label for="name-field">Your Name</label>
+                <input id="name-field" type="text" autocomplete="name" name="name" required />
+
+                <label for="feedback-field">What do you think of FriendlyCaptcha so far?</label>
+                <input id="feedback-field" type="text" name="feedback" placeholder="Optional" />
+
+                <label for="thoughts-field">Any other thoughts or comments?</label>
+                <input id="thoughts-field" type="text" name="thoughts" placeholder="Optional" />
+
+                <!-- Here's the magic! -->
+                <div class="frc-captcha" data-sitekey="FCMGEMUD2KTDSQ5H"></div>
+                <noscript>You need to enable Javascript to complete the anti-spam check.</noscript>
+
+                <button class="button is-primary" style="margin-top: 2rem;" type="submit">Submit</button>
+
+                <a class="button transparent" href="/#how-it-works">← Back to the homepage</a>
+            </form>
+        </div>
+
+    </main>
+
+    <footer class="is-size-5">
+        <p>
+            <a href="https://friendlycaptcha.com" class="is-size-3 has-text-weight-semibold">Friendly Captcha</a>
+            <br>
+        </p>
+
+        <p class="is-size-7">Friendly Captcha GmbH</p>
+
+        <p class="is-size-7">
+            <a href="https://friendlycaptcha.com/support">Support Center</a>
+            | <a href="https://friendlycaptcha.com/contact/sales">Sales Contact</a>
+            | <a href="https://friendlycaptcha.com/privacy">Privacy Center</a>
+            | <a href="https://friendlycaptcha.com/legal">Legal Center</a>
+            | <a href="https://friendlycaptcha.com/legal/imprint/">Legal Notice</a>
+        </p>
+
+    </footer>
+
+    <script>if (window.history.replaceState) { window.history.replaceState(null, null, window.location.href); }</script>
+</body>
+
+</html>

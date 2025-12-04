@@ -1,0 +1,13 @@
+[package]
+name = "blake2b_test_solver"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+blake2b_simd = "1.0.2"
+hex = "0.4.3"
+base64 = "0.21.5"
+threadpool = "1.8.1"
+num_cpus = "1.16.0"
