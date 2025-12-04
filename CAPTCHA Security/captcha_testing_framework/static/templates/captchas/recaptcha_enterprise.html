@@ -1,0 +1,50 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<title>reCAPTCHA enterprise</title>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://www.google.com/recaptcha/enterprise.js?render={{ site_key }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<form id="demo-form" action="/submit_recaptcha_enterprise" method="post">
+    <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <!-- Updated button type and added an id -->
+    <button type="button" id="submit-button">Submit</button>
+</form>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('demo-form');
+    var submitButton = document.getElementById('submit-button');
+    
+    submitButton.addEventListener('click', function (e) {
+        e.preventDefault();
+        grecaptcha.enterprise.ready(async function () {
+            const token = await grecaptcha.enterprise.execute('{{ site_key }}', { action: 'login' });
+
+            // Append the token to the form as a hidden input
+            var hiddenInput = document.createElement('input');
+            hiddenInput.setAttribute('type', 'hidden');
+            hiddenInput.setAttribute('name', 'recaptcha-token');
+            hiddenInput.setAttribute('value', token);
+            form.appendChild(hiddenInput);
+
+            // Submit the form after appending the token
+            form.submit();
+        });
+    });
+});
+</script>
+
+{% endblock %}

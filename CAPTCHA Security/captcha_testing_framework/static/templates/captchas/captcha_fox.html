@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<title>Captchafox</title>
+{% endblock %}
+
+{% block scripts %}
+<script async defer src="https://cdn.captchafox.com/api.js"></script>
+{% endblock %}
+
+{% block content %}
+<form action="/submit_captcha_fox" method="post">
+    <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div class="form-field">
+        <div class="captchafox" data-sitekey="{{ site_key }}"></div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

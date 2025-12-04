@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  captcha_app:
+    build: .
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    environment:
+      STATIC_PATH: /usr/src/captcha_testing_framework/static/

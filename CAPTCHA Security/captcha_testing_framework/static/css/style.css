@@ -1,0 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #282828; /* Slightly lighter than the navbar for subtle contrast */
+  color: #e0e0e0; /* Keeping the text color light for readability */
+  margin: 0;
+  padding-top: 60px; /* Space for the navbar */
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+nav {
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+nav .navbar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo Link Styles */
+.logo-link {
+  color: #4caf50;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  transition: color 0.3s ease;
+}
+
+.logo-link:hover {
+  color: #367c39;
+}
+
+/* Navigation Links Styles */
+.nav-links {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+}
+
+.nav-links li a {
+  padding: 10px;
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #fff;
+}
+
+form {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #222;
+  color: #ddd;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #367c39;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.link-button {
+  display: inline-block;
+  background-color: #4caf50;
+  color: white;
+  padding: 15px 30px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 200px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.link-button:hover,
+.link-button:focus {
+  background-color: #367c39;
+  transform: translateY(-2px);
+  outline: none;
+}
+
+body,
+.content-container {
+  padding-bottom: 40px;
+}
+
+/* Log Display Area Styles */
+.log-display {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 200px; /* Adjust height as needed */
+  background-color: #3e3e3e;
+  overflow-y: auto; /* Enable scrollbar for overflowing content */
+  color: #e0e0e0;
+  font-size: 14px;
+  padding: 10px;
+  box-sizing: border-box;
+}

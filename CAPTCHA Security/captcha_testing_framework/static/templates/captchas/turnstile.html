@@ -1,0 +1,24 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<title>Turnstile</title>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+{% endblock %}
+
+{% block content %}
+<form id="demo-form" action="/submit_turnstile" method="post">
+    <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div class="cf-turnstile" data-sitekey="{{ site_key }}"></div>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}

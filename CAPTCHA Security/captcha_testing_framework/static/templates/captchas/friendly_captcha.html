@@ -1,0 +1,28 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+<title>Friendly Captcha</title>
+{% endblock %}
+
+{% block scripts %}
+<script type="module" src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.14/widget.module.min.js" async
+    defer></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/friendly-challenge@0.9.14/widget.min.js" async defer></script>
+{% endblock %}
+
+{% block content %}
+<form action="/submit_friendly_captcha" method="post">
+    <div class="form-field">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+    </div>
+    <div class="form-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div class="form-field">
+        <div class="frc-captcha dark" data-sitekey="{{ site_key }}"></div>
+    </div>
+    <button type="submit">Submit</button>
+</form>
+{% endblock %}
