@@ -30,6 +30,27 @@ Web by [Info](https://lab.evilginx.dev) | follow us on [Twitter](https://twitter
 - Penetration testers conducting authorized assessments.
 - Developers learning about authentication vulnerabilities in controlled lab settings.
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <video src="https://github.com/user-attachments/assets/8b0b2c85-b333-4bb1-898e-464a770d494e" width="400" controls="controls" style="max-width: 100%;"></video>
+      <p><small>Capture email and password. Bypass 2FA and capture cookies/.The token log is sent to Telegram.</small></p>
+    </td>
+    <td>
+    </td>
+    <td align="center">
+      <video src="https://github.com/user-attachments/assets/0ff2b322-a7af-46a4-aaa5-18924f3a35b0" width="400" controls="controls" style="max-width: 100%;"></video>
+      <p><small>Capture Recovery Phrase 12 + 24. Generated Wallet and password. Bypass 2FA and capture cookies/.The token log is sent to Telegram.</small></p>
+    </td>
+     <td>
+    </td>
+    <td align="center">
+      <video src="https://github.com/user-attachments/assets/2918c365-7885-4497-acac-9f2ece7e7736" width="400" controls="controls" style="max-width: 100%;"></video>
+      <p><small>Capture Mnemonic + Password. Generated Wallet and password. Bypass 2FA and capture cookies/.The token log is sent to Telegram.</small></p>
+    </td>
+  </tr>
+</table>
+
 ### Usage
 
 The configurations in this repository are intended for use in authorized testing environments only. Ensure you have explicit permission from system owners before deploying any tools or configurations. Follow these guidelines:
